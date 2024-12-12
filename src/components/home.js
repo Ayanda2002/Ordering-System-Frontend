@@ -4,6 +4,8 @@ import AboutUs from "./about-us.js";
 import Services from "./services.js";
 import Contact from "./contact.js";
 import PastWork from "./past-work.js";
+import SignUp from "./sign-up.js";
+import SignIn from "./sign-in.js";
 import { ArrowUpward } from "@mui/icons-material"; // Import the icon for the button
 import "./style.css";
 
@@ -16,6 +18,8 @@ const Home = () => {
     "past-work": <PastWork />,
     "contact": <Contact />,
     "about-us": <AboutUs />,
+    "sign-up": <SignUp />,
+    "sign-in": <SignIn />,
   };
 
   const backgroundImage = "url('j.jpg')";
