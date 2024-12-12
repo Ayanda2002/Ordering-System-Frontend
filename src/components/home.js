@@ -12,9 +12,9 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState("services");
 
   const sections = {
-    services: <Services />,
+    "services": <Services />,
     "past-work": <PastWork />,
-    contact: <Contact />,
+    "contact": <Contact />,
     "about-us": <AboutUs />,
   };
 
@@ -82,7 +82,7 @@ const Home = () => {
           boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
         }}
       >
-        {["services", "past-work", "contact", "about-us"].map((section) => (
+        {["home", "sign-in", "sign-up", "checkout", "cart"].map((section) => (
           <Button
             key={section}
             sx={{
