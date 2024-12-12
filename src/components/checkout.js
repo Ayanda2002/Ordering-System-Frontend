@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Box, Card, CardContent, Typography, Button, Radio, RadioGroup, FormControlLabel, TextField, FormControl } from '@mui/material';
 
 const Checkout = () => {
-  // Example total price (static for simplicity)
-  const totalPrice = 90.98;
-
   // State to handle selected payment method
   const [paymentMethod, setPaymentMethod] = useState('cash');
 
@@ -12,6 +9,9 @@ const Checkout = () => {
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
+
+  // Example total price
+  const totalPrice = 90.98; // You can replace this with dynamic data as needed
 
   return (
     <Box
@@ -47,12 +47,12 @@ const Checkout = () => {
         </Typography>
         <CardContent>
           {/* Total Price */}
-          <Typography variant="h6" sx={{ textAlign: 'right', marginBottom: 3 }}>
+          <Typography variant="h6" sx={{ textAlign: 'right', marginBottom: 2 }}>
             Total: R{totalPrice.toFixed(2)}
           </Typography>
 
           {/* Payment method selection */}
-          <FormControl component="fieldset">
+          <FormControl component="fieldset" sx={{ marginTop: 3 }}>
             <RadioGroup
               value={paymentMethod}
               onChange={handlePaymentMethodChange}
@@ -97,7 +97,7 @@ const Checkout = () => {
               width: '100%',
             }}
           >
-            Confirm Order
+            Place Order
           </Button>
         </CardContent>
       </Card>
