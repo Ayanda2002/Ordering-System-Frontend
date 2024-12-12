@@ -6,6 +6,7 @@ import Contact from "./contact.js";
 import PastWork from "./past-work.js";
 import SignUp from "./sign-up.js";
 import SignIn from "./sign-in.js";
+import Checkout from "./checkout.js";
 import { ArrowUpward } from "@mui/icons-material"; // Import the icon for the button
 import "./style.css";
 
@@ -20,6 +21,7 @@ const Home = () => {
     "about-us": <AboutUs />,
     "sign-up": <SignUp />,
     "sign-in": <SignIn />,
+    "checkout": <Checkout />,
   };
 
   const backgroundImage = "url('j.jpg')";
