@@ -7,12 +7,15 @@ import PastWork from "./past-work.js";
 import SignUp from "./sign-up.js";
 import SignIn from "./sign-in.js";
 import Checkout from "./checkout.js";
+import Cart from "./cart.js"; // Import the Cart component
+import BrowseProducts from "./browse-products.js"; // Import the BrowseProducts component
 import { ArrowUpward } from "@mui/icons-material"; // Import the icon for the button
 import "./style.css";
 
 const Home = () => {
-  const [activeSection, setActiveSection] = useState("services");
-  const [activeButton, setActiveButton] = useState("services");
+  // Set initial active section to "browse-products"
+  const [activeSection, setActiveSection] = useState("browse-products");
+  const [activeButton, setActiveButton] = useState("browse-products");
 
   const sections = {
     "services": <Services />,
@@ -22,6 +25,8 @@ const Home = () => {
     "sign-up": <SignUp />,
     "sign-in": <SignIn />,
     "checkout": <Checkout />,
+    "cart": <Cart />, // Add Cart page to sections
+    "browse-products": <BrowseProducts /> // Add BrowseProducts page to sections
   };
 
   const backgroundImage = "url('j.jpg')";
@@ -60,7 +65,7 @@ const Home = () => {
               letterSpacing: "0.05em",
             }}
           >
-            JugamSoft
+            Yummy Tummy's
           </Typography>
 
           <Typography
@@ -72,7 +77,7 @@ const Home = () => {
               fontSize: "1rem",
             }}
           >
-            Innovating Your Digital Future
+            Yummy Sensations
           </Typography>
         </Toolbar>
       </AppBar>
@@ -88,7 +93,7 @@ const Home = () => {
           boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
         }}
       >
-        {["home", "sign-in", "sign-up", "checkout", "cart"].map((section) => (
+        {["browse-products", "sign-in", "sign-up", "checkout", "cart"].map((section) => (
           <Button
             key={section}
             sx={{
