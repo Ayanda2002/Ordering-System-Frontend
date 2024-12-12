@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, Typography, Button, List, ListItem, ListItemText, Radio, RadioGroup, FormControlLabel, TextField, FormControl, Grid, Avatar } from '@mui/material';
+import { Box, Card, CardContent, Typography, Button, Radio, RadioGroup, FormControlLabel, TextField, FormControl } from '@mui/material';
 
 const Checkout = () => {
-  // Example items in the cart
-  const cartItems = [
-    { id: 1, name: 'Item 1', price: 29.99, imageUrl: 'https://via.placeholder.com/80' },
-    { id: 2, name: 'Item 2', price: 15.99, imageUrl: 'https://via.placeholder.com/80' },
-    { id: 3, name: 'Item 3', price: 45.00, imageUrl: 'https://via.placeholder.com/80' },
-  ];
-
-  // Calculate the total price
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0).toFixed(2);
-
   // State to handle selected payment method
   const [paymentMethod, setPaymentMethod] = useState('cash');
 
@@ -19,6 +9,9 @@ const Checkout = () => {
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
+
+  // Example total price
+  const totalPrice = 90.98; // You can replace this with dynamic data as needed
 
   return (
     <Box
@@ -53,23 +46,9 @@ const Checkout = () => {
           Checkout
         </Typography>
         <CardContent>
-          {/* Cart items list */}
-          <List>
-            {cartItems.map((item) => (
-              <ListItem key={item.id} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
-                <Avatar
-                  src={item.imageUrl}
-                  alt={item.name}
-                  sx={{ width: 80, height: 80, marginRight: 2 }}
-                />
-                <Box>
-                  <ListItemText primary={item.name} secondary={`R${item.price.toFixed(2)}`} />
-                </Box>
-              </ListItem>
-            ))}
-          </List>
-          <Typography variant="h6" sx={{ textAlign: 'right', marginTop: 2 }}>
-            Total: R{totalPrice}
+          {/* Total Price */}
+          <Typography variant="h6" sx={{ textAlign: 'right', marginBottom: 2 }}>
+            Total: R{totalPrice.toFixed(2)}
           </Typography>
 
           {/* Payment method selection */}
