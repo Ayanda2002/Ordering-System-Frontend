@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { Button, Box, Typography } from '@mui/material';
 
-const CartPage = () => {
+const CartPage = ({ setActiveSection, setActiveButton }) => {
   const [products, setProducts] = useState([
     {
       id: 1,
       name: 'Product 1',
       price: 20.00,
-      quantity: 2, // Set quantity based on user's previous selection
+      quantity: 2,
       image: 'https://via.placeholder.com/80',
     },
     {
@@ -32,45 +33,69 @@ const CartPage = () => {
     },
   ]);
 
-  // Calculate the total cost for all products
-  const totalCost = products.reduce((total, product) => total + (product.price * product.quantity), 0);
+  const calculateTotalPrice = () => {
+    return products.reduce((total, product) => total + product.price * product.quantity, 0);
+  };
 
   return (
-    <div className="cart-page">
-      <h2>Your Cart</h2>
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" sx={{ marginBottom: 3 }}>
+        Cart
+      </Typography>
 
-      <div className="product-cards">
-        {products.map(product => (
-          <div 
-            className="product-card" 
-            key={product.id} 
-            style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', border: '1px solid #ddd', borderRadius: '8px', padding: '10px' }}
-          >
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              className="product-image" 
-              style={{ width: '80px', height: '80px', marginRight: '20px' }} 
-            />
-            <div className="product-details" style={{ flex: 1 }}>
-              <h3>{product.name}</h3>
-              <p>Price: ${product.price.toFixed(2)}</p>
-              <p>Total: ${(product.price * product.quantity).toFixed(2)}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      {products.map((product) => (
+        <Box
+          key={product.id}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: 2,
+            padding: 2,
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+          }}
+        >
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{ width: '80px', height: '80px', marginRight: '16px' }}
+          />
+          <Box>
+            <Typography variant="h6">{product.name}</Typography>
+            <Typography variant="body2">Price: ${product.price}</Typography>
+            <Typography variant="body2">Quantity: {product.quantity}</Typography>
+          </Box>
+        </Box>
+      ))}
 
-      <div className="cart-total" style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h3>Total Cost: ${totalCost.toFixed(2)}</h3>
-        <button 
-          className="checkout-button" 
-          style={{ padding: '10px 20px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+      <Typography variant="h5" sx={{ marginTop: 3 }}>
+        Total: ${calculateTotalPrice().toFixed(2)}
+      </Typography>
+
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setActiveSection('menu');
+            setActiveButton('menu');
+          }}
+        >
+          Continue Shopping
+        </Button>
+        
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            setActiveSection('checkout');
+            setActiveButton('checkout');
+          }}
         >
           Checkout
-        </button>
-      </div>
-    </div>
+        </Button>
+
+      </Box>
+    </Box>
   );
 };
 

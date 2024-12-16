@@ -56,7 +56,7 @@ const BrowseProducts = () => {
 
   return (
     <div className="browse-products">
-      <h2>Browse Our Products</h2>
+      <h2>Menu</h2>
 
       <div className="product-cards" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         {products.map(product => (
