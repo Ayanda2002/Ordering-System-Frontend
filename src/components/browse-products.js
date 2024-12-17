@@ -5,36 +5,36 @@ const BrowseProducts = () => {
     {
       id: 1,
       name: 'Product 1',
-      price: 20.00,
+      price: 20.0,
       quantity: 0,
       image: 'https://via.placeholder.com/80',
     },
     {
       id: 2,
       name: 'Product 2',
-      price: 15.00,
+      price: 15.0,
       quantity: 0,
       image: 'https://via.placeholder.com/80',
     },
     {
       id: 3,
       name: 'Product 3',
-      price: 30.00,
+      price: 30.0,
       quantity: 0,
       image: 'https://via.placeholder.com/80',
     },
     {
       id: 4,
       name: 'Product 4',
-      price: 10.00,
+      price: 10.0,
       quantity: 0,
       image: 'https://via.placeholder.com/80',
     },
   ]);
 
   const updateQuantity = (id, action) => {
-    setProducts(prevProducts =>
-      prevProducts.map(product => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) => {
         if (product.id === id) {
           let newQuantity = action === 'increase' ? product.quantity + 1 : product.quantity - 1;
           if (newQuantity >= 0) {
@@ -47,7 +47,7 @@ const BrowseProducts = () => {
   };
 
   const addToCart = (id) => {
-    const productToAdd = products.find(product => product.id === id);
+    const productToAdd = products.find((product) => product.id === id);
     if (productToAdd.quantity > 0) {
       console.log(`Added ${productToAdd.quantity} of ${productToAdd.name} to the cart`);
       // Here you would add the product to the cart (this example just logs the action)
@@ -56,16 +56,16 @@ const BrowseProducts = () => {
 
   return (
     <div className="browse-products">
-      <h2>Menu</h2>
+      <h2 style={{ color: '#2c7b2f', textAlign: 'center', marginBottom: '20px' }}>Menu</h2>
 
       <div className="product-cards" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-        {products.map(product => (
+        {products.map((product) => (
           <div
             className="product-card"
             key={product.id}
             style={{
-              width: '30%', // Each card will take up 30% of the container width (3 cards per row)
-              margin: '10px 0', // Vertical margin
+              width: '30%',
+              margin: '10px 0',
               textAlign: 'center',
               border: '1px solid #ccc',
               padding: '10px',

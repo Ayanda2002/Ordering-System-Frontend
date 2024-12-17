@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Box, Card, CardContent, TextField, Button, Typography, IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  TextField,
+  Button,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  
   const handleTogglePassword = () => {
     setShowPassword((prev) => !prev);
   };
@@ -40,7 +48,7 @@ const SignIn = () => {
             color: "#2c7b2f",
           }}
         >
-          Welcome
+          Sign In
         </Typography>
         <CardContent>
           <Box
@@ -70,10 +78,13 @@ const SignIn = () => {
             />
             <Button
               variant="contained"
-              color="primary"
               sx={{
                 textTransform: "none",
                 fontWeight: "bold",
+                backgroundColor: "#2c7b2f",
+                ":hover": {
+                  backgroundColor: "#216623", // Darker green for hover effect
+                },
               }}
             >
               Sign In

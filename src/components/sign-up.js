@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Box, Card, CardContent, TextField, Button, Typography, IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  TextField,
+  Button,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignUp = () => {
@@ -44,7 +53,7 @@ const SignUp = () => {
             color: "#2c7b2f",
           }}
         >
-          Create an Account
+          Sign Up
         </Typography>
         <CardContent>
           <Box
@@ -91,10 +100,13 @@ const SignUp = () => {
             />
             <Button
               variant="contained"
-              color="primary"
               sx={{
                 textTransform: "none",
                 fontWeight: "bold",
+                backgroundColor: "#2c7b2f",
+                ":hover": {
+                  backgroundColor: "#216623", // Darker green for hover effect
+                },
               }}
             >
               Sign Up

@@ -21,7 +21,7 @@ const Checkout = () => {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#fff', // Matches the Menu page
       }}
     >
       <Card
@@ -31,6 +31,7 @@ const Checkout = () => {
           boxShadow: 3,
           padding: 3,
           borderRadius: 2,
+          border: '1px solid #ccc', // Matches the Menu card border
         }}
       >
         <Typography
@@ -40,14 +41,21 @@ const Checkout = () => {
             fontWeight: 'bold',
             textAlign: 'center',
             marginBottom: 3,
-            color: '#2c7b2f',
+            color: '#4CAF50', // Matches the Menu page button color
           }}
         >
           Checkout
         </Typography>
         <CardContent>
           {/* Total Price */}
-          <Typography variant="h6" sx={{ textAlign: 'right', marginBottom: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: 'right',
+              marginBottom: 2,
+              color: '#000', // Neutral text color
+            }}
+          >
             Total: R{totalPrice.toFixed(2)}
           </Typography>
 
@@ -57,8 +65,16 @@ const Checkout = () => {
               value={paymentMethod}
               onChange={handlePaymentMethodChange}
             >
-              <FormControlLabel value="cash" control={<Radio />} label="Cash On Delivery" />
-              <FormControlLabel value="card" control={<Radio />} label="Debit/Credit Card" />
+              <FormControlLabel
+                value="cash"
+                control={<Radio sx={{ color: '#4CAF50' }} />}
+                label="Cash On Delivery"
+              />
+              <FormControlLabel
+                value="card"
+                control={<Radio sx={{ color: '#4CAF50' }} />}
+                label="Debit/Credit Card"
+              />
             </RadioGroup>
           </FormControl>
 
@@ -89,12 +105,16 @@ const Checkout = () => {
           {/* Confirm Order Button */}
           <Button
             variant="contained"
-            color="primary"
             sx={{
               textTransform: 'none',
               fontWeight: 'bold',
               marginTop: 3,
               width: '100%',
+              backgroundColor: '#4CAF50', // Matches the Menu page button color
+              color: 'white',
+              '&:hover': {
+                backgroundColor: '#45a049', // Slightly darker shade on hover
+              },
             }}
           >
             Place Order
