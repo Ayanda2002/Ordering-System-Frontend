@@ -258,7 +258,7 @@ const Home = () => {
       {/* Footer */}
 <Box
   sx={{
-    position: "fixed",
+    position: "relative",
     bottom: 0,
     left: 0,
     right: 0,
