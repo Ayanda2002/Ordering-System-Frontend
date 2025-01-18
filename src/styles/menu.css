@@ -1,3 +1,56 @@
+main .heading h1{
+    width: 950px;
+    font-size: 60px;
+    font-weight: bolder;
+    text-align: center;
+    background-image: linear-gradient(180deg, #ffd900 50%, red 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+main .menu{
+    height: auto;
+    width: 850px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.row{
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+
+.row .image{
+    height: auto;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.1s ease-in, box-shadow 0.1s ease-in;
+    padding: 20px;
+}
+
+.row .image:hover{
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+}
+
+.row a{
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+}
+
+
+.row a img{
+    height: 150px;
+    width: 150px;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .main-bar .icons{
