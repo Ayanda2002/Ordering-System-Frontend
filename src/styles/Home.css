@@ -7,6 +7,7 @@
     font-family: "Poppins", sans-serif;
 }
 
+
 body {
     display: flex;
     flex-direction: column;
@@ -19,17 +20,26 @@ header {
     width: 100%;
     position: sticky;
     top: 0;
+    z-index: 10;
 }
 
 main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     margin: 20px;
     padding-top: 20px;
     height: auto;
 }
 
-p {
+
+p{
     color: #000;
+}
+
+footer{
+    margin-top: 20px;
 }
 
 .main-bar {
@@ -37,17 +47,22 @@ p {
     height: 80px;
     position: sticky;
     top: 0;
+    width: auto;
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.main-bar .logo {
+.main-bar a{
+    text-decoration: none;
+}
+
+.main-bar .title .logo {
     height: 70px;
     width: 70px;
-    position: relative;
-    left: 20px;
-    top: 5px;
 }
 
-.main-bar h1 {
+.main-bar .title h1 {
     display: inline-block;
     position: relative;
     left: 30px;
@@ -61,12 +76,26 @@ p {
     cursor: default;
 }
 
-.main-bar .cart {
+.main-bar .icons{
+    position: relative;
+    left: 80%;
+    top: 20px;
+    margin-right: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.main-bar .icons .cart{
     height: 40px;
     width: 40px;
-    position: relative;
-    left: 82%;
-    top: -10%;
+    filter: invert(1);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.main-bar .icons .user{
+    height: 40px;
+    width: 40px;
     filter: invert(1);
     cursor: pointer;
     transition: 0.5s;
@@ -76,19 +105,44 @@ p {
     transform: scale(1.2);
 }
 
-.main-bar .user {
-    height: 40px;
-    width: 40px;
-    position: relative;
-    left: 75%;
-    top: -10%;
-    filter: invert(1);
-    cursor: pointer;
-    transition: 0.5s;
-}
-
 .main-bar .user:hover {
     transform: scale(1.2);
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: #611903;
+    border: 2px solid #b44320;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    width: 120px;
+}
+
+.user-menu .dropdown a {
+    display: block;
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.user-menu .dropdown a:hover {
+    background-color: #ffe601;
+    color: #611903;
+}
+
+.user-menu .dropdown.show {
+    display: block;
 }
 
 .nav {
@@ -124,14 +178,15 @@ p {
     padding: 20px;
 }
 
-.footer .container {
+.footer .container  {
     display: flex;
     justify-content: center;
     gap: 50px;
     width: 100%;
+
 }
 
-.footer .container .section h2 {
+.footer .container .section  h2 {
     text-decoration: underline;
     cursor: default;
     display: flex;
@@ -155,16 +210,20 @@ p {
 }
 
 .footer .container .section a:hover {
-    color: #ffe601;
+    color: #ffe601;   
+}
+
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .app-links {
     display: flex;
-    justify-content: end;
     gap: 20px;
-    padding: 20px 0;
-    position: relative;
-    top: -40px;
+    margin-top: 20px;
 }
 
 .app-links a img {
@@ -184,9 +243,9 @@ p {
 }
 
 .social-links .social-icon img {
-    width: 40px;
+    width: 40px; 
     height: 40px;
-    border-radius: 50%;
+    border-radius: 50%; 
     transition: transform 0.3s ease;
 }
 
@@ -194,10 +253,273 @@ p {
     transform: scale(1.2);
 }
 
-.copyrights p {
+.copyrights p{
     display: flex;
     justify-content: center;
     color: #ffffff;
     font-weight: 100;
     cursor: default;
+}
+
+.card{
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.card:hover{
+    width: 600px;
+}
+
+.card .circle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .circle::before{
+    content: "";
+    position: absolute;
+    top: 30;
+    left: 2;
+    right: 2;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background-color: #611903;
+    border: solid 8px #d2b303;
+    filter: drop-shadow(0 0 10px #d2b303) drop-shadow(0 0 60px #d2b303);
+    transition: 0.5s, background 0.5s;
+    transition-delay: 0.75s, 1s;
+}
+
+.card:hover .circle::before{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #b44320;
+    transition-delay: 0.1s;
+}
+
+.card .circle .logo{
+    position: relative;
+    width: 250px;
+    transition: 0.5s;
+    transition-delay: 0.5s;
+}
+
+.card:hover .circle .logo{
+    transform: scale(0);
+    transition-delay: 0s;
+}
+
+.card .ramen{
+    position: absolute;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0) rotate(240deg);
+    transition: 0.5s ease-in-out;
+}
+
+.card:hover .ramen{
+    transition-delay: 0.5s;
+    height: 250px;
+    top: 25%;
+    left: 80%;
+    transform: translate(-30%, -65%) scale(1) rotate(20deg);
+}
+
+.card .content{
+    position: absolute;
+    width: 70%;
+    left: 20%;
+    padding: 20px;
+    opacity: 0;
+    transition: 0.5s;
+    visibility: hidden;
+}
+
+.card:hover .content{
+    transition-delay: 0.5s;
+    opacity: 1;
+    visibility: visible;
+    left: 20px;
+}
+
+.card .content h2{
+    color: #fff;
+    font-size: 2.5em;
+    line-height: 46px;
+    font-style: italic;
+    font-weight: bold;
+    background-image: linear-gradient(180deg, #d2b303 50%, #fc4a4a 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card .content p{
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-bar .icons{
+        left: 70%; 
+    }
+
+    .card {
+        width: 300px;
+        height: 300px;
+    }
+
+    .card:hover {
+        width: 500px; 
+    }
+
+    .card .circle::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .card:hover .circle::before {
+        width: 100%;
+        height: 100%;
+    }
+
+    .card .content h2 {
+        font-size: 2em; 
+    }
+
+    .card .content p {
+        font-size: 1em; 
+    }
+}
+
+@media (max-width: 768px) {
+    .main-bar .icons{
+        left: 35%; 
+    }
+
+    .nav ul li {
+        padding-right: 20px; 
+    }
+
+    .nav ul li a {
+        font-size: 20px; 
+    }
+
+    .footer .container {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .card {
+        width: 250px;
+        height: 250px;
+    }
+
+    .card:hover {
+        width: 400px; 
+    }
+
+    .card .circle::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .card:hover .ramen{        
+        height: 150px;
+    }
+
+    .card .content h2 {
+        font-size: 1.5em;
+        line-height: 30px;
+    }
+
+    .card .content p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px; 
+    }
+
+    .main-bar .icons{
+        left: 30%; 
+    }
+
+    .nav {
+        height: auto; 
+        flex-wrap: wrap;
+    }
+
+    .nav ul {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .nav ul li {
+        padding-right: 0; 
+        margin-bottom: 10px; 
+    }
+
+    .nav ul li a {
+        font-size: 18px; 
+    }
+
+    .footer .container .section h2 {
+        font-size: 18px;
+    }
+
+    .footer .container .section a {
+        font-size: 14px;
+    }
+
+    .card {
+        width: 200px;
+        height: 200px;
+    }
+
+    .card:hover {
+        width: 300px; 
+    }
+
+    .card .circle::before {
+        width: 200px;
+        height: 200px;
+    }
+
+    .card .circle .logo{
+        width: 200px;
+    }
+    
+    .card:hover .ramen{        
+        height: 150px;
+    }
+
+    .card .content h2 {
+        font-size: 1.1em;
+        line-height: 20px;
+    }
+
+    .card .content p {
+        font-size: 10px;
+    }
 }
