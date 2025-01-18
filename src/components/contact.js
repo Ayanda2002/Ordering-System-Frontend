@@ -59,8 +59,43 @@ const Contact = () => {
         </div>
       </header>
       <main>
-        
+        <div className="hello">
+          <img src="images/hello.jpg" alt="Hello bord-sign" />
+        </div>
+        <div className="info">
+          <div className="line">
+            <span>Get in </span>
+            <br />
+            <span className="highlight">Touch</span>
+          </div>
+          <p>
+            At Yummy Tummy's, your feedback matters. We welcome your thoughts, suggestions, compliments, and concerns because they inspire us to serve you better every day. Whether you have a unique idea, a kind note, or an issue you'd like to share, we're here to listen and grow. Your input drives our commitment to innovation, ensuring we deliver an unforgettable dining experience every time you visit.
+            <br /><br />
+            We value every compliment—it fuels our passion to keep delighting our guests. Likewise, complaints are an opportunity for us to learn, improve, and make sure your next visit is even better. Don't hesitate to reach out—your voice helps shape the Yummy Tummy's experience.
+            <br /><br />
+            Thank you for being part of our journey to create a place where good food and great memories come together. Together, let's make Yummy Tummy's the ultimate destination for deliciousness and happiness!
+          </p>
+        </div>
+        <div className="user-input">
+          <div className="left">
+            <input type="text" name="First name" id="fname" placeholder="First name" />
+            <input type="text" name="Last name" id="lname" placeholder="Last name" />
+            <input type="email" name="email" id="email" placeholder="Email" />
+            <label for="subject" style={{ color: 'black' }}>Please choose a subject:</label>
+            <select id="subject" name="subject" placeholder="abc">
+              <option value="" disabled selected>Please choose a subject</option>
+              <option value="complain">Complain</option>
+              <option value="compliment">Compliment</option>
+              <option value="suggestion">Suggestion</option>
+            </select>
+          </div>
+          <div className="right">
+            <textarea id="message" name="message" placeholder="Write your message here..."></textarea>
+            <button>Send</button>
+          </div>
+        </div>
       </main>
+
       <footer className="footer">
         <div className="container">
           <div className="section">
@@ -172,8 +207,7 @@ const Contact = () => {
         </div>
         <div className="copyrights">
           <p>
-            Copyright &copy; Tummy Yummy's South Africa. 2025 All Rights
-            Reserved. build pwa-45-12-18_9f34a1c2
+            Copyright &copy; Tummy Yummy's South Africa. 2025 All Rights Reserved. build pwa-45-12-18_9f34a1c2
           </p>
         </div>
       </footer>

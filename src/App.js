@@ -6,12 +6,12 @@ import Cart from './components/cart';
 import Checkout from './components/checkout';
 import Contact from './components/contact';
 import Faq from './components/faq';
-import Menu from './components/menu';
+// import Menu from './components/menu';
 import Partnership from './components/partnership';
 import Sign_In from './components/sign-in';
 import Sign_Up from './components/sign-up';
 import Values from './components/values';
-// import './styles/App.css';
+import './App.css';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
-          <Route path="/menu" element={<Menu />} />
+          {/* <Route path="/menu" element={<Menu />} /> */}
           <Route path="/partnerships" element={<Partnership />} />
           <Route path="/sign-in" element={<Sign_In />} />
           <Route path="/sign-up" element={<Sign_Up />} />

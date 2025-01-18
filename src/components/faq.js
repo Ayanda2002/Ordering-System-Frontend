@@ -59,7 +59,49 @@ const Faq = () => {
         </div>
       </header>
       <main>
-        
+        <div className="info">
+          <div className="line">
+            <span>Frequently</span>
+            <br />
+            <span>Asked</span>
+            <br />
+            <span className="highlight">Questions?</span>
+          </div>
+          <div className="faq-section">
+            <div className="faq">
+              <h3>1. What is Yummy Tummy's?</h3>
+              <p>Yummy Tummy's is a restaurant specializing in delicious, freshly prepared meals inspired by global cuisines.</p>
+            </div>
+            <div className="faq">
+              <h3>2. Do you offer delivery services?</h3>
+              <p>Yes, we offer delivery services. You can place your orders online or through our mobile app.</p>
+            </div>
+            <div className="faq">
+              <h3>3. What are your operating hours?</h3>
+              <p>We are open every day from 9:00 AM to 10:00 PM.</p>
+            </div>
+            <div className="faq">
+              <h3>4. Do you cater for special dietary requirements?</h3>
+              <p>Yes, we offer vegetarian, vegan, and gluten-free options. Please inform our staff about any allergies or dietary restrictions.</p>
+            </div>
+            <div className="faq">
+              <h3>5. Do you host private events?</h3>
+              <p>Yes, we host private events for birthdays, anniversaries, and corporate gatherings. Contact us for more details and booking options.</p>
+            </div>
+            <div className="faq">
+              <h3>6. What payment methods do you accept?</h3>
+              <p>We accept cash, credit cards, debit cards, and popular mobile payment options like Apple Pay and Google Pay.</p>
+            </div>
+            <div className="faq">
+              <h3>7. Are your ingredients locally sourced?</h3>
+              <p>We prioritize using locally sourced and fresh ingredients to ensure quality and support local farmers.</p>
+            </div>
+            <div className="faq">
+              <h3>8. Is your restaurant family-friendly?</h3>
+              <p>Yes, our restaurant is family-friendly, and we offer a special kids’ menu for our younger guests.</p>
+            </div>
+          </div>
+        </div>
       </main>
       <footer className="footer">
         <div className="container">

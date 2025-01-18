@@ -3,9 +3,26 @@ import '../styles/sign-in.css'; // Import your CSS file
 
 const Sign_In = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
+  };
+
+  const validateForm = (event) => {
+    // Add form validation logic here if needed
+    event.preventDefault();
+    setSuccessMessage('Sign-in successful! Welcome back.'); // Set the success message
+    setTimeout(() => setSuccessMessage(''), 5000); // Clear message after 5 seconds
+  };
+
+  const togglePasswordVisibility = () => {
+    const passwordInput = document.getElementById('password');
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
   };
 
   return (
@@ -59,7 +76,47 @@ const Sign_In = () => {
         </div>
       </header>
       <main>
-        
+        <div className="heading">
+          <h1>Sign In</h1>
+        </div>
+        <fieldset>
+          <form id="sign-in-form" onSubmit={validateForm}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              minLength="6"
+              required
+            />
+
+            <div className="show-password">
+              <input
+                type="checkbox"
+                id="show-password"
+                onClick={togglePasswordVisibility}
+              />
+              <label htmlFor="show-password">Show Password</label>
+            </div>
+
+            <button type="submit" className="sign-in-button">
+              Sign In
+            </button>
+          </form>
+        </fieldset>
+        {successMessage && (
+          <div className="success-message">{successMessage}</div> // Display the success message
+        )}
       </main>
       <footer className="footer">
         <div className="container">
