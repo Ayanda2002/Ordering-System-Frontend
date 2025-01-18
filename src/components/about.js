@@ -22,7 +22,7 @@ const About = () => {
             </div>
           </a>
           <div className="icons">
-            <a href="/cart.html">
+            <a href="/cart">
               <img className="cart" src="images/online-shopping.png" alt="cart" />
             </a>
             <div className="user-menu">
@@ -34,8 +34,8 @@ const About = () => {
               />
               {userMenuVisible && (
                 <div className="dropdown">
-                  <a href="/sign-in.html">Sign In</a>
-                  <a href="/sign-up.html">Sign Up</a>
+                  <a href="/sign-in">Sign In</a>
+                  <a href="/sign-up">Sign Up</a>
                 </div>
               )}
             </div>
@@ -44,16 +44,16 @@ const About = () => {
         <div className="nav">
           <ul>
             <li>
-              <a href="/menu.html" className="menu">Menu</a>
+              <a href="/menu" className="menu">Menu</a>
             </li>
             <li>
-              <a href="/partnerships.html" className="partnerships">Partnerships</a>
+              <a href="/partnerships" className="partnerships">Partnerships</a>
             </li>
             <li>
               <a href="/about" className="about-us">About Us</a>
             </li>
             <li>
-              <a href="/contact.html" className="contact-us">Contact Us</a>
+              <a href="/contact" className="contact-us">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -131,7 +131,7 @@ const About = () => {
             <h2>Eat</h2>
             <ul>
               <li>
-                <a href="menu.html">Menu</a>
+                <a href="menu">Menu</a>
               </li>
             </ul>
           </div>
@@ -139,13 +139,13 @@ const About = () => {
             <h2>Explore</h2>
             <ul>
               <li>
-                <a href="about.html">About Us</a>
+                <a href="about">About Us</a>
               </li>
               <li>
-                <a href="values.html">Our Values</a>
+                <a href="values">Our Values</a>
               </li>
               <li>
-                <a href="partnerships.html">Partnerships</a>
+                <a href="partnerships">Partnerships</a>
               </li>
             </ul>
           </div>
@@ -153,10 +153,10 @@ const About = () => {
             <h2>Help</h2>
             <ul>
               <li>
-                <a href="contact.html">Contact Us</a>
+                <a href="contact">Contact Us</a>
               </li>
               <li>
-                <a href="faq.html">FAQ</a>
+                <a href="faq">FAQ</a>
               </li>
             </ul>
           </div>
