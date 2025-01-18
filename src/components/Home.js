@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for routing
 import '../styles/home.css'; // Import the CSS file
 
 const Home = () => {
@@ -28,7 +29,7 @@ const Home = () => {
     <div>
       <header>
         <div className="main-bar">
-          <a href="index.html">
+          <Link to="/">
             <div className="title">
               <img
                 className="logo"
@@ -40,15 +41,15 @@ const Home = () => {
                 Tummy's
               </h1>
             </div>
-          </a>
+          </Link>
           <div className="icons">
-            <a href="cart.html">
+            <Link to="/cart">
               <img
                 className="cart"
                 src={`${process.env.PUBLIC_URL}/images/online-shopping.png`}
                 alt="cart"
               />
-            </a>
+            </Link>
             <div className="user-menu">
               <img
                 className="user"
@@ -58,8 +59,8 @@ const Home = () => {
               />
               {userMenuVisible && (
                 <div className="dropdown" id="user-dropdown">
-                  <a href="sign-in.html">Sign In</a>
-                  <a href="sign-up.html">Sign Up</a>
+                  <Link to="/sign-in">Sign In</Link>
+                  <Link to="/sign-up">Sign Up</Link>
                 </div>
               )}
             </div>
@@ -68,24 +69,24 @@ const Home = () => {
         <div className="nav">
           <ul>
             <li>
-              <a href="menu.html" className="menu">
+              <Link to="/menu" className="menu">
                 Menu
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="partnerships.html" className="partnerships">
+              <Link to="/partnerships" className="partnerships">
                 Partnerships
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="about.html" className="about-us">
+              <Link to="/about" className="about-us">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="contact.html" className="contact-us">
+              <Link to="/contact" className="contact-us">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -123,7 +124,7 @@ const Home = () => {
             <h2>Eat</h2>
             <ul>
               <li>
-                <a href="menu.html">Menu</a>
+                <Link to="/menu">Menu</Link>
               </li>
             </ul>
           </div>
@@ -131,13 +132,13 @@ const Home = () => {
             <h2>Explore</h2>
             <ul>
               <li>
-                <a href="about.html">About Us</a>
+                <Link to="/about">About Us</Link>
               </li>
               <li>
-                <a href="values.html">Our Values</a>
+                <Link to="/values">Our Values</Link>
               </li>
               <li>
-                <a href="partnerships.html">Partnerships</a>
+                <Link to="/partnerships">Partnerships</Link>
               </li>
             </ul>
           </div>
@@ -145,10 +146,10 @@ const Home = () => {
             <h2>Help</h2>
             <ul>
               <li>
-                <a href="contact.html">Contact Us</a>
+                <Link to="/contact">Contact Us</Link>
               </li>
               <li>
-                <a href="faq.html">FAQ</a>
+                <Link to="/faq">FAQ</Link>
               </li>
             </ul>
           </div>
