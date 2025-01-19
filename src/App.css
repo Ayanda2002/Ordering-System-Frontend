@@ -58,6 +58,14 @@ footer{
     text-decoration: none;
 }
 
+.main-bar .title{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+}
+
 .main-bar .title .logo {
     height: 70px;
     width: 70px;
@@ -65,24 +73,19 @@ footer{
 
 .main-bar .title h1 {
     display: inline-block;
-    position: relative;
-    left: 30px;
-    top: 1px;
     line-height: 30px;
     font-size: 25px;
     font-style: italic;
     background-image: linear-gradient(180deg, #d2b303 50%, #FF4D4D 50%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    cursor: default;
+    -webkit-text-fill-color: transparent;    
 }
 
 .main-bar .icons {
-    position: relative;
-    left: 80%;
-    top: 20px;
-    margin-right: 20px;
+    margin-left: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
 }
 
