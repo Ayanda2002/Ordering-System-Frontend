@@ -108,127 +108,32 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .main-bar .icons{
-        left: 70%; 
-    }
-    /* main {
-        margin: 40px;
-    } */
+/* xs */
+@media (max-width: 475px){
 
-    .cart-container {
-        max-width: 100%;
-        padding: 15px;
-    }
-
-    .cart-table th, .cart-table td {
-        font-size: 14px;
-    }
-
-    .cart-summary {
-        margin-top: 15px;
-        font-size: 16px;
-    }
 }
 
-@media (max-width: 768px) {
-    .main-bar .icons{
-        left: 35%; 
-    }
+/* sm */
+@media (max-width: 640px){
 
-    .nav ul li {
-        padding-right: 20px; 
-    }
-
-    .nav ul li a {
-        font-size: 20px; 
-    }
-
-    .footer .container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    /* main {
-        margin: 30px;
-    } */
-
-    .cart-container {
-        max-width: 100%;
-        padding: 10px;
-    }
-
-    .cart-table th, .cart-table td {
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    .cart-summary {
-        font-size: 14px;
-    }
-
-    .checkout-btn {
-        padding: 8px 16px;
-    }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px; 
-    }
+/* md */
+@media (max-width: 768px){
 
-    .main-bar .icons{
-        left: 30%; 
-    }
+}
 
-    .nav {
-        height: auto; 
-        flex-wrap: wrap;
-    }
+/* lg */
+@media (max-width: 1024px){
 
-    .nav ul {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
+}
 
-    .nav ul li {
-        padding-right: 0; 
-        margin-bottom: 10px; 
-    }
+/* xl */
+@media (max-width: 1280px){
 
-    .nav ul li a {
-        font-size: 18px; 
-    }
+}
 
-    .footer .container .section h2 {
-        font-size: 18px;
-    }
-
-    .footer .container .section a {
-        font-size: 14px;
-    }
-
-    /* main {
-        margin: 30px;
-    } */
-
-    .cart-container {
-        max-width: 100%;
-        padding: 10px;
-    }
-
-    .cart-table th, .cart-table td {
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    .cart-summary {
-        font-size: 14px;
-    }
-
-    .checkout-btn {
-        padding: 8px 16px;
-    }
+/* 2xl */
+@media (max-width: 1536px){
 
 }

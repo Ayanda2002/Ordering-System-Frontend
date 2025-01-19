@@ -45,13 +45,12 @@ footer{
 /* Main bar */
 .main-bar {
     background-color: #611903;
-    height: 80px;
+    height: auto;
     position: sticky;
     top: 0;
     width: auto;
     display: flex;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
 }
 
 .main-bar a{
@@ -142,15 +141,22 @@ footer{
 /* Navigation */
 .nav {
     background-color: #b44320;
-    height: 50px;
+    height: auto;
+    padding: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.nav ul{
+    float: left;
+    display: flex;
+    align-items: center;
 }
 
 .nav ul li {
     list-style: none;
     float: left;
-    padding-right: 50px;
 }
 
 .nav ul li a {
@@ -158,8 +164,6 @@ footer{
     color: #ffffff;
     font-size: 25px;
     font-weight: 500;
-    position: relative;
-    top: 10px;
 }
 
 .nav ul li a:hover {
@@ -255,10 +259,196 @@ footer{
     transform: scale(1.2);
 }
 
-.copyrights p {
+.copyrights{
     display: flex;
+    align-items: center;
     justify-content: center;
+    cursor: default;       
+}
+
+.copyrights p {
     color: #ffffff;
     font-weight: 100;
-    cursor: default;
+    text-align: center;
+}
+
+/* xs */
+@media (max-width: 475px) {
+    .main-bar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .main-bar .title h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+    .main-bar .icons {
+        margin-top: 10px;
+        gap: 10px;
+    }
+    .nav ul li a {
+        font-size: 18px;
+        padding-right: 20px;
+    }
+    .footer .container {
+        flex-direction: column;
+        width: 90%;
+    }
+    .app-links a img {
+        width: 120px;
+    }
+    .social-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* sm */
+@media (max-width: 640px) {
+    
+    .main-bar .title h1 {
+        font-size: 22px;
+        line-height: 36px;
+    }
+    .main-bar .icons {
+        gap: 15px;
+    }
+    .nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        list-style: none;
+        width: 100%;
+    }
+    .nav ul li {
+        display: flex; 
+        align-items: center;
+        float: none; 
+        width: 100%;
+        padding: 0;
+    }
+    .nav ul li a {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* md */
+@media (max-width: 768px) {
+    .main-bar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .main-bar .title h1 {
+        font-size: 24px;
+        line-height: 36px;
+    }
+    .app-links a img {
+        width: 140px;
+    }
+    .nav ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav ul li {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        width: 100%;
+    }
+    .nav ul li a {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+    .main-bar .title h1 {
+        font-size: 28px;
+        line-height: 38px;
+    }
+    .nav ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav ul li {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        width: 100%;
+    }
+    .nav ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 22px;
+    }
+    .footer .container {
+        gap: 30px;
+        width: 80%;
+    }
+}
+
+/* xl */
+@media (max-width: 1280px) {
+    .main-bar .title h1 {
+        line-height: 35px;
+    }
+    .main-bar {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .nav ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav ul li {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        width: 100%;
+    }
+    .nav ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 23px;
+    }
+    .footer .container {
+        width: 85%;
+    }
+}
+
+/* 2xl */
+@media (max-width: 1536px) {
+    .main-bar .title h1 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .nav ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav ul li {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        width: 100%;
+    }
+    .nav ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 25px;
+    }
+
+    .footer .container {
+        width: 90%;
+    }
 }

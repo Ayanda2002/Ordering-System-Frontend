@@ -89,117 +89,32 @@ fieldset button:active {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .main-bar .icons{
-        left: 70%; 
-    }
+/* xs */
+@media (max-width: 475px){
 
-    fieldset {
-        width: 70%; /* Adjust fieldset width */
-    }
-
-    .heading h1 {
-        font-size: 50px;
-    }
-
-    input[type="email"], input[type="password"] {
-        font-size: 14px;
-    }
 }
 
-@media (max-width: 768px) {
-    .main-bar .icons{
-        left: 35%; 
-    }
+/* sm */
+@media (max-width: 640px){
 
-    .nav ul li {
-        padding-right: 20px; 
-    }
-
-    .nav ul li a {
-        font-size: 20px; 
-    }
-
-    .footer .container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    fieldset {
-        width: 90%; /* Use most of the screen width */
-    }
-
-    .heading h1 {
-        font-size: 40px;
-    }
-
-    fieldset button {
-        width: 70%; /* Adjust button size */
-    }
-
-    input[type="email"], input[type="password"] {
-        font-size: 14px;
-    }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px; 
-    }
+/* md */
+@media (max-width: 768px){
 
-    .main-bar .icons{
-        left: 30%; 
-    }
+}
 
-    .nav {
-        height: auto; 
-        flex-wrap: wrap;
-    }
+/* lg */
+@media (max-width: 1024px){
 
-    .nav ul {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
+}
 
-    .nav ul li {
-        padding-right: 0; 
-        margin-bottom: 10px; 
-    }
+/* xl */
+@media (max-width: 1280px){
 
-    .nav ul li a {
-        font-size: 18px; 
-    }
+}
 
-    .footer .container .section h2 {
-        font-size: 18px;
-    }
+/* 2xl */
+@media (max-width: 1536px){
 
-    .footer .container .section a {
-        font-size: 14px;
-    }
-
-    .heading h1 {
-        font-size: 30px;
-    }
-
-    fieldset {
-        width: 100px;
-        padding: 15px;
-    }
-
-    input[type="email"], input[type="password"] {
-        font-size: 12px;
-        padding: 8px;
-        width: 50%;
-    }
-
-    fieldset button {
-        width: 50%;
-        font-size: 16px;
-    }
-
-    .show-password {
-        font-size: 14px;
-    }
 }

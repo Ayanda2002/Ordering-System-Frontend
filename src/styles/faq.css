@@ -48,99 +48,32 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .main-bar .icons{
-        left: 70%; 
-    }
+/* xs */
+@media (max-width: 475px){
+
 }
 
-@media (max-width: 768px) {
-    .main-bar .icons{
-        left: 35%; 
-    }
+/* sm */
+@media (max-width: 640px){
 
-    .nav ul li {
-        padding-right: 20px; 
-    }
-
-    .nav ul li a {
-        font-size: 20px; 
-    }
-
-    .footer .container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    .line {
-        font-size: 40px;
-        line-height: 55px;  
-    }
-    
-    .highlight {
-        font-size: 50px;
-    }
-
-    .faq h3{
-        font-size: 21px;
-    }
-
-    .faq p{
-        font-size: 15px;
-    }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px; 
-    }
+/* md */
+@media (max-width: 768px){
 
-    .main-bar .icons{
-        left: 30%; 
-    }
+}
 
-    .nav {
-        height: auto; 
-        flex-wrap: wrap;
-    }
+/* lg */
+@media (max-width: 1024px){
 
-    .nav ul {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
+}
 
-    .nav ul li {
-        padding-right: 0; 
-        margin-bottom: 10px; 
-    }
+/* xl */
+@media (max-width: 1280px){
 
-    .nav ul li a {
-        font-size: 18px; 
-    }
+}
 
-    .footer .container .section h2 {
-        font-size: 18px;
-    }
+/* 2xl */
+@media (max-width: 1536px){
 
-    .footer .container .section a {
-        font-size: 14px;
-    }
-
-    .info .line {
-        font-size: 20px;
-        line-height: 30px;  
-    }
-    
-    .info .highlight {
-        font-size: 30px;
-    }
-
-    .faq h3{
-        font-size: 18px;
-    }
-
-    .faq p{
-        font-size: 12px;
-    }
 }

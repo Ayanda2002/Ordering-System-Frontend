@@ -81,139 +81,32 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .main-bar .icons{
-        left: 70%; 
-    }
+/* xs */
+@media (max-width: 475px){
 
-    .partnership-container .heading img{
-        height: 250px;
-        width: 800px;
-    }
 }
 
-@media (max-width: 768px) {
-    .main-bar .icons{
-        left: 35%; 
-    }
+/* sm */
+@media (max-width: 640px){
 
-    .nav ul li {
-        padding-right: 20px; 
-    }
-
-    .nav ul li a {
-        font-size: 20px; 
-    }
-
-    .footer .partnership-container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    .partnership-container .heading img{
-        height: 200px;
-        width: 500px;
-    }
-    
-    .partnership-container .heading h1{
-        font-size: 40px;
-    }
-    
-    .partnership-container .partnership{
-        font-size: 15px;
-    }
-
-    .partnership-info .line {
-        font-size: 40px;
-        line-height: 55px;  
-    }
-    
-    .partnership-info .highlight {
-        font-size: 50px;
-    }
-    
-    .partnership-info .commitment{
-        font-size: 15px;
-    }
-    
-    .partnership-info .achievements{
-        font-size: 15px;
-    }
-    
-    .partnership-info .role{
-        font-size: 15px;
-    }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px; 
-    }
+/* md */
+@media (max-width: 768px){
 
-    .main-bar .icons{
-        left: 30%; 
-    }
+}
 
-    .nav {
-        height: auto; 
-        flex-wrap: wrap;
-    }
+/* lg */
+@media (max-width: 1024px){
 
-    .nav ul {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
+}
 
-    .nav ul li {
-        padding-right: 0; 
-        margin-bottom: 10px; 
-    }
+/* xl */
+@media (max-width: 1280px){
 
-    .nav ul li a {
-        font-size: 18px; 
-    }
+}
 
-    .footer .partnership-container .section h2 {
-        font-size: 18px;
-    }
+/* 2xl */
+@media (max-width: 1536px){
 
-    .footer .partnership-container .section a {
-        font-size: 14px;
-    }
-
-    .partnership-container .heading img{
-        height: 150px;
-        width: 400px;
-    }
-    
-    .partnership-container .heading h1{
-        font-size: 20px;
-        line-height: 18px;
-    }
-    
-    .partnership-container .partnership{
-        font-size: 12px;
-    }
-
-    .partnership-info .line {
-        font-size: 20px;
-        line-height: 30px;  
-    }
-    
-    .partnership-info .highlight {
-        font-size: 30px;
-    }
-    
-    .partnership-info .commitment{
-        font-size: 12px;
-    }
-    
-    .partnership-info .achievements{
-        font-size: 12px;
-    }
-    
-    .partnership-info .role{
-        font-size: 12px;
-    }
 }

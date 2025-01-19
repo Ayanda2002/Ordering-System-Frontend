@@ -116,150 +116,32 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .main-bar .icons{
-        left: 70%; 
-    }
+/* xs */
+@media (max-width: 475px){
 
-    .card {
-        width: 300px;
-        height: 300px;
-    }
-
-    .card:hover {
-        width: 500px; 
-    }
-
-    .card .circle::before {
-        width: 300px;
-        height: 300px;
-    }
-
-    .card:hover .circle::before {
-        width: 100%;
-        height: 100%;
-    }
-
-    .card .content h2 {
-        font-size: 2em; 
-    }
-
-    .card .content p {
-        font-size: 1em; 
-    }
 }
 
-@media (max-width: 768px) {
-    .main-bar .icons{
-        left: 35%; 
-    }
+/* sm */
+@media (max-width: 640px){
 
-    .nav ul li {
-        padding-right: 20px; 
-    }
-
-    .nav ul li a {
-        font-size: 20px; 
-    }
-
-    .footer .container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    .card {
-        width: 250px;
-        height: 250px;
-    }
-
-    .card:hover {
-        width: 400px; 
-    }
-
-    .card .circle::before {
-        width: 250px;
-        height: 250px;
-    }
-
-    .card:hover .ramen{        
-        height: 150px;
-    }
-
-    .card .content h2 {
-        font-size: 1.5em;
-        line-height: 30px;
-    }
-
-    .card .content p {
-        font-size: 14px;
-    }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px; 
-    }
+/* md */
+@media (max-width: 768px){
 
-    .main-bar .icons{
-        left: 30%; 
-    }
+}
 
-    .nav {
-        height: auto; 
-        flex-wrap: wrap;
-    }
+/* lg */
+@media (max-width: 1024px){
 
-    .nav ul {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
+}
 
-    .nav ul li {
-        padding-right: 0; 
-        margin-bottom: 10px; 
-    }
+/* xl */
+@media (max-width: 1280px){
 
-    .nav ul li a {
-        font-size: 18px; 
-    }
+}
 
-    .footer .container .section h2 {
-        font-size: 18px;
-    }
+/* 2xl */
+@media (max-width: 1536px){
 
-    .footer .container .section a {
-        font-size: 14px;
-    }
-
-    .card {
-        width: 200px;
-        height: 200px;
-    }
-
-    .card:hover {
-        width: 300px; 
-    }
-
-    .card .circle::before {
-        width: 200px;
-        height: 200px;
-    }
-
-    .card .circle .logo{
-        width: 200px;
-    }
-    
-    .card:hover .ramen{        
-        height: 150px;
-    }
-
-    .card .content h2 {
-        font-size: 1.1em;
-        line-height: 20px;
-    }
-
-    .card .content p {
-        font-size: 10px;
-    }
 }
