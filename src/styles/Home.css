@@ -7,8 +7,7 @@
     align-items: center;
     transition: 0.5s;
     cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 80px;
 }
 
 .card:hover{
@@ -118,22 +117,155 @@
 /* Responsive Design */
 /* xs */
 @media (max-width: 475px){
-
+    .card{
+        width: 250px;
+        height: 250px;
+    }
+    
+    .card:hover{
+        width: 350px;
+    }
+    
+    .card .circle{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .card .circle::before{
+        width: 250px;
+        height: 250px;
+    }
+        
+    .card .circle .logo{
+        width: 200px;
+    }
+    
+    .card .ramen{
+        height: 250px;
+    }
+    
+    .card:hover .ramen{
+        height: 150px;
+    }
+    
+    .card .content{
+        width: 80%;
+    }
+    
+    .card .content h2{
+        font-size: 30px;
+        line-height: 30px;
+    }
+    
+    .card .content p{
+        font-size: 13px;
+    }
 }
 
 /* sm */
 @media (max-width: 640px){
-
+    .card{
+        width: 250px;
+        height: 250px;
+    }
+    
+    .card:hover{
+        width: 350px;
+    }
+    
+    .card .circle{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .card .circle::before{
+        width: 200px;
+        height: 200px;
+    }
+        
+    .card .circle .logo{
+        width: 200px;
+    }
+    
+    .card .ramen{
+        height: 250px;
+    }
+    
+    .card:hover .ramen{
+        height: 160px;
+    }
+    
+    .card .content{
+        width: 80%;
+    }
+    
+    .card .content h2{
+        font-size: 30px;
+        line-height: 30px;
+    }
+    
+    .card .content p{
+        font-size: 13px;
+    }
 }
 
 /* md */
 @media (max-width: 768px){
-
+    .card{
+        width: 250px;
+        height: 250px;
+    }
+    
+    .card:hover{
+        width: 350px;
+    }
+    
+    .card .circle{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .card .circle::before{
+        width: 200px;
+        height: 200px;
+    }
+        
+    .card .circle .logo{
+        width: 200px;
+    }
+    
+    .card .ramen{
+        height: 250px;
+    }
+    
+    .card:hover .ramen{
+        height: 180px;
+    }
+    
+    .card .content{
+        width: 80%;
+    }
+    
+    .card .content h2{
+        font-size: 30px;
+        line-height: 30px;
+    }
+    
+    .card .content p{
+        font-size: 14px;
+    }
 }
 
 /* lg */
 @media (max-width: 1024px){
+    .card{
+        width: 300px;
+        height: 300px;
+    }
 
+    .card:hover .ramen{
+        height: 200px;
+    }
 }
 
 /* xl */
