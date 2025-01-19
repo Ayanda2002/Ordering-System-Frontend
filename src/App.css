@@ -50,7 +50,7 @@ footer{
     top: 0;
     width: auto;
     display: flex;
-    padding: 20px;
+    padding: 10px;
 }
 
 .main-bar a{
@@ -90,8 +90,7 @@ footer{
 
 .main-bar .icons .cart,
 .main-bar .icons .user {
-    height: 40px;
-    width: 40px;
+    height: 45px;
     filter: invert(1);
     cursor: pointer;
     transition: 0.5s;
@@ -152,10 +151,10 @@ footer{
     float: left;
     display: flex;
     align-items: center;
+    list-style: none;
 }
 
 .nav ul li {
-    list-style: none;
     float: left;
 }
 
@@ -403,7 +402,7 @@ footer{
         padding-right: 15px;
     }
     .nav ul {
-        width: 100%;
+        width: 50%;
         display: flex;
         align-items: center;
     }

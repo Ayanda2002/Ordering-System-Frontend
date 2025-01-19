@@ -77,30 +77,186 @@
 /* Responsive Design */
 /* xs */
 @media (max-width: 475px){
+    
+    .about-container .heading h1 {
+        font-size: 40px;
+    }
+    
+    .about-container .about-us {
+        font-size: 15px;
+    }
 
+    .about-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-info .line {
+        font-size: 40px;
+        line-height: 55px;
+    }
+    
+    .about-info .highlight {
+        font-size: 50px;
+    }
+    
+    .about-info .about {
+        width: 80%;
+        font-size: 15px;
+    }
+    
+    .about-info .special {
+        width: 80%;
+        font-size: 15px;
+    }
+    
+    .about-info .commitment {
+        width: 80%;
+        font-size: 15px;
+    }
 }
 
 /* sm */
 @media (max-width: 640px){
+    .about-container .heading img {
+        height: 150px;
+    }
+    
+    .about-container .heading h1 {
+        font-size: 40px;
+    }
+    
+    .about-container .about-us {
+        font-size: 20px;
+    }
 
+    .about-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-info .line {
+        font-size: 40px;
+        line-height: 55px;
+    }
+    
+    .about-info .highlight {
+        font-size: 50px;
+    }
+    
+    .about-info .about {
+        width: 80%;
+        font-size: 15px;
+    }
+    
+    .about-info .special {
+        width: 80%;
+        font-size: 15px;
+    }
+    
+    .about-info .commitment {
+        width: 80%;
+        font-size: 15px;
+    }
 }
 
 /* md */
-@media (max-width: 768px){
+@media (max-width: 768px){    
+    .about-container .heading img {
+        height: 150px;
+    }
+    
+    .about-container .heading h1 {
+        font-size: 40px;
+    }
+    
+    .about-container .about-us {
+        font-size: 20px;
+    }
 
+    .about-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-info .line {
+        font-size: 40px;
+        line-height: 55px;
+    }
+    
+    .about-info .highlight {
+        font-size: 50px;
+    }
+    
+    .about-info .about {
+        width: 80%;
+        font-size: 18px;
+    }
+    
+    .about-info .special {
+        width: 80%;
+        font-size: 18px;
+    }
+    
+    .about-info .commitment {
+        width: 80%;
+        font-size: 18px;
+    }
 }
 
 /* lg */
 @media (max-width: 1024px){
+    .about-container .heading img {
+        height: 150px;
+    }
+    
+    .about-container .heading h1 {
+        font-size: 60px;
+    }
+    
+    .about-container .heading h1 {
+        font-size: 40px;
+    }
 
+    .about-info .line {
+        font-size: 30px;
+        line-height: 45px;
+    }
+    
+    .about-info .highlight {
+        font-size: 40px;
+    }
+
+    .about-info .about {
+        width: 80%;
+        font-size: 18px;
+    }
+    
+    .about-info .special {
+        width: 80%;
+        font-size: 18px;
+    }
+    
+    .about-info .commitment {
+        width: 80%;
+        font-size: 18px;
+    }
 }
 
 /* xl */
 @media (max-width: 1280px){
-
+    .about-container .heading img {
+        height: 150px;
+    }
+    
+    .about-container .heading h1 {
+        font-size: 40px;
+    }   
 }
 
 /* 2xl */
 @media (max-width: 1536px){
-
+    .about-container .heading img {
+        height: 150px;
+    }
 }
