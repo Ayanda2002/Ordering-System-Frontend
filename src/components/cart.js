@@ -3,18 +3,67 @@ import '../styles/cart.css'; // Import your CSS file
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([
+    { id: 1, name: "Chicken Ramen", price: 80, quantity: 1 },
+    { id: 2, name: "Vegetarian Sushi", price: 60, quantity: 2 },
+  ]);
 
+  // Toggles the visibility of the user menu
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
+  // Adds a new item to the cart
+  const addItemToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      if (existingItem) {
+        return prevCart.map(cartItem =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prevCart, item];
+      }
+    });
+  };
+
+  // Removes an item from the cart
+  const removeItemFromCart = (id) => {
+    setCart((prevCart) => prevCart.filter(item => item.id !== id));
+  };
+
+  // Increases the quantity of an item in the cart
+  const increaseQuantity = (id) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // Decreases the quantity of an item in the cart
+  const decreaseQuantity = (id) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+    );
+  };
+
+  // Handles the checkout process
   const checkout = () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
     } else {
-      window.location.href = "checkout.html";  // You can replace this with routing in React, like using react-router
+      window.location.href = "/checkout"; // You can replace this with routing in React
     }
+  };
+
+  // Calculate the total price of items in the cart
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
   return (
@@ -68,33 +117,38 @@ const Cart = () => {
         </div>
       </header>
       <main>
-        <section class="cart-container">
-            <h2>Your Cart</h2>
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                 <tbody id="cart-items">
-                  {/* Cart items will be dynamically added here */}
-                  {cart.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.price}</td>
-                      <td>{item.quantity * item.price}</td>
-                      <td><button>Remove</button></td>
-                    </tr>
-                  ))}
-                </tbody>
-            </table>
-            <div className="cart-summary">
-            <p><strong>Subtotal:</strong> <span id="cart-subtotal">R {cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2)}</span></p>
+        <section className="cart-container">
+          <h2>Your Cart</h2>
+          <table className="cart-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>
+                    <button class="add" onClick={() => increaseQuantity(item.id)}>+</button>
+                    {item.quantity}
+                    <button class="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
+                  </td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity * item.price}</td>
+                  <td>
+                    <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="cart-summary">
+            <p><strong>Subtotal:</strong> <span id="cart-subtotal">R {calculateTotal().toFixed(2)}</span></p>
             <button className="checkout-btn" onClick={checkout}>Checkout</button>
           </div>
         </section>

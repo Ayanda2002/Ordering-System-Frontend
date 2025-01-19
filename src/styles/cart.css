@@ -48,6 +48,40 @@
     background-color: #611903;
 }
 
+.cart-table td .add {
+    background-color: #06ff66; /* Red color for Remove button */
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: 150px;
+    top: 10px;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-table td .add:hover {
+    background-color: #02ac43; /* Red color for Remove button */
+}
+
+.cart-table td .minus {
+    background-color: #ff0606; /* Red color for Remove button */
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: 150px;
+    top: 0px;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-table td .minus:hover {
+    background-color: #9f0202; /* Red color for Remove button */
+}
+
 .cart-summary {
     text-align: right;
     margin-top: 10px;
