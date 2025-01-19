@@ -132,16 +132,18 @@ const Cart = () => {
             <tbody>
               {cart.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>
-                    <button class="add" onClick={() => increaseQuantity(item.id)}>+</button>
+                  <td className="content">{item.name}</td>
+                  <td className="content">
                     {item.quantity}
-                    <button class="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
                   </td>
-                  <td>{item.price}</td>
-                  <td>{item.quantity * item.price}</td>
+                  <td className="content">{item.price}</td>
+                  <td className="content">{item.quantity * item.price}</td>
                   <td>
-                    <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+                    <div class="actions">
+                      <button class="add" onClick={() => increaseQuantity(item.id)}>+</button>
+                      <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+                      <button class="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
+                    </div>
                   </td>
                 </tr>
               ))}
