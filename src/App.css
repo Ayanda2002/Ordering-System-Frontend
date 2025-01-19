@@ -132,7 +132,7 @@ footer{
     color: #611903;
 }
 
-.user-menu .dropdown.show {
+.user-menu .dropdown.active {
     display: block;
 }
 

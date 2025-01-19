@@ -1,12 +1,59 @@
-import React, { useState } from 'react';
-import '../styles/faq.css'; // Import your CSS file
+import React, { useState } from "react";
+import "../styles/faq.css"; // Import your CSS file
 
 const Faq = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const [visibleFaqIndex, setVisibleFaqIndex] = useState(null);
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
+
+  const toggleFaq = (index) => {
+    setVisibleFaqIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const faqData = [
+    {
+      question: "1. What is Yummy Tummy's?",
+      answer:
+        "Yummy Tummy's is a restaurant specializing in delicious, freshly prepared meals inspired by global cuisines.",
+    },
+    {
+      question: "2. Do you offer delivery services?",
+      answer:
+        "Yes, we offer delivery services. You can place your orders online or through our mobile app.",
+    },
+    {
+      question: "3. What are your operating hours?",
+      answer: "We are open every day from 9:00 AM to 10:00 PM.",
+    },
+    {
+      question: "4. Do you cater for special dietary requirements?",
+      answer:
+        "Yes, we offer vegetarian, vegan, and gluten-free options. Please inform our staff about any allergies or dietary restrictions.",
+    },
+    {
+      question: "5. Do you host private events?",
+      answer:
+        "Yes, we host private events for birthdays, anniversaries, and corporate gatherings. Contact us for more details and booking options.",
+    },
+    {
+      question: "6. What payment methods do you accept?",
+      answer:
+        "We accept cash, credit cards, debit cards, and popular mobile payment options like Apple Pay and Google Pay.",
+    },
+    {
+      question: "7. Are your ingredients locally sourced?",
+      answer:
+        "We prioritize using locally sourced and fresh ingredients to ensure quality and support local farmers.",
+    },
+    {
+      question: "8. Is your restaurant family-friendly?",
+      answer:
+        "Yes, our restaurant is family-friendly, and we offer a special kids’ menu for our younger guests.",
+    },
+  ];
 
   return (
     <div>
@@ -33,7 +80,7 @@ const Faq = () => {
                 onClick={toggleUserMenu}
               />
               {userMenuVisible && (
-                <div className="dropdown">
+                <div className="dropdown active">
                   <a href="/sign-in">Sign In</a>
                   <a href="/sign-up">Sign Up</a>
                 </div>
@@ -44,16 +91,24 @@ const Faq = () => {
         <div className="nav">
           <ul>
             <li>
-              <a href="/menu" className="menu">Menu</a>
+              <a href="/menu" className="menu">
+                Menu
+              </a>
             </li>
             <li>
-              <a href="/partnerships" className="partnerships">Partnerships</a>
+              <a href="/partnerships" className="partnerships">
+                Partnerships
+              </a>
             </li>
             <li>
-              <a href="/about" className="about-us">About Us</a>
+              <a href="/about" className="about-us">
+                About Us
+              </a>
             </li>
             <li>
-              <a href="/contact" className="contact-us">Contact Us</a>
+              <a href="/contact" className="contact-us">
+                Contact Us
+              </a>
             </li>
           </ul>
         </div>
@@ -68,38 +123,12 @@ const Faq = () => {
             <span className="highlight">Questions?</span>
           </div>
           <div className="faq-section">
-            <div className="faq">
-              <h3>1. What is Yummy Tummy's?</h3>
-              <p>Yummy Tummy's is a restaurant specializing in delicious, freshly prepared meals inspired by global cuisines.</p>
-            </div>
-            <div className="faq">
-              <h3>2. Do you offer delivery services?</h3>
-              <p>Yes, we offer delivery services. You can place your orders online or through our mobile app.</p>
-            </div>
-            <div className="faq">
-              <h3>3. What are your operating hours?</h3>
-              <p>We are open every day from 9:00 AM to 10:00 PM.</p>
-            </div>
-            <div className="faq">
-              <h3>4. Do you cater for special dietary requirements?</h3>
-              <p>Yes, we offer vegetarian, vegan, and gluten-free options. Please inform our staff about any allergies or dietary restrictions.</p>
-            </div>
-            <div className="faq">
-              <h3>5. Do you host private events?</h3>
-              <p>Yes, we host private events for birthdays, anniversaries, and corporate gatherings. Contact us for more details and booking options.</p>
-            </div>
-            <div className="faq">
-              <h3>6. What payment methods do you accept?</h3>
-              <p>We accept cash, credit cards, debit cards, and popular mobile payment options like Apple Pay and Google Pay.</p>
-            </div>
-            <div className="faq">
-              <h3>7. Are your ingredients locally sourced?</h3>
-              <p>We prioritize using locally sourced and fresh ingredients to ensure quality and support local farmers.</p>
-            </div>
-            <div className="faq">
-              <h3>8. Is your restaurant family-friendly?</h3>
-              <p>Yes, our restaurant is family-friendly, and we offer a special kids’ menu for our younger guests.</p>
-            </div>
+            {faqData.map((faq, index) => (
+              <div className="faq" key={index}>
+                <h3 onClick={() => toggleFaq(index)}>{faq.question}</h3>
+                {visibleFaqIndex === index && <p>{faq.answer}</p>}
+              </div>
+            ))}
           </div>
         </div>
       </main>

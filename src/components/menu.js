@@ -33,7 +33,7 @@ const Menu = () => {
                 onClick={toggleUserMenu}
               />
               {userMenuVisible && (
-                <div className="dropdown">
+                <div className="dropdown active">
                   <a href="/sign-in">Sign In</a>
                   <a href="/sign-up">Sign Up</a>
                 </div>

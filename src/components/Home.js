@@ -58,7 +58,7 @@ const Home = () => {
                 onClick={toggleUserMenu} 
               />
               {userMenuVisible && (
-                <div className="dropdown" id="user-dropdown">
+                <div className="dropdown active" id="user-dropdown">
                   <Link to="/sign-in">Sign In</Link>
                   <Link to="/sign-up">Sign Up</Link>
                 </div>
