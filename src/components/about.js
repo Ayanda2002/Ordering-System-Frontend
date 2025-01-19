@@ -59,7 +59,7 @@ const About = () => {
         </div>
       </header>
       <main>
-        <div className="container">
+        <div className="about-container">
           <div className="heading">
             <img src="images/ramen.png" alt="ramen" />
             <h1>About Us</h1>

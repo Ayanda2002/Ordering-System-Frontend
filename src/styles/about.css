@@ -1,4 +1,4 @@
-.container {
+.about-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,24 +8,24 @@
     width: 100%;
 }
 
-.container .heading {
+.about-container .heading {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.container .heading img {
+.about-container .heading img {
     height: 250px;
 }
 
-.container .heading h1 {
+.about-container .heading h1 {
     color: red;
     font-weight: bolder;
     font-size: 60px;
 }
 
-.container .about-us {
+.about-container .about-us {
     width: 70%;
     text-align: center;
     font-size: 20px;
@@ -94,20 +94,20 @@
         font-size: 20px;
     }
 
-    .footer .container {
+    .footer .about-container {
         flex-direction: column;
         align-items: center;
     }
 
-    .container .heading img {
+    .about-container .heading img {
         height: 200px;
     }
 
-    .container .heading h1 {
+    .about-container .heading h1 {
         font-size: 40px;
     }
 
-    .container .about-us {
+    .about-container .about-us {
         font-size: 15px;
     }
 
@@ -162,23 +162,23 @@
         font-size: 18px;
     }
 
-    .footer .container .section h2 {
+    .footer .about-container .section h2 {
         font-size: 18px;
     }
 
-    .footer .container .section a {
+    .footer .about-container .section a {
         font-size: 14px;
     }
 
-    .container .heading img {
+    .about-container .heading img {
         height: 150px;
     }
 
-    .container .heading h1 {
+    .about-container .heading h1 {
         font-size: 20px;
     }
 
-    .container .about-us {
+    .about-container .about-us {
         font-size: 12px;
     }
 
