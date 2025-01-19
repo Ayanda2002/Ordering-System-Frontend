@@ -81,14 +81,14 @@ const Partnership = () => {
             </p>
           </div>
         </div>
-
-        <div className="info">
+        
+        <div className="partnership-info">
           <div className="line">
             <span>Our</span>
             <br />
             <span className="highlight">Vision Together</span>
           </div>
-          <p className="commitment">
+          <p  className="commitment">
             Yummy Tummy's and The Jugamsoft Group share a unified vision: to create a dining experience that seamlessly combines technology, sustainability, and exceptional food. Together, we are committed to offering a perfect blend of tradition and innovation, where every customer feels valued and delighted.
             <br /><br />
             Through this partnership, we aim to lead the industry in integrating smart solutions that prioritize customer satisfaction, operational efficiency, and environmental responsibility. From digital loyalty programs to eco-friendly order management systems, we're crafting a future where every meal not only satisfies your taste buds but also contributes to a more sustainable world.
@@ -97,7 +97,7 @@ const Partnership = () => {
           </p>
         </div>
 
-        <div className="info">
+        <div className="partnership-info">
           <div className="line">
             <span>What We're</span>
             <br />
@@ -114,7 +114,7 @@ const Partnership = () => {
           </p>
         </div>
 
-        <div className="info">
+        <div className="partnership-info">
           <div className="line">
             <span>Your</span>
             <br />
@@ -127,7 +127,6 @@ const Partnership = () => {
           </p>
         </div>        
       </main>
-
       <footer className="footer">
         <div className="container">
           <div className="section">

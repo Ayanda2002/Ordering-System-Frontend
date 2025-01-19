@@ -74,7 +74,7 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="info">
+        <div className="about-info">
             <div className="line">
                 <span>Our</span>
                 <br />
@@ -90,7 +90,8 @@ const About = () => {
                 In everything we do, we are guided by a desire to bring joy to your life—one plate at a time. Together, we're creating a world where good food leads to great memories and where everyone leaves with a happy heart and a full tummy.
             </p>
         </div>
-        <div className="info">
+
+        <div className="about-info">
             <div className="line">
                 <span>What</span>
                 <br />
@@ -112,7 +113,8 @@ const About = () => {
                 At Yummy Tummy's, everyone is welcome. Whether you're stopping by for a quick lunch, a family dinner, or a celebration, our goal is to ensure you leave with a full stomach and a happy heart.
             </p>
         </div>
-        <div className="info">
+        
+        <div className="about-info">
             <div className="line">
                 <span>Our</span>
                 <br />

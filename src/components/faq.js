@@ -59,7 +59,7 @@ const Faq = () => {
         </div>
       </header>
       <main>
-        <div className="info">
+        <div className="faq-info">
           <div className="line">
             <span>Frequently</span>
             <br />

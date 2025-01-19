@@ -33,14 +33,15 @@
     padding: 20px;
 }
 
-.info {
+.about-info {
     margin-top: 50px;
+    margin-left: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.info .line {
+.about-info .line {
     border-left: 4px solid red;
     color: red;
     font-size: 60px;
@@ -48,26 +49,26 @@
     margin-left: 20px;
 }
 
-.info .highlight {
+.about-info .highlight {
     font-weight: bold;
     color: red;
     font-size: 70px;
 }
 
-.info .about {
+.about-info .about {
     width: 80%;
     font-size: 20px;
     margin: 20px;
 }
 
-.info .special {
+.about-info .special {
     width: 75%;
     font-size: 20px;
     margin: 20px;
     color: #000;
 }
 
-.info .commitment {
+.about-info .commitment {
     width: 63%;
     font-size: 20px;
     margin: 20px;
@@ -110,24 +111,24 @@
         font-size: 15px;
     }
 
-    .info .line {
+    .about-info .line {
         font-size: 40px;
         line-height: 55px;
     }
 
-    .info .highlight {
+    .about-info .highlight {
         font-size: 50px;
     }
 
-    .info .about {
+    .about-info .about {
         font-size: 15px;
     }
 
-    .info .special {
+    .about-info .special {
         font-size: 15px;
     }
 
-    .info .commitment {
+    .about-info .commitment {
         font-size: 15px;
     }
 }
@@ -181,24 +182,24 @@
         font-size: 12px;
     }
 
-    .info .line {
+    .about-info .line {
         font-size: 20px;
         line-height: 30px;
     }
 
-    .info .highlight {
+    .about-info .highlight {
         font-size: 30px;
     }
 
-    .info .about {
+    .about-info .about {
         font-size: 12px;
     }
 
-    .info .special {
+    .about-info .special {
         font-size: 12px;
     }
 
-    .info .commitment {
+    .about-info .commitment {
         font-size: 12px;
     }
 }

@@ -59,7 +59,7 @@ const Menu = () => {
         </div>
       </header>
       <main>
-        <div className="heading">
+        <div className="menu-heading">
           <h1>Hungry? We've Got Your Back <br />(and Your Tummy)!</h1>
         </div>
         <div className="menu">

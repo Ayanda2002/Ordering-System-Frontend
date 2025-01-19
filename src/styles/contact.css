@@ -3,13 +3,13 @@
     height: 400px;
 }
 
-.info{
+.contact-info{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.info .line {
+.contact-info .line {
     border-left: 4px solid red;
     padding-left: 10px;
     color: red;
@@ -17,13 +17,13 @@
     line-height: 55px;  
 }
 
-.info .highlight {
+.contact-info .highlight {
     font-weight: bold;
     color: red;
     font-size: 50px;
 }
 
-.info p{
+.contact-info p{
     width: 80%;
     font-size: 20px;
     margin: 20px;

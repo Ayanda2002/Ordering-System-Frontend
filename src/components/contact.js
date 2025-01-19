@@ -62,7 +62,7 @@ const Contact = () => {
         <div className="hello">
           <img src="images/hello.jpg" alt="Hello bord-sign" />
         </div>
-        <div className="info">
+        <div className="contact-info">
           <div className="line">
             <span>Get in </span>
             <br />
