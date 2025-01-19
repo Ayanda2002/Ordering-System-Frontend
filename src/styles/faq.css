@@ -34,10 +34,17 @@
     color: #000;
     font-size: 25px;
 }
+
 .faq p {
-    display: none;
+    display: none; /* Initially hidden */
     margin-top: 20px;
     font-size: 20px;
+    color: #333; 
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+.faq.active p {
+    display: block; 
 }
 
 /* Responsive Design */

@@ -124,10 +124,10 @@ const Faq = () => {
           </div>
           <div className="faq-section">
             {faqData.map((faq, index) => (
-              <div className="faq" key={index}>
-                <h3 onClick={() => toggleFaq(index)}>{faq.question}</h3>
-                {visibleFaqIndex === index && <p>{faq.answer}</p>}
-              </div>
+              <div className={`faq ${visibleFaqIndex === index ? "active" : ""}`} key={index}>
+              <h3 onClick={() => toggleFaq(index)}>{faq.question}</h3>
+              {visibleFaqIndex === index && <p>{faq.answer}</p>}
+             </div>          
             ))}
           </div>
         </div>
