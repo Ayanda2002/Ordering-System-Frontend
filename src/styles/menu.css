@@ -1,5 +1,5 @@
 main .menu-heading h1{
-    width: 950px;
+    width: 100%;
     font-size: 60px;
     font-weight: bolder;
     text-align: center;
@@ -10,10 +10,12 @@ main .menu-heading h1{
 
 main .menu{
     height: auto;
-    width: 850px;
+    width: auto;
     display: flex;
     flex-direction: column;
     margin: 20px;
+    padding: 10px;
+    border: 2px solid #000;
 }
 
 .row{
@@ -22,6 +24,7 @@ main .menu{
     display: flex;
     justify-content: start;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .row .image{
@@ -30,8 +33,10 @@ main .menu{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: start;
     transition: transform 0.1s ease-in, box-shadow 0.1s ease-in;
     padding: 20px;
+    border: 2px solid #000;
 }
 
 .row .image:hover{
@@ -48,28 +53,60 @@ main .menu{
 
 .row a img{
     height: 150px;
-    width: 150px;
+    width: 100%;
+    border: 2px solid #000;
 }
 
 /* Responsive Design */
 /* xs */
 @media (max-width: 475px){
-
+    main .menu-heading h1{
+        font-size: 10px;
+    }
+    main .menu{
+        padding-left: 60px;
+    }
+    .row .image{
+        align-items: stretch;
+    }
+    .row .image{
+        width: 180px;
+    }
 }
 
 /* sm */
 @media (max-width: 640px){
-
+    main .menu-heading h1{
+        font-size: 20px;
+    }
+    .row{
+        align-items: stretch;
+        gap: 20px;
+    }
+    .row .image{
+        width: 200px;
+    }
 }
 
 /* md */
 @media (max-width: 768px){
-
+    main .menu-heading h1{
+        font-size: 30px;
+    }
+    .row{
+        align-items: stretch;
+        padding-left: 30px;
+    }
+    .row .image{
+        width: 180px;
+    }
 }
 
 /* lg */
 @media (max-width: 1024px){
-
+    main .menu-heading h1{
+        font-size: 40px;
+    }
 }
 
 /* xl */

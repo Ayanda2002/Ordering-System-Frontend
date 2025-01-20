@@ -74,7 +74,7 @@ const Menu = () => {
             <div className="image">
               <a href="images/Poppers.png" target="_blank">
                 <img src="images/Poppers.png" alt="Jalapeño Poppers" />
-                <p>Cheesy Jalapeño Poppers</p><br />
+                <p>Jalapeño Poppers</p><br />
                 <p>R64.99</p>
               </a>
             </div>
