@@ -33,6 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 2px solid #000;
 }
 
 .info .heading img{
@@ -51,6 +52,7 @@
     width: 1190px;
     filter: drop-shadow(0 0 10px red);
     margin-bottom: 20px;
+    border: 2px solid #000;
 }
 
 .value{
@@ -80,27 +82,59 @@
 /* Responsive Design */
 /* xs */
 @media (max-width: 475px){
+    .info .heading .heart{
+        height: 200px;
+        width: 400px;
+        margin-top: 0px;
+    }
 
+    .value p{
+        font-size: 12px;
+    }
 }
 
 /* sm */
 @media (max-width: 640px){
+    .info .heading .heart{
+        height: 200px;
+        width: 500px;
+        margin-top: 0px;
+    }
 
+    .value p{
+        font-size: 15px;
+    }
 }
 
 /* md */
 @media (max-width: 768px){
+    .info .heading .heart{
+        height: 250px;
+        width: 600px;
+        margin-top: 0px;
+    }
 
+    .value p{
+        font-size: 15px;
+    }
 }
 
 /* lg */
 @media (max-width: 1024px){
-
+    .info .heading .heart{
+        height: 300px;
+        width: 700px;
+        margin-top: 0px;
+    }
 }
 
 /* xl */
 @media (max-width: 1280px){
-
+    .info .heading .heart{
+        height: 350px;
+        width: 900px;
+        margin-top: 0px;
+    }
 }
 
 /* 2xl */
