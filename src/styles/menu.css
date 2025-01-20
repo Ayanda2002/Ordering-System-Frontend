@@ -15,7 +15,6 @@ main .menu{
     flex-direction: column;
     margin: 20px;
     padding: 10px;
-    border: 2px solid #000;
 }
 
 .row{
@@ -36,7 +35,6 @@ main .menu{
     justify-content: start;
     transition: transform 0.1s ease-in, box-shadow 0.1s ease-in;
     padding: 20px;
-    border: 2px solid #000;
 }
 
 .row .image:hover{
@@ -54,7 +52,6 @@ main .menu{
 .row a img{
     height: 150px;
     width: 100%;
-    border: 2px solid #000;
 }
 
 /* Responsive Design */

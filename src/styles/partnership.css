@@ -6,6 +6,7 @@
     background-color: #d2b303;
     margin-bottom: 20px;
     padding: 20px;
+    width: 100%;
 }
 
 .partnership-container .heading{
@@ -17,7 +18,7 @@
 
 .partnership-container .heading img{
     height: 350px;
-    width: 1000px;
+    width: 100%;
     margin-top: 20px;
     border-radius: 20px;
     box-shadow: 50px 20px 50px rgba(0, 0, 0, 0.5);
@@ -83,17 +84,133 @@
 /* Responsive Design */
 /* xs */
 @media (max-width: 475px){
+    .partnership-container .heading h1{
+        font-size: 30px;
+    }
 
+    .partnership-container .heading img{
+        height: 200px;
+    }
+
+    .partnership-container .partnership{
+        width: 90%;
+        font-size: 12px;
+    }
+
+    .partnership-info{
+        flex-direction: column
+    }
+    
+    .partnership-info .line {
+        font-size: 40px;
+        line-height: 55px;  
+    }
+    
+    .partnership-info .highlight {
+        font-size: 50px;
+    }
+    
+    .partnership-info .commitment{
+        width: 90%;
+        font-size: 15px;
+    }
+    
+    .partnership-info .achievements{
+        width: 90%;
+        font-size: 15px;
+    }
+    
+    .partnership-info .role{
+        width: 90%;
+        font-size: 15px;
+    }
 }
 
 /* sm */
 @media (max-width: 640px){
+    .partnership-container .heading h1{
+        font-size: 50px;
+    }
 
+    .partnership-container .heading img{
+        height: 200px;
+    }
+
+    .partnership-container .partnership{
+        width: 90%;
+        font-size: 15px;
+    }
+
+    .partnership-info{
+        flex-direction: column;
+        align-items: start;
+    }
+    
+    .partnership-info .line {
+        font-size: 40px;
+        line-height: 55px;  
+    }
+    
+    .partnership-info .highlight {
+        font-size: 50px;
+    }
+    
+    .partnership-info .commitment{
+        width: 90%;
+        font-size: 15px;
+    }
+    
+    .partnership-info .achievements{
+        width: 90%;
+        font-size: 15px;
+    }
+    
+    .partnership-info .role{
+        width: 90%;
+        font-size: 15px;
+    }
 }
 
 /* md */
 @media (max-width: 768px){
+    .partnership-container .partnership{
+        font-size: 18px;
+        width: 90%;
+    }
 
+    .partnership-container .partnership{
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .partnership-info{
+        flex-direction: column;
+        align-items: start;
+    }
+    
+    .partnership-info .line {
+        font-size: 40px;
+        line-height: 55px;  
+    }
+    
+    .partnership-info .highlight {
+        font-size: 50px;
+    }
+    
+    .partnership-info .commitment{
+        width: 90%;
+        font-size: 18px;
+    }
+    
+    .partnership-info .achievements{
+        width: 90%;
+        font-size: 18px;
+    }
+    
+    .partnership-info .role{
+        width: 90%;
+        font-size: 18px;
+    }
 }
 
 /* lg */
