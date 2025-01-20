@@ -1,91 +1,90 @@
-fieldset {
+.sign-up fieldset {
     border: solid 2px #b44320;
-    height: auto; /* Adjust for dynamic content */
+    height: auto;
     width: 60%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Adds space inside the fieldset */
-    background-color: #fdf4e3; /* Light background to distinguish the form */
+    padding: 20px;
+    background-color: #fdf4e3; 
 }
 
-form{
+.sign-up form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-label {
-    margin-bottom: 10px; /* Adds space between label and input */
-    font-size: 20px; /* Enhances visibility */
-    color: #611903; /* Matches the header for brand consistency */
+.sign-up label {
+    margin-bottom: 10px; 
+    font-size: 20px; 
+    color: #611903; 
     font-weight: 600;
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
-    width: 90%; /* Adjusts width for responsiveness */
-    padding: 10px; /* Comfortable padding */
-    margin-bottom: 20px; /* Adds space between inputs */
-    border: 2px solid #b44320; /* Border styling */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 16px; /* Improves text readability */
-    color: #611903; /* Matches text color with branding */
-    background-color: #fff; /* Neutral background for inputs */
+.sign-up input[type="email"], .sign-up input[type="password"], .sign-up input[type="text"] {
+    width: 90%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 2px solid #b44320; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    color: #611903; 
+    background-color: #fff; 
 }
 
-input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus {
-    border-color: #ffe601; /* Highlights on focus */
-    outline: none; /* Removes default outline */
-    box-shadow: 0 0 5px #ffe601; /* Adds glow effect */
+.sign-up input[type="email"]:focus, .sign-up input[type="password"]:focus, .sign-up input[type="text"]:focus {
+    border-color: #ffe601;
+    outline: none; 
+    box-shadow: 0 0 5px #ffe601;
 }
 
-.heading h1 {
-    /* background-color: #b44320; */
-    color: red; /* Matches input focus color */
+.sign-up .heading h1 {
+    color: red;
     font-weight: bolder;
     font-size: 60px;
     padding: 20px;
     border-radius: 20px;
     margin-bottom: 30px;
-    text-align: center; /* Centers text */
+    text-align: center;
     width: 400px;
 }
 
-.show-password {
+.sign-up .show-password {
     margin-bottom: 20px;
     margin-left: 580px;
 }
 
-.show-password label {
+.sign-up .show-password label {
     margin-left: 5px;
     font-size: 16px;
     color: #611903;
 }
 
-fieldset button {
-    width: 50%; /* Adjusts button size */
-    padding: 10px 20px; /* Comfortable padding */
-    border: none; /* Removes border */
-    border-radius: 10px; /* Rounded corners */
-    background-color: #b44320; /* Button background */
-    color: #fff; /* Button text color */
-    font-size: 18px; /* Font size for readability */
-    font-weight: 600; /* Bold text */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Adds smooth effects */
+.sign-up fieldset button {
+    width: 50%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #b44320;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
-fieldset button:hover {
-    background-color: #ffe601; /* Highlight effect */
-    color: #611903; /* Inverts text color */
-    transform: scale(1.05); /* Slight zoom effect */
+.sign-up fieldset button:hover {
+    background-color: #ffe601; 
+    color: #611903; 
+    transform: scale(1.05); 
 }
 
-fieldset button:active {
-    transform: scale(0.95); /* Slight shrink on click */
+.sign-up fieldset button:active {
+    transform: scale(0.95); 
 }
 
 /* Responsive Design */

@@ -33,7 +33,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid #000;
 }
 
 .info .heading img{
@@ -52,7 +51,6 @@
     width: 1190px;
     filter: drop-shadow(0 0 10px red);
     margin-bottom: 20px;
-    border: 2px solid #000;
 }
 
 .value{

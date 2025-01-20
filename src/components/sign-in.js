@@ -75,7 +75,7 @@ const Sign_In = () => {
           </ul>
         </div>
       </header>
-      <main>
+      <main className="sign-in">
         <div className="heading">
           <h1>Sign In</h1>
         </div>
