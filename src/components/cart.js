@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
+import { useCart } from "../cart-context";
+import { useNavigate } from "react-router-dom";
 import '../styles/cart.css'; // Import your CSS file
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
-  const [cart, setCart] = useState([
-    { id: 1, name: "Chicken Ramen", price: 80, quantity: 1 },
-    { id: 2, name: "Vegetarian Sushi", price: 60, quantity: 2 },
-  ]);
+  const { cart, setCart } = useCart();
+  const navigate = useNavigate();
+
+  // Sample cart data to visualize
+  useEffect(() => {
+    // Only set the default cart items if the cart is empty
+    if (cart.length === 0) {
+      setCart([
+        { id: 1, name: 'Ramen', price: 50, quantity: 2 },
+        { id: 2, name: 'Sushi', price: 70, quantity: 1 },
+      ]);
+    }
+  }, [cart, setCart]);
 
   // Toggles the visibility of the user menu
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
-  };
-
-  // Adds a new item to the cart
-  const addItemToCart = (item) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
-      if (existingItem) {
-        return prevCart.map(cartItem =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      } else {
-        return [...prevCart, item];
-      }
-    });
   };
 
   // Removes an item from the cart
@@ -57,7 +52,7 @@ const Cart = () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
     } else {
-      window.location.href = "/checkout"; // You can replace this with routing in React
+      navigate("/checkout");
     }
   };
 
