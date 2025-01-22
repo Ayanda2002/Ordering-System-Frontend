@@ -82,10 +82,13 @@ footer{
 
 .main-bar .icons {
     margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    height: 60px;
 }
 
 .main-bar .icons .cart,
@@ -95,6 +98,29 @@ footer{
     cursor: pointer;
     transition: 0.5s;
 }
+
+.cart-container {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: default;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: 8px;
+    right: -10px;
+    background-color: #000;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 .main-bar .cart:hover,
 .main-bar .user:hover {

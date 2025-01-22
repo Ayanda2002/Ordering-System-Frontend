@@ -15,7 +15,7 @@ main .menu{
     flex-direction: column;
     margin: 20px;
     padding: 10px;
-}
+}  
 
 .row{
     height: auto;
@@ -53,6 +53,7 @@ main .menu{
     height: 150px;
     width: 100%;
 }
+
 
 /* Responsive Design */
 /* xs */

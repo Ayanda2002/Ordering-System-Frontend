@@ -3,9 +3,14 @@ import '../styles/menu.css'; // Import your CSS file
 
 const Menu = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
+  };
+
+  const handleAddToCart = () => {
+    setCartCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -22,8 +27,9 @@ const Menu = () => {
             </div>
           </a>
           <div className="icons">
-            <a href="/cart">
+            <a className="cart-container" href="/cart">
               <img className="cart" src="images/online-shopping.png" alt="cart" />
+              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
             </a>
             <div className="user-menu">
               <img
@@ -70,20 +76,29 @@ const Menu = () => {
                 <p>Crispy Garlic Breadsticks</p><br />
                 <p>R59.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
             <div className="image">
               <a href="images/Poppers.png" target="_blank">
                 <img src="images/Poppers.png" alt="Jalapeño Poppers" />
-                <p>Jalapeño Poppers</p><br />
+                <p>Cheesy Jalapeño Poppers</p><br />
                 <p>R64.99</p>
+                <button className="add-to-cart" onClick={handleAddToCart}>
+                  Add to Cart
+                </button>
               </a>
             </div>
             <div className="image">
               <a href="images/rolls.jpg" target="_blank">
                 <img src="images/rolls.jpg" alt="Spring Rolls" />
-                <p>Mini Spring Rolls</p><br />
+                <p>Mini Sweet Spring Rolls</p><br />
                 <p>R69.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
             <div className="image">
               <a href="images/sticks.jpg" target="_blank">
@@ -91,15 +106,21 @@ const Menu = () => {
                 <p>Golden Mozzarella Sticks</p><br />
                 <p>R58.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
           </div>
           <div className="row">
             <div className="image">
               <a href="images/pasta.jpg" target="_blank">
                 <img src="images/pasta.jpg" alt="Pasta" />
-                <p>Pasta Paradise</p><br />
+                <p>Pasta Paradise Alfredo</p><br />
                 <p>R89.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
             <div className="image">
               <a href="images/wrap.jpg" target="_blank">
@@ -107,13 +128,19 @@ const Menu = () => {
                 <p>Fiesta Chicken Wrap</p><br />
                 <p>R99.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
             <div className="image">
               <a href="images/veggie.jpg" target="_blank">
                 <img src="images/veggie.jpg" alt="Veggie Bowl" />
-                <p>Veggie Power Bowl</p><br />
+                <p>Mixed Veggie Power Bowl</p><br />
                 <p>R119.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
           </div>
           <div className="row">
@@ -123,6 +150,9 @@ const Menu = () => {
                 <p>Choco-Lava Delight</p><br />
                 <p>R69.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
             <div className="image">
               <a href="images/fruits.jpg" target="_blank">
@@ -130,6 +160,9 @@ const Menu = () => {
                 <p>Fruit Bliss Parfait</p><br />
                 <p>R79.99</p>
               </a>
+              <button className="add-to-cart" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
