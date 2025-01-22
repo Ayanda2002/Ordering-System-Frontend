@@ -54,6 +54,12 @@ main .menu{
     width: 100%;
 }
 
+.quantity-controls {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
 
 /* Responsive Design */
 /* xs */
