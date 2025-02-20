@@ -1,3 +1,24 @@
+.image {
+  display: flex;  /* This will display the items (product cards) in a row */
+  flex-wrap: wrap; /* This ensures that the cards will wrap to the next line when there are too many */
+  gap: 20px;  /* Optional: Adds space between cards */
+  justify-content: flex-start; /* Align the cards to the left */
+}
+
+.product-card {
+  width: calc(20% - 20px);  /* Ensures 5 cards fit in a row, accounting for the gap */
+  min-width: 200px;  /* Ensures that the cards don't shrink smaller than 200px */
+  max-width: 200px;  /* Optional: Cap the width of the cards */
+  border: 1px solid #ccc;  /* Optional: Add border */
+  padding: 10px;  /* Padding for the card */
+  background-color: #fff;  /* Optional: Card background */
+}
+
+img {
+  width: 100%;  /* Makes the image fill the card */
+  height: auto;  /* Maintain aspect ratio of the image */
+}
+
 main .menu-heading h1{
     width: 100%;
     font-size: 60px;

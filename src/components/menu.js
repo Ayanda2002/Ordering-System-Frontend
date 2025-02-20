@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/menu.css'; // Import your CSS file
 
 const Menu = () => {
@@ -20,6 +20,22 @@ const Menu = () => {
   const decreaseQuantity = () => {
     setCartCount((prevCount) => prevCount - 1);
   };
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/product');
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div>
@@ -78,118 +94,32 @@ const Menu = () => {
         </div>
         <div className="menu">
           <div className="row">
+
             <div className="image">
-              <a href="images/garlic-bread.webp" target="_blank">
-                <img src="images/garlic-bread.webp" alt="Garlic Breadsticks" />
-                <p>Crispy Garlic Breadsticks</p><br />
-                <p>R59.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/Poppers.png" target="_blank">
-                <img src="images/Poppers.png" alt="Jalapeño Poppers" />
-                <p>Cheesy Jalapeño Poppers</p><br />
-                <p>R64.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/rolls.jpg" target="_blank">
-                <img src="images/rolls.jpg" alt="Spring Rolls" />
-                <p>Mini Sweet Spring Rolls</p><br />
-                <p>R69.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity} onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/sticks.jpg" target="_blank">
-                <img src="images/sticks.jpg" alt="Mozzarella Sticks" />
-                <p>Golden Mozzarella Sticks</p><br />
-                <p>R58.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
+              <h1>Product List</h1>
+              
+              {products.map((product) => (
+                <div key={product.id} className="product-card">
+                  <a href={`/product/${product.id}`}>
+                    <img src={`images/user.png`} alt={product.prodName} />
+                    <p>{product.prodName}</p><br />
+                    <p>R{product.prodPrice}</p>
+                  </a>
+                  <button className="add-to-cart" onClick={() => handleAddToCart(product)}>Add to Cart</button>
+                  <div className="quantity-controls">
+                    <button className="minus" onClick={() => decreaseQuantity(product.id)}>-</button>
+                    <button className="add" onClick={() => increaseQuantity(product.id)}>+</button>
+                  </div>
+                </div>
+              ))}
+
             </div>
           </div>
           <div className="row">
-            <div className="image">
-              <a href="images/pasta.jpg" target="_blank">
-                <img src="images/pasta.jpg" alt="Pasta" />
-                <p>Pasta Paradise Alfredo</p><br />
-                <p>R89.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/wrap.jpg" target="_blank">
-                <img src="images/wrap.jpg" alt="Chicken Wrap" />
-                <p>Fiesta Chicken Wrap</p><br />
-                <p>R99.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/veggie.jpg" target="_blank">
-                <img src="images/veggie.jpg" alt="Veggie Bowl" />
-                <p>Mixed Veggie Power Bowl</p><br />
-                <p>R119.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
+            
           </div>
           <div className="row">
-            <div className="image">
-              <a href="images/cake.avif" target="_blank">
-                <img src="images/cake.avif" alt="Choco-Lava Cake" />
-                <p>Choco-Lava Delight</p><br />
-                <p>R69.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-            <div className="image">
-              <a href="images/fruits.jpg" target="_blank">
-                <img src="images/fruits.jpg" alt="Fruit Parfait" />
-                <p>Fruit Bliss Parfait</p><br />
-                <p>R79.99</p>
-              </a>
-              <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-              <div className="quantity-controls">
-                <button className="minus" onClick={decreaseQuantity}>-</button>
-                <button className="add" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
+
           </div>
         </div>
       </main>
