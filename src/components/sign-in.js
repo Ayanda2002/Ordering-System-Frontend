@@ -12,23 +12,6 @@ const Sign_In = () => {
   const validateForm = (event) => {
     // Add form validation logic here if needed
     event.preventDefault();
-
-    userEmail = document.getElementById('email');
-    userPassword = document.getElementById('password');
-
-    //api call to token endpoint for logging the user in
-    fetch('https://127.0.0.1:8000/api/token/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: userEmail, password: userPassword })
-    })
-    .then(response => response.json())
-    .then(data => {
-        //store the access token and the refresh token locally
-        localStorage.setItem('accessToken', data.access);
-        localStorage.setItem('refreshToken', data.refresh);
-    });
-
     setSuccessMessage('Sign-in successful! Welcome back.'); // Set the success message
     setTimeout(() => setSuccessMessage(''), 5000); // Clear message after 5 seconds
   };
