@@ -8,16 +8,42 @@ const Cart = () => {
   const { cart, setCart } = useCart();
   const navigate = useNavigate();
 
-  // Sample cart data to visualize
+  // Fetch products from API
   useEffect(() => {
-    // Only set the default cart items if the cart is empty
+    const fetchCartItems = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/cart', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Include token for authentication
+          },
+        });
+        const result = await response.json();
+  
+        if (!result.success) {
+          console.error("Error fetching cart items:", result.error);
+          return;
+        }
+  
+        const cartData = result.data.map((cartItem) => ({
+          id: cartItem.cart_item.id,
+          name: cartItem.product.name,
+          price: Number(cartItem.product.price) || 0,
+          quantity: cartItem.menu_item.id in cartItem.user.menuCartItems 
+            ? cartItem.user.menuCartItems[cartItem.menu_item.id]
+            : 1, // Get quantity from `menuCartItems`
+        }));
+  
+        setCart(cartData);
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    };
+  
     if (cart.length === 0) {
-      setCart([
-        { id: 1, name: 'Ramen', price: 50, quantity: 2 },
-        { id: 2, name: 'Sushi', price: 70, quantity: 1 },
-      ]);
+      fetchCartItems();
     }
   }, [cart, setCart]);
+  
 
   // Toggles the visibility of the user menu
   const toggleUserMenu = () => {
@@ -42,7 +68,7 @@ const Cart = () => {
   const decreaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        item.id === id ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
       )
     );
   };
@@ -52,13 +78,17 @@ const Cart = () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
     } else {
-      navigate("/checkout");
+      navigate("api/checkout");
     }
   };
 
   // Calculate the total price of items in the cart
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => {
+      const price = Number(item.price) || 0;
+      const quantity = Number(item.quantity) || 1;
+      return total + price * quantity;
+    }, 0);
   };
 
   return (
@@ -94,22 +124,6 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <div className="nav">
-          <ul>
-            <li>
-              <a href="/menu" className="menu">Menu</a>
-            </li>
-            <li>
-              <a href="/partnerships" className="partnerships">Partnerships</a>
-            </li>
-            <li>
-              <a href="/about" className="about-us">About Us</a>
-            </li>
-            <li>
-              <a href="/contact" className="contact-us">Contact Us</a>
-            </li>
-          </ul>
-        </div>
       </header>
       <main>
         <section className="cart-container">
@@ -128,16 +142,14 @@ const Cart = () => {
               {cart.map((item) => (
                 <tr key={item.id}>
                   <td className="content">{item.name}</td>
-                  <td className="content">
-                    {item.quantity}
-                  </td>
+                  <td className="content">{item.quantity}</td>
                   <td className="content">{item.price}</td>
                   <td className="content">{item.quantity * item.price}</td>
                   <td>
-                    <div class="actions">
-                      <button class="add" onClick={() => increaseQuantity(item.id)}>+</button>
+                    <div className="actions">
+                      <button className="add" onClick={() => increaseQuantity(item.id)}>+</button>
                       <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
-                      <button class="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
+                      <button className="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
                     </div>
                   </td>
                 </tr>
@@ -150,122 +162,6 @@ const Cart = () => {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <div className="container">
-          <div className="section">
-            <h2>Eat</h2>
-            <ul>
-              <li>
-                <a href="menu">Menu</a>
-              </li>
-            </ul>
-          </div>
-          <div className="section">
-            <h2>Explore</h2>
-            <ul>
-              <li>
-                <a href="about">About Us</a>
-              </li>
-              <li>
-                <a href="values">Our Values</a>
-              </li>
-              <li>
-                <a href="partnerships">Partnerships</a>
-              </li>
-            </ul>
-          </div>
-          <div className="section">
-            <h2>Help</h2>
-            <ul>
-              <li>
-                <a href="contact">Contact Us</a>
-              </li>
-              <li>
-                <a href="faq">FAQ</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="links">
-          <div className="app-links">
-            <a
-              href="https://apps.apple.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="app-store-link"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/apple.webp`}
-                alt="Download on the App Store"
-              />
-            </a>
-            <a
-              href="https://play.google.com/store"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="google-play-link"
-            >
-              <img
-                className="google"
-                src={`${process.env.PUBLIC_URL}/images/google.png`}
-                alt="Get it on Google Play"
-              />
-            </a>
-          </div>
-          <div className="social-links">
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/instragram.jpg`}
-                alt="Instagram"
-              />
-            </a>
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/facebook.jpg`}
-                alt="Facebook"
-              />
-            </a>
-            <a
-              href="https://www.twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/x.png`}
-                alt="X (formerly Twitter)"
-              />
-            </a>
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/youtube.png`}
-                alt="YouTube"
-              />
-            </a>
-          </div>
-        </div>
-        <div className="copyrights">
-          <p>
-            Copyright &copy; Tummy Yummy's South Africa. 2025 All Rights
-            Reserved. build pwa-45-12-18_9f34a1c2
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };
