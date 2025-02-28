@@ -10,13 +10,37 @@ const Sign_Up = () => {
 
   const validateSignUpForm = (event) => {
     event.preventDefault();
+
+    const firstName = document.getElementById("name").value;
+    const lastName = document.getElementById("surname").value;
+    const email = document.getElementById("email").value;
+    const username = firstName + " " + lastName;
+
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return false;
     }
     alert("Form submitted successfully!");
+
+    // Register the new user
+    fetch('http://127.0.0.1:8000/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          confirm_password: confirmPassword // Match backend naming
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
     return true;
   };
 

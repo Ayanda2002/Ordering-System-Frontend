@@ -12,8 +12,26 @@ const Sign_In = () => {
   const validateForm = (event) => {
     // Add form validation logic here if needed
     event.preventDefault();
-    setSuccessMessage('Sign-in successful! Welcome back.'); // Set the success message
-    setTimeout(() => setSuccessMessage(''), 5000); // Clear message after 5 seconds
+
+    const userName = document.getElementById('email').value;
+    const userPassword = document.getElementById('password').value;
+
+    //api call to token endpoint for logging the user in
+    fetch('http://127.0.0.1:8000/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: userName, password: userPassword})
+    })
+    .then(response => response.json())
+    .then(data => {
+        //store the access token and the refresh token locally
+        const token = localStorage.setItem('accessToken', data.access);
+        localStorage.setItem('refreshToken', data.refresh);
+        setSuccessMessage('Sign-in successful! Welcome back.'); // Set the success message
+        setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 5 seconds
+    });
+
+    
   };
 
   const togglePasswordVisibility = () => {
