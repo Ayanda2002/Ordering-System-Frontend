@@ -4,13 +4,57 @@ import '../styles/menu.css'; // Import your CSS file
 const Menu = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  const accessToken = localStorage.getItem('accessToken');
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
-  const handleAddToCart = () => {
-    setCartCount((prevCount) => prevCount + 1);
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/product', {
+        headers: {
+          //'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleAddToCart = async (product) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/cart', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add product to cart');
+      }
+
+      setCartCount((prevCount) => prevCount + 1);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
   const increaseQuantity = () => {
@@ -18,24 +62,8 @@ const Menu = () => {
   };
 
   const decreaseQuantity = () => {
-    setCartCount((prevCount) => prevCount - 1);
+    setCartCount((prevCount) => Math.max(prevCount - 1, 0));
   };
-
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/product');
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
 
   return (
     <div>
@@ -94,7 +122,6 @@ const Menu = () => {
         </div>
         <div className="menu">
           <div className="row">
-
             <div className="image">
               <h1>Product List</h1>
               
@@ -107,138 +134,15 @@ const Menu = () => {
                   </a>
                   <button className="add-to-cart" onClick={() => handleAddToCart(product)}>Add to Cart</button>
                   <div className="quantity-controls">
-                    <button className="minus" onClick={() => decreaseQuantity(product.id)}>-</button>
-                    <button className="add" onClick={() => increaseQuantity(product.id)}>+</button>
+                    <button className="minus" onClick={decreaseQuantity}>-</button>
+                    <button className="add" onClick={increaseQuantity}>+</button>
                   </div>
                 </div>
               ))}
-
             </div>
-          </div>
-          <div className="row">
-            
-          </div>
-          <div className="row">
-
           </div>
         </div>
       </main>
-      <footer className="footer">
-        <div className="container">
-          <div className="section">
-            <h2>Eat</h2>
-            <ul>
-              <li>
-                <a href="menu">Menu</a>
-              </li>
-            </ul>
-          </div>
-          <div className="section">
-            <h2>Explore</h2>
-            <ul>
-              <li>
-                <a href="about">About Us</a>
-              </li>
-              <li>
-                <a href="values">Our Values</a>
-              </li>
-              <li>
-                <a href="partnerships">Partnerships</a>
-              </li>
-            </ul>
-          </div>
-          <div className="section">
-            <h2>Help</h2>
-            <ul>
-              <li>
-                <a href="contact">Contact Us</a>
-              </li>
-              <li>
-                <a href="faq">FAQ</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="links">
-          <div className="app-links">
-            <a
-              href="https://apps.apple.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="app-store-link"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/apple.webp`}
-                alt="Download on the App Store"
-              />
-            </a>
-            <a
-              href="https://play.google.com/store"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="google-play-link"
-            >
-              <img
-                className="google"
-                src={`${process.env.PUBLIC_URL}/images/google.png`}
-                alt="Get it on Google Play"
-              />
-            </a>
-          </div>
-          <div className="social-links">
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/instragram.jpg`}
-                alt="Instagram"
-              />
-            </a>
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/facebook.jpg`}
-                alt="Facebook"
-              />
-            </a>
-            <a
-              href="https://www.twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/x.png`}
-                alt="X (formerly Twitter)"
-              />
-            </a>
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/youtube.png`}
-                alt="YouTube"
-              />
-            </a>
-          </div>
-        </div>
-        <div className="copyrights">
-          <p>
-            Copyright &copy; Tummy Yummy's South Africa. 2025 All Rights
-            Reserved. build pwa-45-12-18_9f34a1c2
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };
