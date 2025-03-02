@@ -4,7 +4,8 @@ import "../styles/faq.css"; // Import your CSS file
 const Faq = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [visibleFaqIndex, setVisibleFaqIndex] = useState(null);
-
+  const [cartCount, setCartCount] = useState(0);
+  
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
@@ -69,23 +70,25 @@ const Faq = () => {
             </div>
           </a>
           <div className="icons">
-            <a href="/cart">
-              <img className="cart" src="images/online-shopping.png" alt="cart" />
+            <a className="cart-container" href="#">
+              <img className="cart" src="images/logout.png" alt="cart" />
+              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
             </a>
-            <div className="user-menu">
-              <img
-                className="user"
-                src="images/user.png"
-                alt="user"
-                onClick={toggleUserMenu}
-              />
-              {userMenuVisible && (
-                <div className="dropdown active">
-                  <a href="/sign-in">Sign In</a>
-                  <a href="/sign-up">Sign Up</a>
-                </div>
-              )}
-            </div>
+            <a className="cart-container" href="/cart">
+              <img className="cart" src="images/online-shopping.png" alt="cart" />
+              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+            </a>
+            <a className="cart-container">
+              <div className="user-menu">
+                <img className="user" src="images/user.png" alt="user" onClick={toggleUserMenu} />
+                {userMenuVisible && (
+                  <div className="dropdown active">
+                    <a href="/sign-in">Sign In</a>
+                    <a href="/sign-up">Sign Up</a>
+                  </div>
+                )}
+              </div>
+            </a>
           </div>
         </div>
         <div className="nav">
