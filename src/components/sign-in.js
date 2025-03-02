@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
+import Menu from './menu'; // Import the Menu component
+
 import '../styles/sign-in.css'; // Import your CSS file
 
 const Sign_In = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if the user is logged in
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
   const validateForm = (event) => {
-    // Add form validation logic here if needed
     event.preventDefault();
 
     const userName = document.getElementById('email').value;
     const userPassword = document.getElementById('password').value;
 
-    //api call to token endpoint for logging the user in
+    // API call to token endpoint for logging the user in
     fetch('http://127.0.0.1:8000/api/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: userName, password: userPassword})
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: userName, password: userPassword }),
     })
-    .then(response => response.json())
-    .then(data => {
-        //store the access token and the refresh token locally
-        const token = localStorage.setItem('accessToken', data.access);
-        localStorage.setItem('refreshToken', data.refresh);
-        setSuccessMessage('Sign-in successful! Welcome back.'); // Set the success message
-        setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 5 seconds
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.access) {
+          // Store the access token and the refresh token locally
+          localStorage.setItem('accessToken', data.access);
+          localStorage.setItem('refreshToken', data.refresh);
+          alert('Sign-in successful! Welcome back.');
 
-    
+          // Change the state to show the Menu page
+          setIsLoggedIn(true); // Set to true to show the Menu component
+        } else {
+          alert('Login failed. Please check your credentials.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error during sign-in:', error);
+        alert('Something went wrong. Please try again.');
+      });
   };
 
   const togglePasswordVisibility = () => {
@@ -42,6 +52,11 @@ const Sign_In = () => {
       passwordInput.type = 'password';
     }
   };
+
+  if (isLoggedIn) {
+    // If the user is logged in, render the Menu component
+    return <Menu />;
+  }
 
   return (
     <div>
@@ -93,6 +108,7 @@ const Sign_In = () => {
           </ul>
         </div>
       </header>
+
       <main className="sign-in">
         <div className="heading">
           <h1>Sign In</h1>
@@ -132,10 +148,9 @@ const Sign_In = () => {
             </button>
           </form>
         </fieldset>
-        {successMessage && (
-          <div className="success-message">{successMessage}</div> // Display the success message
-        )}
+        {successMessage && <div className="success-message">{successMessage}</div>}
       </main>
+
       <footer className="footer">
         <div className="container">
           <div className="section">

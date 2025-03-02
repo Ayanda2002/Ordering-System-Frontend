@@ -50,6 +50,8 @@ const Checkout = () => {
     // If payment is via cash, simply alert and don't proceed
     if (paymentMethod === "cash") {
       alert("Order placed! Thank you for your order.");
+      // Redirect to menu page after cash order
+      window.location.replace("/menu");
       return;
     }
 
@@ -85,9 +87,10 @@ const Checkout = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Payment successful")
+        alert("Payment successful");
         console.log("Payment successful:", data);
-        // Optionally redirect or show success message
+        // Redirect to menu page after successful payment
+        window.location.replace("/menu");
       } else {
         console.error("Payment failed:", data);
       }
