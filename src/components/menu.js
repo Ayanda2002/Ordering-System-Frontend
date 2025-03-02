@@ -6,7 +6,7 @@ const Menu = () => {
   const [cartCount, setCartCount] = useState(0);
   const [products, setProducts] = useState([]);
 
-  const accessToken = localStorage.getItem('accessToken');
+  //const accessToken = localStorage.getItem('accessToken');
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
@@ -37,24 +37,36 @@ const Menu = () => {
   }, []);
 
   const handleAddToCart = async (product) => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/cart', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId: product.id, quantity: 1 }),
-      });
+      try {
+          const accessToken = localStorage.getItem('accessToken'); // Get fresh access token
 
-      if (!response.ok) {
-        throw new Error('Failed to add product to cart');
+          if (!accessToken) {
+              console.error("Access token not found. User might not be logged in.");
+              return;
+          }
+
+          const response = await fetch('http://127.0.0.1:8000/api/cart/add', {
+              method: 'POST',
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ productId: product.id, quantity: 1 }),
+          });
+
+          if (!response.ok) {
+              throw new Error('Failed to add product to cart');
+          }
+
+          const data = await response.json();
+          console.log("Updated Cart:", data.cart);
+
+          // Update cart count based on total items in cart
+          setCartCount(Object.values(data.cart).reduce((a, b) => a + b, 0));
+
+      } catch (error) {
+          console.error('Error adding to cart:', error);
       }
-
-      setCartCount((prevCount) => prevCount + 1);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
   };
 
   const increaseQuantity = () => {

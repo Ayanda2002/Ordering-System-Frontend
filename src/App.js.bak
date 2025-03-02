@@ -19,7 +19,7 @@ import Values from "./components/values";
 import "./App.css";
 
 // Load your Stripe public key
-const stripePromise = loadStripe("pk_test_51Q7V6fP3W3PNlhUH4jkTVZDpXEN9S341jGJJyl2paPsPZEn8frJp4PKH0lyrzz3cE2gyThoKTlbjCCCENQvHgPye00CWjmk9L5");
+const stripePromise = loadStripe("your-publishable-key-here");
 
 function App() {
   return (
@@ -46,7 +46,5 @@ function App() {
     </CartProvider>
   );
 }
-
-
 
 export default App;

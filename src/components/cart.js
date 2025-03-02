@@ -1,95 +1,108 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from "../cart-context";
-import { useNavigate } from "react-router-dom";
-import '../styles/cart.css'; // Import your CSS file
+import Checkout from './checkout';  // Import the Checkout component
+import '../styles/cart.css';
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [cartDetailsPopupMessage, setCartDetailsPopupMessage] = useState(""); 
   const { cart, setCart } = useCart();
-  const navigate = useNavigate();
+  const [isCheckoutPage, setIsCheckoutPage] = useState(false);  // State to control Checkout rendering
+  const [showCartPage, setShowCartPage] = useState(true);  // State to control visibility of the cart page
 
-  // Fetch products from API
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/cart', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Include token for authentication
-          },
-        });
-        const result = await response.json();
-  
-        if (!result.success) {
-          console.error("Error fetching cart items:", result.error);
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+          setPopupMessage("No access token found. Please log in.");
           return;
         }
-  
-        const cartData = result.data.map((cartItem) => ({
-          id: cartItem.cart_item.id,
-          name: cartItem.product.name,
-          price: Number(cartItem.product.price) || 0,
-          quantity: cartItem.menu_item.id in cartItem.user.menuCartItems 
-            ? cartItem.user.menuCartItems[cartItem.menu_item.id]
-            : 1, // Get quantity from `menuCartItems`
-        }));
-  
-        setCart(cartData);
+
+        const response = await fetch("http://127.0.0.1:8000/api/cart", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        const result = await response.json();
+        console.log("Full API Response:", result); // ✅ Log response for debugging
+
+        if (!result || !result.cart) {
+          throw new Error("Invalid cart data format. Expected 'cart' object.");
+        }
+
+        const cartItems = result.cart;
+
+        const productDetails = await Promise.all(
+          Object.keys(cartItems).map(async (productId) => {
+            const response = await fetch(`http://127.0.0.1:8000/api/product/${productId}`);
+            const product = await response.json();
+            return {
+              id: product.id,
+              name: product.prodName,
+              prodPrice: product.prodPrice || 0,
+              image: product.image || "default-image.jpg",
+              quantity: cartItems[productId] || 1,
+            };
+          })
+        );
+
+        setCart(productDetails); 
+
       } catch (error) {
         console.error("Error fetching cart:", error);
+        setPopupMessage(error.message);
       }
     };
-  
-    if (cart.length === 0) {
-      fetchCartItems();
-    }
-  }, [cart, setCart]);
-  
 
-  // Toggles the visibility of the user menu
+    fetchCartItems();
+  }, [setCart]);
+
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
-  // Removes an item from the cart
+  const modifyCartItem = (id, action) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + action) }
+          : item
+      )
+    );
+  };
+
   const removeItemFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter(item => item.id !== id));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  // Increases the quantity of an item in the cart
-  const increaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.prodPrice * item.quantity, 0);
   };
 
-  // Decreases the quantity of an item in the cart
-  const decreaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
-      )
-    );
-  };
-
-  // Handles the checkout process
-  const checkout = () => {
+  const goToCheckout = () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
     } else {
-      navigate("api/checkout");
+      const subtotal = calculateTotal();
+      localStorage.setItem("cartSubtotal", subtotal.toFixed(2)); // Store the subtotal in localStorage
+      setShowCartPage(false);  // Hide the cart page
+      setIsCheckoutPage(true);  // Show the Checkout page
     }
   };
 
-  // Calculate the total price of items in the cart
-  const calculateTotal = () => {
-    return cart.reduce((total, item) => {
-      const price = Number(item.price) || 0;
-      const quantity = Number(item.quantity) || 1;
-      return total + price * quantity;
-    }, 0);
-  };
+  useEffect(() => {
+    if (popupMessage) {
+      const timer = setTimeout(() => {
+        setPopupMessage("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [popupMessage]);
 
   return (
     <div>
@@ -98,10 +111,7 @@ const Cart = () => {
           <a href="/#">
             <div className="title">
               <img className="logo" src="images/ramen.png" alt="logo" />
-              <h1>
-                Yummy <br />
-                Tummy's
-              </h1>
+              <h1>Yummy <br /> Tummy's</h1>
             </div>
           </a>
           <div className="icons">
@@ -109,12 +119,7 @@ const Cart = () => {
               <img className="cart" src="images/online-shopping.png" alt="cart" />
             </a>
             <div className="user-menu">
-              <img
-                className="user"
-                src="images/user.png"
-                alt="user"
-                onClick={toggleUserMenu}
-              />
+              <img className="user" src="images/user.png" alt="user" onClick={toggleUserMenu} />
               {userMenuVisible && (
                 <div className="dropdown active">
                   <a href="/sign-in">Sign In</a>
@@ -125,43 +130,51 @@ const Cart = () => {
           </div>
         </div>
       </header>
+
       <main>
-        <section className="cart-container">
-          <h2>Your Cart</h2>
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item) => (
-                <tr key={item.id}>
-                  <td className="content">{item.name}</td>
-                  <td className="content">{item.quantity}</td>
-                  <td className="content">{item.price}</td>
-                  <td className="content">{item.quantity * item.price}</td>
-                  <td>
-                    <div className="actions">
-                      <button className="add" onClick={() => increaseQuantity(item.id)}>+</button>
-                      <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
-                      <button className="minus" onClick={() => decreaseQuantity(item.id)}>-</button>
+        {showCartPage && (
+          <section className="cart-container">
+            <h2>Your Cart</h2>
+            {cart.length === 0 ? (
+              <p>Your cart is empty.</p>
+            ) : (
+              <div className="cart-grid">
+                {cart.map((item) => (
+                  <div key={item.id} className="cart-item">
+                    <img className="item-image" src={item.image} alt={item.name} />
+                    <div className="item-details">
+                      <h3>{item.name}</h3>
+                      <p>R {item.prodPrice}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      <p>Total: R {(item.quantity * item.prodPrice)}</p>
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="cart-summary">
-            <p><strong>Subtotal:</strong> <span id="cart-subtotal">R {calculateTotal().toFixed(2)}</span></p>
-            <button className="checkout-btn" onClick={checkout}>Checkout</button>
-          </div>
-        </section>
+                    <div className="actions">
+                      <button className="add" onClick={() => modifyCartItem(item.id, 1)}>+</button>
+                      <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+                      <button className="minus" onClick={() => modifyCartItem(item.id, -1)}>-</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="cart-summary">
+              <p><strong>Subtotal:</strong> <span id="cart-subtotal">R {calculateTotal().toFixed(2)}</span></p>
+              <button className="checkout-btn" onClick={goToCheckout}>Checkout</button>
+            </div>
+          </section>
+        )}
       </main>
+
+      {popupMessage && (
+        <div className="popup-message">
+          <div className="popup-content">
+            <span className="close-popup" onClick={() => setPopupMessage("")}>&times;</span>
+            <p>{popupMessage}</p>
+          </div>
+        </div>
+      )}
+
+      {isCheckoutPage && <Checkout />}  {/* Conditionally render Checkout page */}
     </div>
   );
 };
