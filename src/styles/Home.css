@@ -1,3 +1,13 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Ensures it stays above other content */
+    background-color: white; /* Optional: Add background color for visibility */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow to separate it from content */
+  }
+
 .card{
     position: relative;
     width: 350px;

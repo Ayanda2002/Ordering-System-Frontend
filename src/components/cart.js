@@ -15,6 +15,7 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem("accessToken");
+        
         if (!token) {
           setPopupMessage("No access token found. Please log in.");
           return;
@@ -28,15 +29,24 @@ const Cart = () => {
           },
         });
 
-        const result = await response.json();
-        console.log("Full API Response:", result); // ✅ Log response for debugging
+        if (response.status === 401) {
+          alert("You are not logged in. Please sign in to view your cart.");
+          return;
+        }
 
-        if (!result || !result.cart) {
-          throw new Error("Invalid cart data format. Expected 'cart' object.");
+        const result = await response.json();
+        console.log("Full API Response:", result); // Log response for debugging
+
+
+        if (!result.success || result.message) {
+          // Check if the response indicates the user is not authenticated
+          setPopupMessage(result.message || "Failed to fetch cart. Please try again later.");
+          return;  // Do not proceed if the user isn't authenticated
         }
 
         const cartItems = result.cart;
 
+        // Proceed to fetch product details only if cart data is valid
         const productDetails = await Promise.all(
           Object.keys(cartItems).map(async (productId) => {
             const response = await fetch(`http://127.0.0.1:8000/api/product/${productId}`);
@@ -51,7 +61,7 @@ const Cart = () => {
           })
         );
 
-        setCart(productDetails); 
+        setCart(productDetails);  // Set the cart items
 
       } catch (error) {
         console.error("Error fetching cart:", error);
@@ -99,7 +109,7 @@ const Cart = () => {
     if (popupMessage) {
       const timer = setTimeout(() => {
         setPopupMessage("");
-      }, 3000);
+      }, 6000);
       return () => clearTimeout(timer);
     }
   }, [popupMessage]);
@@ -128,6 +138,23 @@ const Cart = () => {
               )}
             </div>
           </div>
+        </div>
+        
+        <div className="nav">
+          <ul>
+            <li>
+              <a href="/menu" className="menu">Menu</a>
+            </li>
+            <li>
+              <a href="/partnerships" className="partnerships">Partnerships</a>
+            </li>
+            <li>
+              <a href="/about" className="about-us">About Us</a>
+            </li>
+            <li>
+              <a href="/contact" className="contact-us">Contact Us</a>
+            </li>
+          </ul>
         </div>
       </header>
 

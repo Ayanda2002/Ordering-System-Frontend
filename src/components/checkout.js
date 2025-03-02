@@ -9,12 +9,13 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("card"); // "card" or "cash"
   const [deliveryMethod, setDeliveryMethod] = useState("collect"); // "collect" or "delivery"
   const [deliveryFee, setDeliveryFee] = useState(50); // Example delivery fee (R50)
-  
+
+  // Subtotal and total calculation based on delivery
   const subtotal = parseFloat(localStorage.getItem("cartSubtotal")) || 0;
   const totalPrice = deliveryMethod === "delivery" ? subtotal + deliveryFee : subtotal; // Adjust total
 
   useEffect(() => {
-    // Load Stripe
+    // Load Stripe.js script
     const script = document.createElement("script");
     script.src = "https://js.stripe.com/v3/";
     script.onload = () => {
@@ -29,16 +30,30 @@ const Checkout = () => {
   }, []);
 
   useEffect(() => {
-    if (stripe && elements && paymentMethod === "card" && !cardElement) {
+    // Clean up previous card element if it exists when switching to cash
+    if (cardElement) {
+      cardElement.destroy();
+      setCardElement(null);
+    }
+
+    // Re-create card element when switching to "card" payment method
+    if (stripe && elements && paymentMethod === "card") {
       const newCardElement = elements.create("card");
       newCardElement.mount(cardElementRef.current);
       setCardElement(newCardElement);
     }
-  }, [stripe, elements, paymentMethod, cardElement]);
+  }, [stripe, elements, paymentMethod]); // Re-run this effect when paymentMethod changes
 
   const handleCheckout = async (event) => {
     event.preventDefault();
 
+    // If payment is via cash, simply alert and don't proceed
+    if (paymentMethod === "cash") {
+      alert("Order placed! Thank you for your order.");
+      return;
+    }
+
+    // If payment is via card, proceed with Stripe payment process
     if (paymentMethod === "card" && (!stripe || !elements)) {
       console.error("Stripe has not loaded yet.");
       return;
@@ -54,14 +69,14 @@ const Checkout = () => {
       stripeToken = token.id;
     }
 
-    // Prepare form data
+    // Prepare form data for the backend
     const formData = new FormData();
     if (stripeToken) formData.append("stripeToken", stripeToken);
     formData.append("totalPurchaseTotal", totalPrice);
     formData.append("paymentMethod", paymentMethod);
     formData.append("deliveryMethod", deliveryMethod);
 
-    // Send request to backend
+    // Send data to the backend for processing
     try {
       const response = await fetch("http://127.0.0.1:8000/api/checkout", {
         method: "POST",
@@ -70,7 +85,9 @@ const Checkout = () => {
 
       const data = await response.json();
       if (response.ok) {
+        alert("Payment successful")
         console.log("Payment successful:", data);
+        // Optionally redirect or show success message
       } else {
         console.error("Payment failed:", data);
       }
@@ -84,57 +101,61 @@ const Checkout = () => {
       <h1 style={{ color: "black" }}>Checkout</h1>
 
       {/* Payment Method Selection */}
-      <label style={{ color: "black", display: "block", margin: "10px 0" }}>
-        <input
-          type="radio"
-          name="paymentMethod"
-          value="card"
-          checked={paymentMethod === "card"}
-          onChange={() => setPaymentMethod("card")}
-        />
-        Pay with Card
-      </label>
+      <div style={{ marginBottom: "20px" }}>
+        <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="card"
+            checked={paymentMethod === "card"}
+            onChange={() => setPaymentMethod("card")}
+          />
+          Pay with Card
+        </label>
 
-      <label style={{ color: "black", display: "block", margin: "10px 0" }}>
-        <input
-          type="radio"
-          name="paymentMethod"
-          value="cash"
-          checked={paymentMethod === "cash"}
-          onChange={() => setPaymentMethod("cash")}
-        />
-        Pay with Cash
-      </label>
+        <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="cash"
+            checked={paymentMethod === "cash"}
+            onChange={() => setPaymentMethod("cash")}
+          />
+          Pay with Cash
+        </label>
+      </div>
 
       {/* Delivery Method Selection */}
-      <label style={{ color: "black", display: "block", margin: "10px 0" }}>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="collect"
-          checked={deliveryMethod === "collect"}
-          onChange={() => setDeliveryMethod("collect")}
-        />
-        Collect (No Delivery Fee)
-      </label>
+      <div style={{ marginBottom: "20px" }}>
+        <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
+          <input
+            type="radio"
+            name="deliveryMethod"
+            value="collect"
+            checked={deliveryMethod === "collect"}
+            onChange={() => setDeliveryMethod("collect")}
+          />
+          Collect (No Delivery Fee)
+        </label>
 
-      <label style={{ color: "black", display: "block", margin: "10px 0" }}>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="delivery"
-          checked={deliveryMethod === "delivery"}
-          onChange={() => setDeliveryMethod("delivery")}
-        />
-        Delivery (+R{deliveryFee})
-      </label>
+        <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
+          <input
+            type="radio"
+            name="deliveryMethod"
+            value="delivery"
+            checked={deliveryMethod === "delivery"}
+            onChange={() => setDeliveryMethod("delivery")}
+          />
+          Delivery (+R{deliveryFee})
+        </label>
+      </div>
 
       <h3 style={{ color: "black" }}>Total Price: R{totalPrice.toFixed(2)}</h3>
 
       <form id="payment-form" onSubmit={handleCheckout}>
         {/* Show Card Element only if Card Payment is selected */}
         {paymentMethod === "card" && (
-          <div>
+          <div style={{ marginBottom: "20px" }}>
             <label htmlFor="card-element" style={{ color: "black", display: "block", marginBottom: "5px" }}>
               Credit or Debit Card
             </label>
@@ -143,8 +164,20 @@ const Checkout = () => {
           </div>
         )}
 
-        <button type="submit" style={{ marginTop: "15px", padding: "10px", cursor: "pointer" }}>
-          Submit Payment
+        {/* Submit Button */}
+        <button
+          type="submit"
+          style={{
+            marginTop: "15px",
+            padding: "10px 20px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+            borderRadius: "5px",
+          }}
+        >
+          Place Order
         </button>
       </form>
     </div>
