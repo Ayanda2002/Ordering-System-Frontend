@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from "../cart-context";
 import Checkout from './checkout';  // Import the Checkout component
 import '../styles/cart.css';
+import { Link } from 'react-router-dom'; // Import Link for routing
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -141,20 +142,28 @@ const Cart = () => {
         </div>
         
         <div className="nav">
-          <ul>
-            <li>
-              <a href="/menu" className="menu">Menu</a>
-            </li>
-            <li>
-              <a href="/partnerships" className="partnerships">Partnerships</a>
-            </li>
-            <li>
-              <a href="/about" className="about-us">About Us</a>
-            </li>
-            <li>
-              <a href="/contact" className="contact-us">Contact Us</a>
-            </li>
-          </ul>
+                  <ul>
+                    <li>
+                      <Link to="/menu" className="menu">
+                        Menu
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/partnerships" className="partnerships">
+                        Partnerships
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about" className="about-us">
+                        About Us
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="contact-us">
+                        Contact Us
+                      </Link>
+                    </li>
+                  </ul>
         </div>
       </header>
 

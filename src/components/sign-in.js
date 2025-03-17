@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Menu from './menu'; // Import the Menu component
+import { Link } from 'react-router-dom'; // Import Link for routing
 
 import '../styles/sign-in.css'; // Import your CSS file
 
@@ -92,20 +93,28 @@ const Sign_In = () => {
           </div>
         </div>
         <div className="nav">
-          <ul>
-            <li>
-              <a href="/menu" className="menu">Menu</a>
-            </li>
-            <li>
-              <a href="/partnerships" className="partnerships">Partnerships</a>
-            </li>
-            <li>
-              <a href="/about" className="about-us">About Us</a>
-            </li>
-            <li>
-              <a href="/contact" className="contact-us">Contact Us</a>
-            </li>
-          </ul>
+                  <ul>
+                    <li>
+                      <Link to="/menu" className="menu">
+                        Menu
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/partnerships" className="partnerships">
+                        Partnerships
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about" className="about-us">
+                        About Us
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="contact-us">
+                        Contact Us
+                      </Link>
+                    </li>
+                  </ul>
         </div>
       </header>
 
