@@ -6,7 +6,7 @@ const Logout = () => {
   const navigate = useNavigate(); // Initialize navigate hook for redirection
 
   // Check if the user is logged in by checking if the accessToken exists in localStorage
-  const isLoggedIn = localStorage.getItem('accessToken') !== null;
+  let isLoggedIn = !!localStorage.getItem('accessToken');
   
   const logout = () => {
     if (isLoggedIn) {

@@ -1,8 +1,8 @@
 // Header.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logout from './logout'; // Import Logout component
-import HeaderIcons from './headerIcons'; // Import the HeaderIcons component
+import HeaderIcons from './iconComponents/headerIcons'; // Import the HeaderIcons component
+import NavigationBar from './navigationComponents/navigation-bar';
 
 const Header = ({ cartCount }) => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -27,16 +27,7 @@ const Header = ({ cartCount }) => {
           </Link>
           <HeaderIcons/>
         </div>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/menu" className="menu">
-                Menu
-              </Link>
-            </li>
-
-          </ul>
-        </div>
+        <NavigationBar/>
       </header>
     </div>
   );

@@ -1,85 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from "../cart-context";
-import Checkout from './checkout';  // Import the Checkout component
+import Checkout from './checkout';  
 import '../styles/cart.css';
-import { Link } from 'react-router-dom'; // Import Link for routing
-import Logout from './logout'; // Import the Logout component
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
-
+import { Link } from 'react-router-dom'; 
+import Header from './header'; 
+import Footer from './footer'; 
+import { fetchCartItems } from './apiComponents/api-cart';  // Import API function
 
 const Cart = () => {
-  const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState(""); 
-  const [cartDetailsPopupMessage, setCartDetailsPopupMessage] = useState(""); 
+  const [loading, setLoading] = useState(true); 
   const { cart, setCart } = useCart();
-  const [isCheckoutPage, setIsCheckoutPage] = useState(false);  // State to control Checkout rendering
-  const [showCartPage, setShowCartPage] = useState(true);  // State to control visibility of the cart page
+  const [isCheckoutPage, setIsCheckoutPage] = useState(false);
+  const [showCartPage, setShowCartPage] = useState(true);
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const token = localStorage.getItem("accessToken");
-        
-        if (!token) {
-          setPopupMessage("No access token found. Please log in.");
-          return;
-        }
-
-        const response = await fetch("http://127.0.0.1:8000/api/cart", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.status === 401) {
-          alert("You are not logged in. Please sign in to view your cart.");
-          return;
-        }
-
-        const result = await response.json();
-        console.log("Full API Response:", result); // Log response for debugging
-
-
-        if (!result.success || result.message) {
-          // Check if the response indicates the user is not authenticated
-          setPopupMessage(result.message || "Failed to fetch cart. Please try again later.");
-          return;  // Do not proceed if the user isn't authenticated
-        }
-
-        const cartItems = result.cart;
-
-        // Proceed to fetch product details only if cart data is valid
-        const productDetails = await Promise.all(
-          Object.keys(cartItems).map(async (productId) => {
-            const response = await fetch(`http://127.0.0.1:8000/api/product/${productId}`);
-            const product = await response.json();
-            return {
-              id: product.id,
-              name: product.prodName,
-              prodPrice: product.prodPrice || 0,
-              image: product.image || "default-image.jpg",
-              quantity: cartItems[productId] || 1,
-            };
-          })
-        );
-
-        setCart(productDetails);  // Set the cart items
-
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-        setPopupMessage(error.message);
-      }
-    };
-
-    fetchCartItems();
+    fetchCartItems(setCart, setLoading, setPopupMessage);
   }, [setCart]);
-
-  const toggleUserMenu = () => {
-    setUserMenuVisible((prev) => !prev);
-  };
 
   const modifyCartItem = (id, action) => {
     setCart((prevCart) =>
@@ -103,32 +40,27 @@ const Cart = () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
     } else {
-      const subtotal = calculateTotal();
-      localStorage.setItem("cartSubtotal", subtotal.toFixed(2)); // Store the subtotal in localStorage
-      setShowCartPage(false);  // Hide the cart page
-      setIsCheckoutPage(true);  // Show the Checkout page
+      localStorage.setItem("cartSubtotal", calculateTotal().toFixed(2));
+      setShowCartPage(false);
+      setIsCheckoutPage(true);
     }
   };
 
-  useEffect(() => {
-    if (popupMessage) {
-      const timer = setTimeout(() => {
-        setPopupMessage("");
-      }, 6000);
-      return () => clearTimeout(timer);
-    }
-  }, [popupMessage]);
-
   return (
     <div>
-      <header>
-        <Header/>
-      </header>
+      <Header />
 
       <main>
-        {showCartPage && (
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading cart...</p>
+          </div>
+        ) : showCartPage ? (
           <section className="cart-container">
             <h2>Your Cart</h2>
+
+            {popupMessage && <p className="error-message">{popupMessage}</p>}
+
             {cart.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
@@ -156,22 +88,12 @@ const Cart = () => {
               <button className="checkout-btn" onClick={goToCheckout}>Checkout</button>
             </div>
           </section>
+        ) : (
+          isCheckoutPage && <Checkout />
         )}
       </main>
 
-      {popupMessage && (
-        <div className="popup-message">
-          <div className="popup-content">
-            <span className="close-popup" onClick={() => setPopupMessage("")}>&times;</span>
-            <p>{popupMessage}</p>
-          </div>
-        </div>
-      )}
-
-      {isCheckoutPage && <Checkout />}  {/* Conditionally render Checkout page */}
-      <footer className="footer">
-        <Footer/>
-      </footer>
+      <Footer />
     </div>
   );
 };

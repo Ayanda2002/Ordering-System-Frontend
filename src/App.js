@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { CartProvider } from "./cart-context";
 import { Elements } from "@stripe/react-stripe-js"; // Importing Stripe Elements
 import { loadStripe } from "@stripe/stripe-js"; // Stripe JS library
+import ScrollToTop from "./components/scrollToTop";
 
 // Importing your components
 import Home from "./components/home";
@@ -24,6 +25,7 @@ function App() {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop /> {/* Ensures scrolling to top on route change */}
         <div className="App">
           <Elements stripe={stripePromise}>
             <Routes>

@@ -1,18 +1,34 @@
-// CartButton.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // If you want to navigate programmatically
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getCachedCartProducts, setCachedCartProducts } from '../cacheComponents/cache-cart-products';
+import { fetchCartItems } from '../apiComponents/api-cart';
+import { useCart } from '../../cart-context';
 
 const CartButton = () => {
-  const navigate = useNavigate(); // Initialize navigate hook for redirection
+  const navigate = useNavigate();
+  const { setCart } = useCart();
+  const [loading, setLoading] = useState(false); // ✅ Loading state
+  const [popupMessage, setPopupMessage] = useState(""); // ✅ Error message state
+  const isLoggedIn = !!localStorage.getItem('accessToken');
 
-  // Function to open the cart (navigate to /cart page)
-  const openCart = () => {
-    navigate('/cart'); // Redirect to the cart page
+  const openCart = async () => {
+    const token = localStorage.getItem("accessToken");
+    
+    if (!token) {
+      alert("You must be logged in to go to your cart");
+      return;
+    }
+    else{
+      navigate('/cart');
+    }
+
+    
   };
 
   return (
     <a className="cart-container" onClick={openCart}>
-      <img className="cart" src="images/online-shopping.png" alt="cart" />
+      {loading ? <span>Loading...</span> : <img className="cart" src="images/online-shopping.png" alt="cart" />}
+      {popupMessage && <p className="error-message">{popupMessage}</p>}
     </a>
   );
 };
