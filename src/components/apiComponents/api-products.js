@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = 'https://ecom-project-qt91.onrender.com/api';
 
 export const fetchProducts = async () => {
   try {
