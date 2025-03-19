@@ -38,31 +38,6 @@ const Footer = () => {
         </div>
       </div>
       <div className="links">
-        <div className="app-links">
-          <a
-            href="https://apps.apple.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="app-store-link"
-          >
-            <img
-              src={`${process.env.PUBLIC_URL}/images/apple.webp`}
-              alt="Download on the App Store"
-            />
-          </a>
-          <a
-            href="https://play.google.com/store"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="google-play-link"
-          >
-            <img
-              className="google"
-              src={`${process.env.PUBLIC_URL}/images/google.png`}
-              alt="Get it on Google Play"
-            />
-          </a>
-        </div>
         <div className="social-links">
           <a
             href="https://www.instagram.com"
@@ -111,10 +86,9 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyrights">
-        <p>
-          Copyright &copy; Tummy Yummy's South Africa. 2025 All Rights
-          Reserved. build pwa-45-12-18_9f34a1c2
-        </p>
+      <p>
+        &copy; {new Date().getFullYear()} Tummy Yummy's. All Rights Reserved. | Developed by JugamSoft Technologies
+      </p>
       </div>
     </footer>
   );
