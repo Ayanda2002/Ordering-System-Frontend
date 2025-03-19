@@ -1,7 +1,7 @@
 .info {
     display: flex;  
     align-items: center;
-    margin: 20px;
+    margin: 10px;
     width: 100%;
 }
 
@@ -25,18 +25,7 @@
     flex-direction: column; 
     justify-content: center;
     width: 100%;
-    margin-top: 80px;
-}
-
-.info .heading{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.info .heading img{
-    height: 200px;
+    margin-top: 20px;
 }
 
 .info .heading h1{
@@ -45,13 +34,7 @@
     font-size: 60px
 }
 
-.info .heading .heart{
-    margin-top: 80px;
-    height: 400px;
-    width: 1190px;
-    filter: drop-shadow(0 0 10px red);
-    margin-bottom: 20px;
-}
+
 
 .value{
     border: 4px solid red;

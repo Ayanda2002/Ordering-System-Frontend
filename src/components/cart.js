@@ -4,6 +4,9 @@ import Checkout from './checkout';  // Import the Checkout component
 import '../styles/cart.css';
 import { Link } from 'react-router-dom'; // Import Link for routing
 import Logout from './logout'; // Import the Logout component
+import Header from './header'; // Import Header component
+import Footer from './footer'; // Import Footer component
+
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -119,54 +122,7 @@ const Cart = () => {
   return (
     <div>
       <header>
-        <div className="main-bar">
-          <a href="/#">
-            <div className="title">
-              <img className="logo" src="images/ramen.png" alt="logo" />
-              <h1>Yummy <br /> Tummy's</h1>
-            </div>
-          </a>
-          <div className="icons">
-            <Logout/>
-            <a href="/cart">
-              <img className="cart" src="images/online-shopping.png" alt="cart" />
-            </a>
-            <div className="user-menu">
-              <img className="user" src="images/user.png" alt="user" onClick={toggleUserMenu} />
-              {userMenuVisible && (
-                <div className="dropdown active">
-                  <a href="/sign-in">Sign In</a>
-                  <a href="/sign-up">Sign Up</a>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        <div className="nav">
-                  <ul>
-                    <li>
-                      <Link to="/menu" className="menu">
-                        Menu
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/partnerships" className="partnerships">
-                        Partnerships
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/about" className="about-us">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/contact" className="contact-us">
-                        Contact Us
-                      </Link>
-                    </li>
-                  </ul>
-        </div>
+        <Header/>
       </header>
 
       <main>
@@ -213,6 +169,9 @@ const Cart = () => {
       )}
 
       {isCheckoutPage && <Checkout />}  {/* Conditionally render Checkout page */}
+      <footer className="footer">
+        <Footer/>
+      </footer>
     </div>
   );
 };
