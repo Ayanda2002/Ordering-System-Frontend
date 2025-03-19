@@ -39,9 +39,11 @@ const Contact = () => {
       subject: formData.subject,
       message: formData.message
     };
+
+    const API_URL = 'https://ecom-project-qt91.onrender.com';
   
     try {
-      const response = await fetch('http://127.0.0.1:8000/contact-us', {
+      const response = await fetch(`${API_URL}/contact-us`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
