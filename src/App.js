@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { CartProvider } from "./cart-context";
 import { Elements } from "@stripe/react-stripe-js"; // Importing Stripe Elements
 import { loadStripe } from "@stripe/stripe-js"; // Stripe JS library
