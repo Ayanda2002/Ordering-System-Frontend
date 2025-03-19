@@ -120,7 +120,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-              <label htmlFor="subject" style={{ color: 'black' }}>Please choose a subject:</label>
+              <label htmlFor="subject" style={{ color: 'black'}}>Please choose a subject:</label>
               <select
                 id="subject"
                 name="subject"

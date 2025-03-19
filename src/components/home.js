@@ -13,7 +13,6 @@ const Home = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
-
   const closeUserMenu = (event) => {
     if (
       event.target.closest('.user-menu') === null &&
@@ -33,7 +32,7 @@ const Home = () => {
   return (
     <div>
       <header>
-        <Header/>
+        <Header />
       </header>
       <main>
         <div className="card">
@@ -55,15 +54,11 @@ const Home = () => {
               cozy atmosphere make us your new favorite spot to eat.
             </p>
           </div>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/ramen.png`}
-            alt="Ramen"
-            className="ramen"
-          />
+
         </div>
       </main>
       <footer className="footer">
-        <Footer/>
+        <Footer />
       </footer>
     </div>
   );

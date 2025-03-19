@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logout from './logout'; // Import Logout component
+import HeaderIcons from './headerIcons'; // Import the HeaderIcons component
 
 const Header = ({ cartCount }) => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -24,23 +25,7 @@ const Header = ({ cartCount }) => {
               </h1>
             </div>
           </Link>
-          <div className="icons">
-            <Logout /> {/* Logout component will be shown only if the user is logged in */}
-            <a className="cart-container" href="/cart">
-              <img className="cart" src="images/online-shopping.png" alt="cart" />
-            </a>
-            <a className="cart-container">
-              <div className="user-menu">
-                <img className="user" src="images/user.png" alt="user" onClick={toggleUserMenu} />
-                {userMenuVisible && (
-                  <div className="dropdown active">
-                    <a href="/sign-in">Sign In</a>
-                    <a href="/sign-up">Sign Up</a>
-                  </div>
-                )}
-              </div>
-            </a>
-          </div>
+          <HeaderIcons/>
         </div>
         <div className="nav">
           <ul>

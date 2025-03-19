@@ -43,8 +43,9 @@ const Menu = () => {
     const quantity = quantities[product.id] || 1; // Use selected quantity or default to 1
     try {
       const accessToken = localStorage.getItem('accessToken');
+
       if (!accessToken) {
-        console.error('Access token not found. User might not be logged in.');
+        alert('Please log in to Add to Cart');
         return;
       }
 
@@ -98,9 +99,6 @@ const Menu = () => {
       </header>
 
       <main>
-        <div className="menu-heading">
-          <h1>Menu</h1>
-        </div>
         <div className="menu">
           <div className="row">
             {products.map((product) => (

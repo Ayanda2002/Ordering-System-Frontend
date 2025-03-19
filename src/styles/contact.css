@@ -50,7 +50,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border: 2px solid #ff0000;
 }
 
 .user-input .left input{
@@ -61,17 +60,19 @@
 }
 
 .user-input .left select{
-    height: 40px;
+    height: 50px;
     width: 500px;
-    padding: 10px;
-    font-size: 15px;
+    padding: 0px 4px; /* Add padding for better spacing */
+    font-size: 14px;
+    border-radius: 5px; /* Slightly rounded corners for a clean look */
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .user-input .right{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border: 2px solid #000;
+    margin-top: 10px;
 }
 
 .user-input .right textarea{
