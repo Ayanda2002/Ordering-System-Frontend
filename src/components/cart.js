@@ -3,6 +3,7 @@ import { useCart } from "../cart-context";
 import Checkout from './checkout';  // Import the Checkout component
 import '../styles/cart.css';
 import { Link } from 'react-router-dom'; // Import Link for routing
+import Logout from './logout'; // Import the Logout component
 
 const Cart = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -126,6 +127,7 @@ const Cart = () => {
             </div>
           </a>
           <div className="icons">
+            <Logout/>
             <a href="/cart">
               <img className="cart" src="images/online-shopping.png" alt="cart" />
             </a>

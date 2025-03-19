@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for routing
 import '../styles/home.css'; // Import the CSS file
+import Logout from './logout'; // Import the Logout component
 
 const Home = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -9,6 +10,7 @@ const Home = () => {
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
+
 
   const closeUserMenu = (event) => {
     if (
@@ -44,10 +46,7 @@ const Home = () => {
             </div>
           </Link>
           <div className="icons">
-            <a className="cart-container" href="#">
-              <img className="cart" src="images/logout.png" alt="cart" />
-              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-            </a>
+            <Logout/>
             <a className="cart-container" href="/cart">
               <img className="cart" src="images/online-shopping.png" alt="cart" />
               {cartCount > 0 && <span className="cart-count">{cartCount}</span>}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/faq.css"; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
+import Logout from './logout'; // Import the Logout component
 
 const Faq = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
