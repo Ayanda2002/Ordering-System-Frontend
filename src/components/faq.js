@@ -72,10 +72,7 @@ const Faq = () => {
             </div>
           </a>
           <div className="icons">
-            <a className="cart-container" href="#">
-              <img className="cart" src="images/logout.png" alt="cart" />
-              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-            </a>
+            <Logout/>
             <a className="cart-container" href="/cart">
               <img className="cart" src="images/online-shopping.png" alt="cart" />
               {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
