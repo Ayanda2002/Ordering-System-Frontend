@@ -21,6 +21,7 @@ const UserButton = () => {
     navigate('/sign-up'); // Navigate to the Sign Up page
   };
 
+  
   return (
     <a className="cart-container">
       <div className="user-menu">
