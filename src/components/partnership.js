@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/partnership.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
-import Logout from './logout'; // Import the Logout component
 import Header from './header'; // Import Header component
 import Footer from './footer'; // Import Footer component
 
@@ -21,13 +20,10 @@ const Partnership = () => {
       <main>
         <div className="partnership-container">
           <div className="heading">
-            <h1>In 
-              <br />
-              Partnership 
-              <br />
-              With
-            </h1>
-            <img src="images/partnership.jpg" alt="Partnership" />
+            <h1>In Partnership With<br/></h1>
+          </div>
+          <div className="logo">
+            <img src="images/partnership.png" alt="Partnership" />
           </div>
           <div className="partnership">
             <p>
