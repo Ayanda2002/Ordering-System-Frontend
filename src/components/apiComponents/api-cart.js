@@ -72,7 +72,7 @@ export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () =
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) return { success: false, message: "User not authenticated" };
   
-      const response = await fetch(`${API_URL}/cart/add`, { // Make sure the endpoint matches Django
+      const response = await fetch(`${API_URL}/api/cart/add`, { // Make sure the endpoint matches Django
         method: "POST",
         headers: {
           "Content-Type": "application/json",
