@@ -1,6 +1,6 @@
 // src/apiComponents/api-cart.js
 
-const API_URL = 'https://ecom-project-qt91.onrender.com/api';
+const API_URL = 'https://yummytummies.onrender.com';
 
 export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () => {}) => {
   try {
@@ -35,7 +35,7 @@ export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () =
       const productDetails = await Promise.all(
           Object.keys(cartItems).map(async (productId) => {
               try {
-                  const productResponse = await fetch(`${API_URL}/product/${productId}`);
+                  const productResponse = await fetch(`${API_URL}/api/product/${productId}`);
                   const product = await productResponse.json();
                   return {
                       id: product.id,

@@ -1,8 +1,8 @@
-const API_URL = 'https://ecom-project-qt91.onrender.com/api';
+const API_URL = 'https://yummytummies.onrender.com';
 
 export const fetchProducts = async () => {
   try {
-    const response = await fetch(`${API_URL}/product`, {
+    const response = await fetch(`${API_URL}/api/product`, {
       headers: { 'Content-Type': 'application/json' }
     });
 

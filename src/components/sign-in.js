@@ -10,7 +10,7 @@ const Sign_In = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if the user is logged in
 
-  const API_URL = 'https://ecom-project-qt91.onrender.com/api';
+  const API_URL = 'https://yummytummies.onrender.com';
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
@@ -23,7 +23,7 @@ const Sign_In = () => {
     const userPassword = document.getElementById('password').value;
 
     // API call to token endpoint for logging the user in
-    fetch(`${API_URL}/token`, {
+    fetch(`${API_URL}/api/token`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: userName, password: userPassword }),

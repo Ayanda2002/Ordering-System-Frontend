@@ -28,10 +28,10 @@ const Sign_Up = () => {
     }
     alert("Form submitted successfully!");
 
-    const API_URL = 'https://ecom-project-qt91.onrender.com/api';
+    const API_URL = 'https://yummytummies.onrender.com';
 
     // Register the new user
-    fetch(`${API_URL}/register`, {
+    fetch(`${API_URL}/api/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -78,11 +78,11 @@ const Checkout = () => {
     formData.append("paymentMethod", paymentMethod);
     formData.append("deliveryMethod", deliveryMethod);
 
-    const API_URL = 'https://ecom-project-qt91.onrender.com/api';
+    const API_URL = 'https://yummytummies.onrender.com';
 
     // Send data to the backend for processing
     try {
-      const response = await fetch(`${API_URL}/checkout`, {
+      const response = await fetch(`${API_URL}/api/checkout`, {
         method: "POST",
         body: formData,
       });

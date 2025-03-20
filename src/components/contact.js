@@ -40,7 +40,7 @@ const Contact = () => {
       message: formData.message
     };
 
-    const API_URL = 'https://ecom-project-qt91.onrender.com';
+    const API_URL = 'https://yummytummies.onrender.com';
   
     try {
       const response = await fetch(`${API_URL}/contact-us`, {
