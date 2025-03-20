@@ -78,7 +78,7 @@ const Checkout = () => {
     formData.append("paymentMethod", paymentMethod);
     formData.append("deliveryMethod", deliveryMethod);
 
-    const API_URL = 'https://yummytummies.onrender.com';
+    const API_URL = 'https://yummytummies-backend.onrender.com';
 
     // Send data to the backend for processing
     try {

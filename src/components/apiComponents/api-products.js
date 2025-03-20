@@ -1,4 +1,4 @@
-const API_URL = 'https://yummytummies.onrender.com';
+const API_URL = 'https://yummytummies-backend.onrender.com';
 
 export const fetchProducts = async () => {
   try {

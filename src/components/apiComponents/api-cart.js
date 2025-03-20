@@ -1,6 +1,6 @@
 // src/apiComponents/api-cart.js
 
-const API_URL = 'https://yummytummies.onrender.com';
+const API_URL = 'https://yummytummies-backend.onrender.com';
 
 export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () => {}) => {
   try {

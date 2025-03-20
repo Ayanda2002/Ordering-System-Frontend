@@ -28,7 +28,7 @@ const Sign_Up = () => {
     }
     alert("Form submitted successfully!");
 
-    const API_URL = 'https://yummytummies.onrender.com';
+    const API_URL = 'https://yummytummies-backend.onrender.com';
 
     // Register the new user
     fetch(`${API_URL}/api/register`, {
