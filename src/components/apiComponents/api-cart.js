@@ -7,7 +7,7 @@ export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () =
       setLoading(true);
       const token = localStorage.getItem("accessToken");
 
-      const response = await fetch(`${API_URL}/cart`, {
+      const response = await fetch(`${API_URL}/api/cart`, {
           method: "GET",
           headers: {
               Authorization: `Bearer ${token}`,
