@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/partnership.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
-
 
 const Partnership = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -14,9 +11,6 @@ const Partnership = () => {
 
   return (
     <div>
-      <header>
-        <Header/>
-      </header>
       <main>
         <div className="partnership-container">
           <div className="heading">
@@ -83,9 +77,6 @@ const Partnership = () => {
           </p>
         </div>        
       </main>
-      <footer className="footer">
-        <Footer/>
-      </footer>
     </div>
   );
 };

@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/about.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
-import Logout from './logout'; // Import the Logout component
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
-
 
 const About = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -15,9 +11,6 @@ const About = () => {
 
   return (
     <div>
-      <header>
-        <Header/>
-      </header>
       <main>
         <div className="about-container">
           <div className="heading">
@@ -87,9 +80,6 @@ const About = () => {
             </p>
         </div>
       </main>
-      <footer className="footer">
-        <Footer/>
-      </footer>
     </div>
   );
 };

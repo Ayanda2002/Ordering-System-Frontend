@@ -3,8 +3,6 @@ import { useCart } from "../cart-context";
 import Checkout from './checkout';  
 import '../styles/cart.css';
 import { Link } from 'react-router-dom'; 
-import Header from './header'; 
-import Footer from './footer'; 
 import { fetchCartItems } from './apiComponents/api-cart';  // Import API function
 
 const Cart = () => {
@@ -48,8 +46,6 @@ const Cart = () => {
 
   return (
     <div>
-      <Header />
-
       <main>
         {loading ? (
           <div className="loading-container">
@@ -92,8 +88,6 @@ const Cart = () => {
           isCheckoutPage && <Checkout />
         )}
       </main>
-
-      <Footer />
     </div>
   );
 };

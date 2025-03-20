@@ -8,12 +8,13 @@
     font-family: "Poppins", sans-serif;
 }
 
-body {
+.App .body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
     background-color: #ffffff;
     color: #ffffff;
+    margin-bottom: 7%;
 }
 
 header {
@@ -24,7 +25,7 @@ header {
     margin-bottom: 0px;
 }
 
-main{
+main {
     margin: 0;
     padding: 0;
     display: flex;
@@ -32,14 +33,18 @@ main{
     justify-content: center;
     align-items: center;
     flex: 1;
+    padding-bottom: 0; /* Remove any fixed padding */
 }
 
-p{
+p {
     color: #000;
 }
 
-footer{
-    margin-top: 0px;
+.App .footer {
+    margin-bottom: 0;
+    width: 100%;      /* Full width */
+    z-index: 1000;    /* Ensure it stays above other elements */
+    flex-shrink: 0;   /* Prevents shrinking */
 }
 
 /* Main bar */
@@ -53,11 +58,11 @@ footer{
     padding: 10px;
 }
 
-.main-bar a{
+.main-bar a {
     text-decoration: none;
 }
 
-.main-bar .title{
+.main-bar .title {
     display: flex;
     gap: 5px;
     justify-content: center;
@@ -104,9 +109,9 @@ footer{
     background-color: transparent;
     border: none;
     cursor: default;
-  }
-  
-  .cart-count {
+}
+
+.cart-count {
     position: absolute;
     top: 8px;
     right: -10px;
@@ -120,7 +125,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
 .main-bar .cart:hover,
 .main-bar .user:hover {
@@ -173,7 +178,7 @@ footer{
     align-items: center;
 }
 
-.nav ul{
+.nav ul {
     float: left;
     display: flex;
     align-items: center;
@@ -284,7 +289,7 @@ footer{
     transform: scale(1.2);
 }
 
-.copyrights{
+.copyrights {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -330,7 +335,6 @@ footer{
 
 /* sm */
 @media (max-width: 640px) {
-    
     .main-bar .title h1 {
         font-size: 22px;
         line-height: 36px;
@@ -437,43 +441,9 @@ footer{
         display: flex;
         align-items: center;
         list-style: none;
-        width: 100%;
-    }
-    .nav ul li a {
-        text-align: center;
-        width: 100%;
-        font-size: 23px;
     }
     .footer .container {
-        width: 85%;
-    }
-}
-
-/* 2xl */
-@media (max-width: 1536px) {
-    .main-bar .title h1 {
-        font-size: 30px;
-        line-height: 35px;
-    }
-    .nav ul {
-        width: 100%;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav ul li {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        width: 100%;
-    }
-    .nav ul li a {
-        text-align: center;
-        width: 100%;
-        font-size: 25px;
-    }
-
-    .footer .container {
-        width: 90%;
+        gap: 40px;
+        width: 70%;
     }
 }

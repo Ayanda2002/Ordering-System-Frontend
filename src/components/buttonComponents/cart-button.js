@@ -12,9 +12,7 @@ const CartButton = () => {
   const isLoggedIn = !!localStorage.getItem('accessToken');
 
   const openCart = async () => {
-    const token = localStorage.getItem("accessToken");
-    
-    if (!token) {
+    if (!isLoggedIn) {
       alert("You must be logged in to go to your cart");
       return;
     }

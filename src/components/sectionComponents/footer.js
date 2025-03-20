@@ -1,10 +1,11 @@
 // Footer.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../App.css'; // Import the CSS file
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <div>
       <div className="container">
         <div className="section">
           <h2>Eat</h2>
@@ -90,7 +91,7 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} Tummy Yummy's. All Rights Reserved. | Developed by JugamSoft Technologies
       </p>
       </div>
-    </footer>
+    </div>
   );
 };
 

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for routing
 import '../styles/home.css'; // Import the CSS file
-import Logout from './logout'; // Import the Logout component
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
 
 const Home = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -31,9 +28,6 @@ const Home = () => {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
       <main>
         <div className="card">
           <div className="circle">
@@ -57,9 +51,6 @@ const Home = () => {
 
         </div>
       </main>
-      <footer className="footer">
-        <Footer />
-      </footer>
     </div>
   );
 };

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import Menu from './menu'; // Import the Menu component
+import Menu from '../menu'; // Import the Menu component
 import { Link } from 'react-router-dom'; // Import Link for routing
-import '../styles/sign-in.css'; // Import your CSS file
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
+import '../../styles/sign-in.css'; // Import your CSS file
 
 const Sign_In = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -64,13 +62,9 @@ const Sign_In = () => {
 
   return (
     <div>
-      <header>
-        <Header/>
-      </header>
-
       <main className="sign-in">
         <div className="heading">
-          <h1>Sign In</h1>
+          <h1>Login</h1>
         </div>
         <fieldset>
           <form id="sign-in-form" onSubmit={validateForm}>
@@ -109,10 +103,6 @@ const Sign_In = () => {
         </fieldset>
         {successMessage && <div className="success-message">{successMessage}</div>}
       </main>
-
-      <footer className="footer">
-        <Footer/>
-      </footer>
     </div>
   );
 };

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/menu.css';
 import { Link } from 'react-router-dom';
-import Header from './header';
-import Footer from './footer';
 import { getCachedProducts } from './cacheComponents/cache-products';
 import { addToCart } from './apiComponents/api-cart'; // Restored API function
 
@@ -54,10 +52,6 @@ const Menu = () => {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
-
       <main>
         {loading ? (
           <div className="loading-container">
@@ -85,10 +79,6 @@ const Menu = () => {
           </div>
         )}
       </main>
-
-      <footer className="footer">
-        <Footer />
-      </footer>
     </div>
   );
 };

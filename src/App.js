@@ -13,10 +13,12 @@ import Checkout from "./components/checkout";
 import Contact from "./components/contact";
 import Menu from "./components/menu";
 import Partnership from "./components/partnership";
-import Sign_In from "./components/sign-in";
-import Sign_Up from "./components/sign-up";
+import Sign_In from "./components/userManagementComponents/sign-in";
+import Sign_Up from "./components/userManagementComponents/sign-up";
 import Values from "./components/values";
 import "./App.css";
+import Header from './components/sectionComponents/header'; // Import Header component
+import Footer from './components/sectionComponents/footer'; // Import Footer component
 
 // Load your Stripe public key
 const stripePromise = loadStripe("pk_test_51Q7V6fP3W3PNlhUH4jkTVZDpXEN9S341jGJJyl2paPsPZEn8frJp4PKH0lyrzz3cE2gyThoKTlbjCCCENQvHgPye00CWjmk9L5");
@@ -27,26 +29,34 @@ function App() {
       <Router>
         <ScrollToTop /> {/* Ensures scrolling to top on route change */}
         <div className="App">
-          <Elements stripe={stripePromise}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/partnerships" element={<Partnership />} />
-              <Route path="/sign-in" element={<Sign_In />} />
-              <Route path="/sign-up" element={<Sign_Up />} />
-              <Route path="/values" element={<Values />} />
-            </Routes>
-          </Elements>
+          <div className="header">
+            <Header />
+          </div>
+
+          <div className="body">
+            <Elements stripe={stripePromise}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/partnerships" element={<Partnership />} />
+                <Route path="/sign-in" element={<Sign_In />} />
+                <Route path="/sign-up" element={<Sign_Up />} />
+                <Route path="/values" element={<Values />} />
+              </Routes>
+            </Elements>
+          </div>
+
+          <div className="footer">
+            <Footer />
+          </div>
         </div>
       </Router>
     </CartProvider>
   );
 }
-
-
 
 export default App;

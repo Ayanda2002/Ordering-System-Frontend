@@ -33,7 +33,7 @@ const UserButton = () => {
         />
         {userMenuVisible && (
           <div className="dropdown active">
-            <a onClick={handleSignIn}>Sign In</a>
+            <a onClick={handleSignIn}>Login</a>
             <a onClick={handleSignUp}>Sign Up</a>
           </div>
         )}

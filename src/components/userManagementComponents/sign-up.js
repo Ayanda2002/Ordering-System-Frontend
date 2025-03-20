@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/sign-up.css'; // Import your CSS file
+import '../../styles/sign-up.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
-import Header from './header'; // Import Header component
-import Footer from './footer'; // Import Footer component
 
 const Sign_Up = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -59,9 +57,6 @@ const Sign_Up = () => {
 
   return (
     <div>
-      <header>
-        <Header/>
-      </header>
       <main className="sign-up">
         <div className="heading">
           <h1>Sign Up</h1>
@@ -110,9 +105,6 @@ const Sign_Up = () => {
           </form>
         </fieldset>
       </main>
-      <footer className="footer">
-        <Footer/>
-      </footer>
     </div>
   );
 };

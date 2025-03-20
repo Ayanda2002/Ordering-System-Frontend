@@ -1,8 +1,8 @@
 // Header.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderIcons from './iconComponents/headerIcons'; // Import the HeaderIcons component
-import NavigationBar from './navigationComponents/navigation-bar';
+import HeaderIcons from '../iconComponents/headerIcons'; // Import the HeaderIcons component
+import NavigationBar from '../navigationComponents/navigation-bar';
 
 const Header = ({ cartCount }) => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
