@@ -29,12 +29,6 @@ export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () =
           return;
       }
 
-      //get the user_id from the response from getting the cart from backend
-      const user_id = result.user_id;
-      
-      //save the user_id in local storage
-      localStorage.setItem("user_id", user_id);
-
       const cartItems = result.cart;
 
       // Fetch product details for each cart item
