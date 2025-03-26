@@ -26,10 +26,52 @@ const Cart = () => {
     );
   };
 
-  const removeItemFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
+  
+  //const removeItemFromCart = (id) => {
+  //  setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  //};
 
+  const removeItemFromCart = (id) => {
+    const token = localStorage.getItem("accessToken");  // Get the access token from localStorage
+    const user_id = localStorage.getItem("user_id");    // Get the user ID from localStorage
+  
+    // Make sure that both the token and user_id exist
+    if (!token || !user_id) {
+      console.error("Missing token or user ID in localStorage");
+      return;
+    }
+  
+    const API_URL = 'https://yummytummies-backend.onrender.com';
+  
+    // Update state optimistically
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);  // Remove the item from the cart
+  
+      // Send the updated cart to the backend
+      fetch(`${API_URL}/api/cart/${user_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,  // Attach the token for authentication
+        },
+        body: JSON.stringify({
+          menuCartItems: updatedCart,  // Send updated cart items
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Cart updated:", data);  // Log response from the backend
+        })
+        .catch((error) => {
+          console.error("Error updating cart:", error);  // Handle errors
+        });
+  
+      return updatedCart;  // Return the updated cart state immediately for better UX
+    });
+  };
+  
+
+  
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.prodPrice * item.quantity, 0);
   };
