@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import '../../styles/sign-up.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
+import { useNavigate } from 'react-router-dom';
 
 const Sign_Up = () => {
+
+  //for naivagtion to menu page
+  const navigate = useNavigate();
+
   const [userMenuVisible, setUserMenuVisible] = useState(false);
 
   const toggleUserMenu = () => {
@@ -24,7 +29,6 @@ const Sign_Up = () => {
       alert("Passwords do not match!");
       return false;
     }
-    alert("Form submitted successfully!");
 
     const API_URL = 'https://yummytummies-backend.onrender.com';
 
@@ -44,7 +48,14 @@ const Sign_Up = () => {
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
 
-    return true;
+    alert("Form submitted successfully!");
+
+    // Redirect to login page after successful user registration
+    navigate('/sign-in');
+
+    return;
+
+    
   };
 
   const togglePasswordVisibility = () => {
