@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import Menu from '../menu'; // Import the Menu component
 import { Link } from 'react-router-dom'; // Import Link for routing
 import '../../styles/sign-in.css'; // Import your CSS file
+import { useNavigate } from 'react-router-dom';
 
 const Sign_In = () => {
+  //for naivagtion to menu page
+  const navigate = useNavigate();
+
   const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if the user is logged in
@@ -34,8 +38,11 @@ const Sign_In = () => {
           localStorage.setItem('refreshToken', data.refresh);
           alert('Sign-in successful! Welcome back.');
 
+          // Redirect to menu page after successful login
+          navigate('/menu');
+
           // Change the state to show the Menu page
-          setIsLoggedIn(true); // Set to true to show the Menu component
+          //setIsLoggedIn(true); // Set to true to show the Menu component
         } else {
           alert('Login failed. Please check your credentials.');
         }
@@ -55,10 +62,10 @@ const Sign_In = () => {
     }
   };
 
-  if (isLoggedIn) {
+  //if (isLoggedIn) {
     // If the user is logged in, render the Menu component
-    return <Menu />;
-  }
+  //  return <Menu />;
+  //}
 
   return (
     <div>
