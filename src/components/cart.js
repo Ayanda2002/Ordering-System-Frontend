@@ -26,6 +26,48 @@ const Cart = () => {
     );
   };
 
+  //increment specific products quantity in user cart
+  const incrementCartItem = async (productId) => {
+    try {
+      const token = localStorage.getItem('accessToken');
+  
+      if (!token) {
+        alert("You are not logged in. Please sign in to modify your cart.");
+        return;
+      }
+  
+      const response = await fetch('https://yummytummies-backend.onrender.com/api/cart/increment', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Send token in auth header
+        },
+        body: JSON.stringify({
+          productId: productId, // Send productId to the API
+        }),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok || !result.success) {
+        alert(result.message || "Failed to increment product quantity.");
+        return;
+      }
+  
+      // Update the state if the API request is successful
+      setCart((prevCart) => 
+        prevCart.map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      );
+    } catch (error) {
+      console.error("Error incrementing item quantity:", error);
+      alert("An error occurred while incrementing the quantity.");
+    }
+  };
+  
+
+  //remove specific product from users cart
   const removeItemFromCart = async (id) => {
     try {
       const token = localStorage.getItem("accessToken");
@@ -101,7 +143,7 @@ const Cart = () => {
                       <p>Total: R {(item.quantity * item.prodPrice)}</p>
                     </div>
                     <div className="actions">
-                      <button className="add" onClick={() => modifyCartItem(item.id, 1)}>+</button>
+                      <button className="add" onClick={() => incrementCartItem(item.id)}>+</button>
                       <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
                       <button className="minus" onClick={() => modifyCartItem(item.id, -1)}>-</button>
                     </div>
