@@ -56,7 +56,7 @@ const Checkout = () => {
       alert("Order placed! Thank you for your order.");
   
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/transaction", {
+        const response = await fetch("https://yummytummies-backend.onrender.com/api/transaction", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
