@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
+  //for naivagtion to menu page
+  const navigate = useNavigate();
+
   const [stripe, setStripe] = useState(null);
   const [elements, setElements] = useState(null);
   const [cardElement, setCardElement] = useState(null); // Store the card element reference
@@ -51,7 +55,7 @@ const Checkout = () => {
     if (paymentMethod === "cash") {
       alert("Order placed! Thank you for your order.");
       // Redirect to menu page after cash order
-      window.location.replace("/menu");
+      navigate('/menu');
       return;
     }
 
@@ -92,7 +96,7 @@ const Checkout = () => {
         alert("Payment successful");
         console.log("Payment successful:", data);
         // Redirect to menu page after successful payment
-        window.location.replace("/menu");
+        navigate('/menu');
       } else {
         console.error("Payment failed:", data);
       }
