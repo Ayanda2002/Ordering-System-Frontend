@@ -50,21 +50,43 @@ const Checkout = () => {
 
   const handleCheckout = async (event) => {
     event.preventDefault();
-
-    // If payment is via cash, simply alert and don't proceed
+  
+    // If payment is via cash, simply alert and don't proceed with Stripe
     if (paymentMethod === "cash") {
       alert("Order placed! Thank you for your order.");
+  
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/transaction", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Assuming token is stored in localStorage
+          },
+          body: JSON.stringify({ paymentMethod }),
+        });
+  
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Transaction logged successfully:", data);
+          alert("Transaction logged successfully");
+        } else {
+          console.error("Failed to log transaction:", data);
+        }
+      } catch (error) {
+        console.error("Error logging transaction:", error);
+      }
+  
       // Redirect to menu page after cash order
-      navigate('/menu');
+      navigate("/menu");
       return;
     }
-
+  
     // If payment is via card, proceed with Stripe payment process
     if (paymentMethod === "card" && (!stripe || !elements)) {
       console.error("Stripe has not loaded yet.");
       return;
     }
-
+  
     let stripeToken = null;
     if (paymentMethod === "card") {
       const { token, error } = await stripe.createToken(cardElement);
@@ -74,29 +96,53 @@ const Checkout = () => {
       }
       stripeToken = token.id;
     }
-
+  
     // Prepare form data for the backend
     const formData = new FormData();
     if (stripeToken) formData.append("stripeToken", stripeToken);
     formData.append("totalPurchaseTotal", totalPrice);
     formData.append("paymentMethod", paymentMethod);
     formData.append("deliveryMethod", deliveryMethod);
-
-    const API_URL = 'https://yummytummies-backend.onrender.com';
-
+  
+    const API_URL = "https://yummytummies-backend.onrender.com";
+  
     // Send data to the backend for processing
     try {
       const response = await fetch(`${API_URL}/api/checkout`, {
         method: "POST",
         body: formData,
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         alert("Payment successful");
         console.log("Payment successful:", data);
+  
+        // Make the API call to store the transaction in the transaction log
+        try {
+          const transactionResponse = await fetch("https://yummytummies-backend.onrender.com/api/transaction", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify({ paymentMethod }),
+          });
+  
+          const transactionData = await transactionResponse.json();
+          if (transactionResponse.ok) {
+            
+            console.log("Transaction logged successfully:", transactionData);
+            alert("Transaction logged successfully");
+          } else {
+            console.error("Failed to log transaction:", transactionData);
+          }
+        } catch (error) {
+          console.error("Error logging transaction:", error);
+        }
+  
         // Redirect to menu page after successful payment
-        navigate('/menu');
+        navigate("/menu");
       } else {
         console.error("Payment failed:", data);
       }
@@ -104,6 +150,7 @@ const Checkout = () => {
       console.error("Error during payment processing:", error);
     }
   };
+  
 
   return (
     <div>
