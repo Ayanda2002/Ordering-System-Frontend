@@ -26,9 +26,39 @@ const Cart = () => {
     );
   };
 
-  const removeItemFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const removeItemFromCart = async (id) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+  
+      if (!token) {
+        alert("You are not logged in. Please sign in to modify your cart.");
+        return;
+      }
+  
+      const response = await fetch("https://yummytummies-backend.onrender.com/api/cart/remove", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId: id }),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok || !result.success) {
+        alert(result.message || "Failed to remove item from cart.");
+        return;
+      }
+  
+      // Remove the item from local state only if the API request is successful
+      setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+      alert("An error occurred while removing the item.");
+    }
   };
+  
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.prodPrice * item.quantity, 0);
