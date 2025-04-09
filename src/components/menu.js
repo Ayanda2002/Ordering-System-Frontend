@@ -63,7 +63,7 @@ const Menu = () => {
               {products.map((product) => (
                 <div key={product.id} className="product-card">
                   <a href={`/product/${product.id}`}>
-                    <img src={`images/user.png`} alt={product.prodName} />
+                    <img src={product.prodImagePath} alt={product.prodName} />
                     <p>{product.prodName}</p><br />
                     <p>R{product.prodPrice}</p>
                   </a>

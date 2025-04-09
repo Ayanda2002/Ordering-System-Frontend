@@ -14,7 +14,7 @@
   width: calc(20% - 20px);  /* Ensures 5 cards fit in a row, accounting for the gap */
   min-width: 200px;  /* Ensures that the cards don't shrink smaller than 200px */
   max-width: 200px;  /* Optional: Cap the width of the cards */
-  border: 1px solid #ccc;  /* Optional: Add border */
+  border: 0px solid #ccc;  /* Optional: Add border */
   padding: 10px;  /* Padding for the card */
   background-color: #fff;  /* Optional: Card background */
   box-sizing: border-box; /* Ensure padding is included in width calculation */

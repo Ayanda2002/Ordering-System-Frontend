@@ -16,14 +16,12 @@ main {
 footer {
   background-color: #611903;
   color: white;
-  padding-top: 0px;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 20px; /* Optional padding for footer content */
   width: 100%;      /* Full width */
   z-index: 1000;    /* Ensure it stays above other elements */
   flex-shrink: 0;   /* Prevents shrinking */
-  position: relative; /* Let the footer flow naturally at the end of content */
+  position: fixed; /* Let the footer flow naturally at the end of content */
 }
 
 /* Footer content styling */
