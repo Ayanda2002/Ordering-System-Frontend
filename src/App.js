@@ -12,7 +12,6 @@ import Cart from "./components/cart";
 import Checkout from "./components/checkout";
 import Contact from "./components/contact";
 import Menu from "./components/menu";
-import Partnership from "./components/partnership";
 import Sign_In from "./components/userManagementComponents/sign-in";
 import Sign_Up from "./components/userManagementComponents/sign-up";
 import Values from "./components/values";
@@ -42,7 +41,6 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/menu" element={<Menu />} />
-                <Route path="/partnerships" element={<Partnership />} />
                 <Route path="/sign-in" element={<Sign_In />} />
                 <Route path="/sign-up" element={<Sign_Up />} />
                 <Route path="/values" element={<Values />} />

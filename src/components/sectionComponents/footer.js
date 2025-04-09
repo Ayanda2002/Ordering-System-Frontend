@@ -8,36 +8,19 @@ const Footer = () => {
     <div>
       <div className="container">
         <div className="section">
-          <h2>Eat</h2>
-          <ul>
-            <li>
-              <Link to="/menu">Menu</Link>
-            </li>
-          </ul>
+          <Link to="/menu">Menu</Link>
         </div>
         <div className="section">
-          <h2>Explore</h2>
-          <ul>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/values">Our Values</Link>
-            </li>
-            <li>
-              <Link to="/partnerships">Partnerships</Link>
-            </li>
-          </ul>
+          <Link to="/values">Our Values</Link>
         </div>
         <div className="section">
-          <h2>Help</h2>
-          <ul>
-            <li>
-              <Link to="/contact">Contact Us</Link>
-            </li>
-          </ul>
+          <Link to="/contact">Contact Us</Link>
+        </div>
+        <div className="section">
+          <Link to="/about">About Us</Link>
         </div>
       </div>
+      {/*
       <div className="links">
         <div className="social-links">
           <a
@@ -86,6 +69,8 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      */}
+
       <div className="copyrights">
       <p>
         &copy; {new Date().getFullYear()} Tummy Yummy's. All Rights Reserved. | Developed by JugamSoft Technologies
