@@ -1,3 +1,45 @@
+/* Stylish quantity control buttons */
+.quantity-controls button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.quantity-controls button:hover {
+  background-color: #ddd;
+}
+
+.quantity-display {
+  font-size: 18px;
+  min-width: 30px;
+  text-align: center;
+  line-height: 32px;
+}
+
+/* Add to Cart button */
+.add-to-cart {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #45a049;
+}
+
 /* Menu Styles */
 .quantity-controls{
   color: #000;

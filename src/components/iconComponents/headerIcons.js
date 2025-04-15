@@ -14,9 +14,9 @@ const HeaderIcons = () => {
 
   return (
     <div className="icons">
-      <Logout /> {/* Logout component will be shown only if the user is logged in */}
       <CartButton/>
       <UserButton/>
+      <Logout /> {/* Logout component will be shown only if the user is logged in */}
     </div>
   );
 };

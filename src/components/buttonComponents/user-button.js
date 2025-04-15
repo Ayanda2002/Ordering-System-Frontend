@@ -1,10 +1,10 @@
-// UserButton.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserButton = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate hook for redirection
+  const navigate = useNavigate();
+  const userMenuRef = useRef(null); // Create a reference for the user menu
 
   // Toggle the visibility of the user menu
   const toggleUserMenu = () => {
@@ -21,10 +21,26 @@ const UserButton = () => {
     navigate('/sign-up'); // Navigate to the Sign Up page
   };
 
-  
+  // Close the dropdown when clicking outside
+  const handleClickOutside = (event) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      setUserMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener to detect clicks outside the menu
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <a className="cart-container">
-      <div className="user-menu">
+      <div className="user-menu" ref={userMenuRef}>
         <img
           className="user"
           src="images/user.png"

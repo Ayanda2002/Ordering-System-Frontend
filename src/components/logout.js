@@ -1,18 +1,20 @@
 // src/components/Logout.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { getAccessToken, removeAccessToken, removeRefreshToken } from './tokenManagement/tokenManager'; // Import tokenManager functions
 
 const Logout = () => {
   const navigate = useNavigate(); // Initialize navigate hook for redirection
 
-  // Check if the user is logged in by checking if the accessToken exists in localStorage
-  let isLoggedIn = !!localStorage.getItem('accessToken');
-  
+  // Check if the user is logged in by using getAccessToken from tokenManager
+  let isLoggedIn = !!getAccessToken(); // If a valid access token exists, the user is logged in
+
   const logout = () => {
     if (isLoggedIn) {
-      // Remove the JWT token from localStorage
-      localStorage.removeItem('accessToken');
-      
+      // Use tokenManager to remove access token and refresh token
+      removeAccessToken();
+      removeRefreshToken();
+
       // Optionally, show an alert or message
       alert('Logged out successfully');
 
@@ -28,7 +30,7 @@ const Logout = () => {
 
   return (
     <a className="cart-container" onClick={logout}>
-      <img className="cart" src="images/logout.png" alt="cart" />
+      <img className="cart" src="images/new-logout.png" alt="cart" />
     </a>
   );
 };
