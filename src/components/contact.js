@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/contact.css'; // Import your CSS file
 import { submitContactForm } from './apiComponents/api-contact'; // Import the function for submitting contact form
+import contactData from './jsonData/contactData.json'; // Import the contact data
 
 const Contact = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -54,17 +55,11 @@ const Contact = () => {
         </div>
         <div className="contact-info">
           <div className="line">
-            <span>Get in </span>
+            <span>{contactData.contactInfo.title.split(' ')[0]}</span>
             <br />
-            <span className="highlight">Touch</span>
+            <span className="highlight">{contactData.contactInfo.title.split(' ')[1]}</span>
           </div>
-          <p>
-            At Yummy Tummy's, your feedback matters. We welcome your thoughts, suggestions, compliments, and concerns because they inspire us to serve you better every day. Whether you have a unique idea, a kind note, or an issue you'd like to share, we're here to listen and grow. Your input drives our commitment to innovation, ensuring we deliver an unforgettable dining experience every time you visit.
-            <br /><br />
-            We value every compliment—it fuels our passion to keep delighting our guests. Likewise, complaints are an opportunity for us to learn, improve, and make sure your next visit is even better. Don't hesitate to reach out—your voice helps shape the Yummy Tummy's experience.
-            <br /><br />
-            Thank you for being part of our journey to create a place where good food and great memories come together. Together, let's make Yummy Tummy's the ultimate destination for deliciousness and happiness!
-          </p>
+          <p>{contactData.contactInfo.content}</p>
         </div>
         <div className="user-input">
           <form onSubmit={handleSubmit}>
@@ -93,7 +88,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-              <label htmlFor="subject" style={{ color: 'black'}}>Please choose a subject:</label>
+              <label htmlFor="subject" style={{ color: 'black' }}>Please choose a subject:</label>
               <select
                 id="subject"
                 name="subject"

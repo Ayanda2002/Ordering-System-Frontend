@@ -1,25 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
+import { logTransaction, processPayment } from './apiComponents/api-checkout'; // Import the functions
 
 const Checkout = () => {
-  //for naivagtion to menu page
   const navigate = useNavigate();
-
   const [stripe, setStripe] = useState(null);
   const [elements, setElements] = useState(null);
-  const [cardElement, setCardElement] = useState(null); // Store the card element reference
+  const [cardElement, setCardElement] = useState(null); 
   const cardElementRef = useRef(null);
 
-  const [paymentMethod, setPaymentMethod] = useState("card"); // "card" or "cash"
-  const [deliveryMethod, setDeliveryMethod] = useState("collect"); // "collect" or "delivery"
+  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [deliveryMethod, setDeliveryMethod] = useState("collect");
   const [deliveryFee, setDeliveryFee] = useState(50); // Example delivery fee (R50)
 
-  // Subtotal and total calculation based on delivery
   const subtotal = parseFloat(localStorage.getItem("cartSubtotal")) || 0;
-  const totalPrice = deliveryMethod === "delivery" ? subtotal + deliveryFee : subtotal; // Adjust total
+  const totalPrice = deliveryMethod === "delivery" ? subtotal + deliveryFee : subtotal;
 
   useEffect(() => {
-    // Load Stripe.js script
     const script = document.createElement("script");
     script.src = "https://js.stripe.com/v3/";
     script.onload = () => {
@@ -34,129 +31,41 @@ const Checkout = () => {
   }, []);
 
   useEffect(() => {
-    // Clean up previous card element if it exists when switching to cash
     if (cardElement) {
       cardElement.destroy();
       setCardElement(null);
     }
 
-    // Re-create card element when switching to "card" payment method
     if (stripe && elements && paymentMethod === "card") {
       const newCardElement = elements.create("card");
       newCardElement.mount(cardElementRef.current);
       setCardElement(newCardElement);
     }
-  }, [stripe, elements, paymentMethod]); // Re-run this effect when paymentMethod changes
+  }, [stripe, elements, paymentMethod]);
 
   const handleCheckout = async (event) => {
     event.preventDefault();
-  
-    // If payment is via cash, simply alert and don't proceed with Stripe
+
     if (paymentMethod === "cash") {
       alert("Order placed! Thank you for your order.");
-  
-      try {
-        const response = await fetch("https://yummytummies-backend.onrender.com/api/transaction", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Assuming token is stored in localStorage
-          },
-          body: JSON.stringify({ paymentMethod }),
-        });
-  
-        const data = await response.json();
-        if (response.ok) {
-          console.log("Transaction logged successfully:", data);
-          alert("Transaction logged successfully");
-        } else {
-          console.error("Failed to log transaction:", data);
-        }
-      } catch (error) {
-        console.error("Error logging transaction:", error);
-      }
-  
-      // Redirect to menu page after cash order
+
+      // Log the transaction and redirect
+      await logTransaction(paymentMethod);
       navigate("/menu");
       return;
     }
-  
-    // If payment is via card, proceed with Stripe payment process
-    if (paymentMethod === "card" && (!stripe || !elements)) {
-      console.error("Stripe has not loaded yet.");
-      return;
-    }
-  
-    let stripeToken = null;
+
+    // Process the payment for card
     if (paymentMethod === "card") {
-      const { token, error } = await stripe.createToken(cardElement);
-      if (error) {
-        document.getElementById("card-errors").textContent = error.message;
-        return;
-      }
-      stripeToken = token.id;
-    }
-  
-    // Prepare form data for the backend
-    const formData = new FormData();
-    if (stripeToken) formData.append("stripeToken", stripeToken);
-    formData.append("totalPurchaseTotal", totalPrice);
-    formData.append("paymentMethod", paymentMethod);
-    formData.append("deliveryMethod", deliveryMethod);
-  
-    const API_URL = "https://yummytummies-backend.onrender.com";
-  
-    // Send data to the backend for processing
-    try {
-      const response = await fetch(`${API_URL}/api/checkout`, {
-        method: "POST",
-        body: formData,
-      });
-  
-      const data = await response.json();
-      if (response.ok) {
-        alert("Payment successful");
-        console.log("Payment successful:", data);
-  
-        // Make the API call to store the transaction in the transaction log
-        try {
-          const transactionResponse = await fetch("https://yummytummies-backend.onrender.com/api/transaction", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify({ paymentMethod }),
-          });
-  
-          const transactionData = await transactionResponse.json();
-          if (transactionResponse.ok) {
-            
-            console.log("Transaction logged successfully:", transactionData);
-            alert("Transaction logged successfully");
-          } else {
-            console.error("Failed to log transaction:", transactionData);
-          }
-        } catch (error) {
-          console.error("Error logging transaction:", error);
-        }
-  
-        // Redirect to menu page after successful payment
-        navigate("/menu");
-      } else {
-        console.error("Payment failed:", data);
-      }
-    } catch (error) {
-      console.error("Error during payment processing:", error);
+      await processPayment(stripe, cardElement, totalPrice, paymentMethod, deliveryMethod);
+      navigate("/menu");
     }
   };
-  
 
   return (
     <div>
       <h1 style={{ color: "black" }}>Checkout</h1>
 
-      {/* Payment Method Selection */}
       <div style={{ marginBottom: "20px" }}>
         <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
           <input
@@ -181,7 +90,6 @@ const Checkout = () => {
         </label>
       </div>
 
-      {/* Delivery Method Selection */}
       <div style={{ marginBottom: "20px" }}>
         <label style={{ color: "black", display: "block", marginBottom: "10px" }}>
           <input
@@ -209,7 +117,6 @@ const Checkout = () => {
       <h3 style={{ color: "black" }}>Total Price: R{totalPrice.toFixed(2)}</h3>
 
       <form id="payment-form" onSubmit={handleCheckout}>
-        {/* Show Card Element only if Card Payment is selected */}
         {paymentMethod === "card" && (
           <div style={{ marginBottom: "20px" }}>
             <label htmlFor="card-element" style={{ color: "black", display: "block", marginBottom: "5px" }}>
@@ -220,7 +127,6 @@ const Checkout = () => {
           </div>
         )}
 
-        {/* Submit Button */}
         <button
           type="submit"
           style={{
