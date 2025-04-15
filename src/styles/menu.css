@@ -8,17 +8,28 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  flex: 1;
+  max-width: 60px;
 }
 
 .quantity-controls button:hover {
-  background-color: #ddd;
+  background-color: #ebdb53;
 }
 
 .quantity-display {
+  flex: 1;
   font-size: 18px;
   min-width: 30px;
   text-align: center;
   line-height: 32px;
+}
+
+.quantity-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
 /* Add to Cart button */
@@ -37,7 +48,7 @@
 }
 
 .add-to-cart:hover {
-  background-color: #45a049;
+  background-color: #31dd39e8;
 }
 
 /* Menu Styles */

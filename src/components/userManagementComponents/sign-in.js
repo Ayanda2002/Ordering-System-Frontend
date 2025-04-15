@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-import Menu from '../menu'; // Import the Menu component
-import { Link } from 'react-router-dom'; // Import Link for routing
-import '../../styles/sign-in.css'; // Import your CSS file
 import { useNavigate } from 'react-router-dom';
-import { signIn } from "../apiComponents/api-signIn"; // Import the signIn function
+import '../../styles/sign-in.css';
+import { signIn } from '../apiComponents/api-signIn';
+import { preloadMenuData } from '../preLoadMenuData/preloadMenu'; // 🔁 Reuse preload logic
 
 const Sign_In = () => {
-  // For navigation to menu page
   const navigate = useNavigate();
 
-  const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if the user is logged in
-
-  const toggleUserMenu = () => {
-    setUserMenuVisible((prev) => !prev);
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const validateForm = async (event) => {
     event.preventDefault();
@@ -23,26 +16,24 @@ const Sign_In = () => {
     const userName = document.getElementById('email').value;
     const userPassword = document.getElementById('password').value;
 
-    // API call to token endpoint for logging the user in
     const result = await signIn(userName, userPassword);
 
     if (result.success) {
       alert('Sign-in successful! Welcome back.');
 
-      // Redirect to menu page after successful login
+      // ⏳ Preload products before navigating
+      await preloadMenuData();
+
+      // ✅ Go to the menu page
       navigate('/menu');
     } else {
-      alert(result.message); // Show error message if sign-in failed
+      alert(result.message); // Show error if failed
     }
   };
 
   const togglePasswordVisibility = () => {
     const passwordInput = document.getElementById('password');
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-    } else {
-      passwordInput.type = 'password';
-    }
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
   };
 
   return (
@@ -86,6 +77,7 @@ const Sign_In = () => {
             </button>
           </form>
         </fieldset>
+
         {successMessage && <div className="success-message">{successMessage}</div>}
       </main>
     </div>

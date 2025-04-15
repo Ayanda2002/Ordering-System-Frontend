@@ -10,14 +10,14 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get cached products (no API call here)
     const cachedProducts = getCachedProducts();
-    if (cachedProducts) {
+    if (cachedProducts && cachedProducts.length > 0) {
       setProducts(cachedProducts);
-      setLoading(false);
     } else {
       console.error('No cached data found. This should not happen.');
+      setProducts([]); // fallback to empty list to avoid hanging
     }
+    setLoading(false); // ✅ Always stop loading
   }, []);
 
   const increaseQuantity = (productId) => {
@@ -35,19 +35,17 @@ const Menu = () => {
   };
 
   const handleAddToCart = async (productId, quantity) => {
-    const accessToken = !!localStorage.getItem("accessToken")
-    if(accessToken){
+    const accessToken = !!localStorage.getItem("accessToken");
+    if (accessToken) {
       const result = await addToCart(productId, quantity);
       if (result.success) {
         alert("Item added to cart!");
       } else {
         alert(result.message || "Failed to add item.");
       }
+    } else {
+      alert("You must be logged in to add to cart");
     }
-    else{
-      alert("You must be logged in to add to cart")
-    }
-
   };
 
   return (
@@ -56,6 +54,10 @@ const Menu = () => {
         {loading ? (
           <div className="loading-container">
             <p>Loading menu...</p>
+          </div>
+        ) : products.length === 0 ? (
+          <div className="loading-container">
+            <p>No products available at the moment.</p>
           </div>
         ) : (
           <div className="menu">
@@ -72,7 +74,12 @@ const Menu = () => {
                     <span className="quantity-display">{quantities[product.id] || 1}</span>
                     <button className="add" onClick={() => increaseQuantity(product.id)}>+</button>
                   </div>
-                  <button className="add-to-cart" onClick={() => handleAddToCart(product.id, quantities[product.id] || 1)}>Add to Cart</button>
+                  <button
+                    className="add-to-cart"
+                    onClick={() => handleAddToCart(product.id, quantities[product.id] || 1)}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               ))}
             </div>
