@@ -14,6 +14,7 @@ import Contact from "./components/contact";
 import Menu from "./components/menu";
 import Sign_In from "./components/userManagementComponents/sign-in";
 import Sign_Up from "./components/userManagementComponents/sign-up";
+import UploadProduct from "./components/upload-products";
 import "./App.css";
 import Header from './components/sectionComponents/header'; // Import Header component
 import Footer from './components/sectionComponents/footer'; // Import Footer component
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/sign-in" element={<Sign_In />} />
                 <Route path="/sign-up" element={<Sign_Up />} />
+                <Route path="/upload-product" element={<UploadProduct />} />
               </Routes>
             </Elements>
           </div>

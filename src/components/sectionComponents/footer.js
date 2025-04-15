@@ -13,6 +13,9 @@ const Footer = () => {
         <div className="section">
           <Link to="/about">About Us</Link>
         </div>
+        <div className="section">
+          <Link to="/upload-product">Upload Products</Link>
+        </div>
       </div>
 
       <div className="copyrights">
