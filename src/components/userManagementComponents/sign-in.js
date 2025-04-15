@@ -3,56 +3,37 @@ import Menu from '../menu'; // Import the Menu component
 import { Link } from 'react-router-dom'; // Import Link for routing
 import '../../styles/sign-in.css'; // Import your CSS file
 import { useNavigate } from 'react-router-dom';
-
-import {API_URL} from "../apiComponents/api-base-url"
+import { signIn } from "../apiComponents/api-signIn"; // Import the signIn function
 
 const Sign_In = () => {
-  //for naivagtion to menu page
+  // For navigation to menu page
   const navigate = useNavigate();
 
   const [userMenuVisible, setUserMenuVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if the user is logged in
 
-  //const API_URL = 'https://yummytummies-backend.onrender.com';
-
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
-  const validateForm = (event) => {
+  const validateForm = async (event) => {
     event.preventDefault();
 
     const userName = document.getElementById('email').value;
     const userPassword = document.getElementById('password').value;
 
     // API call to token endpoint for logging the user in
-    fetch(`${API_URL}/api/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: userName, password: userPassword }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.access) {
-          // Store the access token and the refresh token locally
-          localStorage.setItem('accessToken', data.access);
-          localStorage.setItem('refreshToken', data.refresh);
-          alert('Sign-in successful! Welcome back.');
+    const result = await signIn(userName, userPassword);
 
-          // Redirect to menu page after successful login
-          navigate('/menu');
+    if (result.success) {
+      alert('Sign-in successful! Welcome back.');
 
-          // Change the state to show the Menu page
-          //setIsLoggedIn(true); // Set to true to show the Menu component
-        } else {
-          alert('Login failed. Please check your credentials.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error during sign-in:', error);
-        alert('Something went wrong. Please try again.');
-      });
+      // Redirect to menu page after successful login
+      navigate('/menu');
+    } else {
+      alert(result.message); // Show error message if sign-in failed
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -63,11 +44,6 @@ const Sign_In = () => {
       passwordInput.type = 'password';
     }
   };
-
-  //if (isLoggedIn) {
-    // If the user is logged in, render the Menu component
-  //  return <Menu />;
-  //}
 
   return (
     <div>
