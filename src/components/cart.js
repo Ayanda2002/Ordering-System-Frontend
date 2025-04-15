@@ -4,6 +4,7 @@ import Checkout from './checkout';
 import '../styles/cart.css';
 import { Link } from 'react-router-dom'; 
 import { fetchCartItems } from './apiComponents/api-cart';  // Import API function
+import {API_URL} from "./apiComponents/api-base-url"
 
 const Cart = () => {
   const [popupMessage, setPopupMessage] = useState(""); 
@@ -36,7 +37,7 @@ const Cart = () => {
         return;
       }
   
-      const response = await fetch('https://yummytummies-backend.onrender.com/api/cart/increment', {
+      const response = await fetch(`${API_URL}/api/cart/increment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const Cart = () => {
         return;
       }
   
-      const response = await fetch('https://yummytummies-backend.onrender.com/api/cart/decrement', {
+      const response = await fetch(`${API_URL}/api/cart/decrement`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +119,7 @@ const Cart = () => {
         return;
       }
   
-      const response = await fetch("https://yummytummies-backend.onrender.com/api/cart/remove", {
+      const response = await fetch(`${API_URL}/api/cart/remove`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

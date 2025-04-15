@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/sign-up.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
 import { useNavigate } from 'react-router-dom';
+import {API_URL} from "../apiComponents/api-base-url"
 
 const Sign_Up = () => {
 
@@ -30,7 +31,7 @@ const Sign_Up = () => {
       return false;
     }
 
-    const API_URL = 'https://yummytummies-backend.onrender.com';
+    //const API_URL = 'https://yummytummies-backend.onrender.com';
 
     // Register the new user
     fetch(`${API_URL}/api/register`, {

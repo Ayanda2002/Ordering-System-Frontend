@@ -1,6 +1,6 @@
 // src/apiComponents/api-cart.js
-
-const API_URL = 'https://yummytummies-backend.onrender.com';
+import {API_URL} from "./api-base-url"
+//const API_URL = 'https://yummytummies-backend.onrender.com';
 
 export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () => {}) => {
   try {
@@ -41,7 +41,7 @@ export const fetchCartItems = async (setCart, setLoading, setPopupMessage = () =
                       id: product.id,
                       name: product.prodName,
                       prodPrice: product.prodPrice || 0,
-                      image: product.image || "default-image.jpg",
+                      image: product.prodImagePath || "default-image.jpg",
                       quantity: cartItems[productId] || 1,
                   };
               } catch (error) {
