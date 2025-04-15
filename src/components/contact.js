@@ -50,14 +50,9 @@ const Contact = () => {
   return (
     <div>
       <main>
-        <div className="hello">
-          <img src="images/hello.jpg" alt="Hello bord-sign" />
-        </div>
         <div className="contact-info">
           <div className="line">
-            <span>{contactData.contactInfo.title.split(' ')[0]}</span>
-            <br />
-            <span className="highlight">{contactData.contactInfo.title.split(' ')[1]}</span>
+            <span>{contactData.contactInfo.title}</span>
           </div>
           <p>{contactData.contactInfo.content}</p>
         </div>

@@ -15,7 +15,6 @@ const About = () => {
       <main>
         <div className="about-container">
           <div className="heading">
-            <img src="images/ramen.png" alt="ramen" />
             <h1>{aboutData.aboutSection.title}</h1>
           </div>
           <div className="about-us">
