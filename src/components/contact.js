@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/contact.css'; // Import your CSS file
-import { Link } from 'react-router-dom'; // Import Link for routing
+import { submitContactForm } from './apiComponents/api-contact'; // Import the function for submitting contact form
 
 const Contact = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
@@ -27,42 +27,20 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const formPayload = {
-      first_name: formData.first_name,
-      last_name: formData.last_name,
-      email: formData.email,
-      subject: formData.subject,
-      message: formData.message
-    };
 
-    const API_URL = 'https://yummytummies-backend.onrender.com';
-  
-    try {
-      const response = await fetch(`${API_URL}/contact-us`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formPayload),
+    const { success, data, error } = await submitContactForm(formData);
+
+    if (success) {
+      console.log('Form Submitted:', data);
+      alert('Thank you for reaching out! We will get back to you soon.');
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        subject: '',
+        message: ''
       });
-  
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Form Submitted:', data);
-        alert('Thank you for reaching out! We will get back to you soon.');
-        // Optionally clear the form
-        setFormData({
-          first_name: '',
-          last_name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Something went wrong. Please try again later.');
-      }
-    } catch (error) {
+    } else {
       console.error('Error submitting form:', error);
       alert('There was an error submitting your message, please try again later.');
     }

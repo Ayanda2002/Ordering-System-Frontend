@@ -2,61 +2,42 @@ import React, { useState } from 'react';
 import '../../styles/sign-up.css'; // Import your CSS file
 import { Link } from 'react-router-dom'; // Import Link for routing
 import { useNavigate } from 'react-router-dom';
-import {API_URL} from "../apiComponents/api-base-url"
+import { registerUser } from "../apiComponents/api-signUp"; // Import the function for registration
 
 const Sign_Up = () => {
-
-  //for naivagtion to menu page
   const navigate = useNavigate();
-
   const [userMenuVisible, setUserMenuVisible] = useState(false);
 
   const toggleUserMenu = () => {
     setUserMenuVisible((prev) => !prev);
   };
 
-  const validateSignUpForm = (event) => {
+  const validateSignUpForm = async (event) => {
     event.preventDefault();
 
     const firstName = document.getElementById("name").value;
     const lastName = document.getElementById("surname").value;
     const email = document.getElementById("email").value;
     const username = firstName + " " + lastName;
-
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
 
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
-      return false;
+      return;
     }
 
-    //const API_URL = 'https://yummytummies-backend.onrender.com';
+    try {
+      const data = await registerUser(firstName, lastName, email, password, confirmPassword);
+      console.log(data); // Handle the response data if needed
+      alert("Form submitted successfully!");
 
-    // Register the new user
-    fetch(`${API_URL}/api/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          confirm_password: confirmPassword // Match backend naming
-      })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-
-    alert("Form submitted successfully!");
-
-    // Redirect to login page after successful user registration
-    navigate('/sign-in');
-
-    return;
-
-    
+      // Redirect to the login page after successful user registration
+      navigate('/sign-in');
+    } catch (error) {
+      console.error("Error during sign-up:", error);
+      alert("There was an issue with your sign-up. Please try again.");
+    }
   };
 
   const togglePasswordVisibility = () => {
