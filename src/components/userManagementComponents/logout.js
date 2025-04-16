@@ -1,7 +1,7 @@
 // src/components/Logout.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import { getAccessToken, removeAccessToken, removeRefreshToken } from './tokenManagement/tokenManager'; // Import tokenManager functions
+import { getAccessToken, removeAccessToken, removeRefreshToken } from '../tokenManagement/tokenManager'; // Import tokenManager functions
 
 const Logout = () => {
   const navigate = useNavigate(); // Initialize navigate hook for redirection
