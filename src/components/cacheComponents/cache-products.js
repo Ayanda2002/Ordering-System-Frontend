@@ -1,6 +1,6 @@
 const CACHE_KEY = 'cachedProducts';
-const cacheMinutes = 2;
-const CACHE_TIME = cacheMinutes * 60 * 1000; // 2 minutes caching
+const cacheMinutes = 1;
+const CACHE_TIME = cacheMinutes * 60 * 1000; // 1 minute caching
 
 export const getCachedProducts = () => {
   const cachedData = localStorage.getItem(CACHE_KEY);
