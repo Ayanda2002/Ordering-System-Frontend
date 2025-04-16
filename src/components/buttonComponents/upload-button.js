@@ -1,14 +1,20 @@
 // UploadButton.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAccessToken } from '../tokenManagement/tokenManager'; // Import to check login status
+import { getAccessToken } from '../tokenManagement/tokenManager';
 
 const UploadButton = () => {
-  const isLoggedIn = !!getAccessToken(); // Check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(!!getAccessToken());
 
-  if (!isLoggedIn) {
-    return null; // Don't render if not logged in
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsLoggedIn(!!getAccessToken());
+    }, 500); // Check every half a second
+
+    return () => clearInterval(interval); // Cleanup
+  }, []);
+
+  if (!isLoggedIn) return null;
 
   return (
     <div className="section">
