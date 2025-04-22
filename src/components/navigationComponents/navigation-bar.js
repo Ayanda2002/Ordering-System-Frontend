@@ -3,10 +3,21 @@ import MenuButton from '../buttonComponents/menu-button';
 
 const NavigationBar = () => {
   return (
-    <div className="nav">
-      <ul>
+    <div
+      className="nav"
+      style={{
+        backgroundColor: 'green',
+        padding: '10px',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        
+      }}
+    >
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
         <li>
-          <MenuButton/>
+          <MenuButton />
         </li>
       </ul>
     </div>
