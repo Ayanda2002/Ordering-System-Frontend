@@ -3,8 +3,7 @@ import { useCart } from "../cart-context";
 import Checkout from './checkout';  
 import '../styles/cart.css';
 import { Link } from 'react-router-dom'; 
-import { fetchCartItems } from './apiComponents/api-cart';  // Import API function
-import {API_URL} from "./apiComponents/api-base-url"
+import {fetchCartItems, incrementCartItemAPI, decrementCartItemAPI, removeItemFromCartAPI} from './apiComponents/api-cart';
 
 const Cart = () => {
   const [popupMessage, setPopupMessage] = useState(""); 
@@ -29,118 +28,45 @@ const Cart = () => {
 
   //increment specific products quantity in user cart
   const incrementCartItem = async (productId) => {
-    try {
-      const token = localStorage.getItem('accessToken');
-  
-      if (!token) {
-        alert("You are not logged in. Please sign in to modify your cart.");
-        return;
-      }
-  
-      const response = await fetch(`${API_URL}/api/cart/increment`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Send token in auth header
-        },
-        body: JSON.stringify({
-          productId: productId, // Send productId to the API
-        }),
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok || !result.success) {
-        alert(result.message || "Failed to increment product quantity.");
-        return;
-      }
-  
-      // Update the state if the API request is successful
-      setCart((prevCart) => 
-        prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } catch (error) {
-      console.error("Error incrementing item quantity:", error);
-      alert("An error occurred while incrementing the quantity.");
+    const result = await incrementCartItemAPI(productId);
+    if (!result.success) {
+      alert(result.message);
+      return;
     }
+  
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
   
   //decrement specific products quantity in user cart
   const decrementCartItem = async (productId) => {
-    try {
-      const token = localStorage.getItem('accessToken');
-  
-      if (!token) {
-        alert("You are not logged in. Please sign in to modify your cart.");
-        return;
-      }
-  
-      const response = await fetch(`${API_URL}/api/cart/decrement`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Send token in auth header
-        },
-        body: JSON.stringify({
-          productId: productId, // Send productId to the API
-        }),
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok || !result.success) {
-        alert(result.message || "Failed to decrement product quantity.");
-        return;
-      }
-  
-      // Update the state if the API request is successful
-      setCart((prevCart) => 
-        prevCart.map((item) =>
-          item.id === productId && item.quantity > 1 
-            ? { ...item, quantity: item.quantity - 1 } // Decrement quantity if it's greater than 1
-            : item
-        )
-      );
-    } catch (error) {
-      console.error("Error decrementing item quantity:", error);
-      alert("An error occurred while decrementing the quantity.");
+    const result = await decrementCartItemAPI(productId);
+    if (!result.success) {
+      alert(result.message);
+      return;
     }
+  
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
   };
 
   //remove specific product from users cart
   const removeItemFromCart = async (id) => {
-    try {
-      const token = localStorage.getItem("accessToken");
-  
-      if (!token) {
-        alert("You are not logged in. Please sign in to modify your cart.");
-        return;
-      }
-  
-      const response = await fetch(`${API_URL}/api/cart/remove`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId: id }),
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok || !result.success) {
-        alert(result.message || "Failed to remove item from cart.");
-        return;
-      }
-  
-      // Remove the item from local state only if the API request is successful
-      setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error("Error removing item from cart:", error);
-      alert("An error occurred while removing the item.");
+    const result = await removeItemFromCartAPI(id);
+    if (!result.success) {
+      alert(result.message);
+      return;
     }
+  
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
   
 

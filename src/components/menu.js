@@ -19,20 +19,6 @@ const Menu = () => {
     setLoading(false);
   }, []);
 
-  const increaseQuantity = (productId) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] || 1) + 1,
-    }));
-  };
-
-  const decreaseQuantity = (productId) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [productId]: Math.max((prev[productId] || 1) - 1, 1),
-    }));
-  };
-
   const handleAddToCart = async (productId, quantity) => {
     const accessToken = !!localStorage.getItem("accessToken");
     if (accessToken) {

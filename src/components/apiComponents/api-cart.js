@@ -88,3 +88,72 @@ export const addToCart = async (productId, quantity) => {
     return { success: false, message: "Error adding to cart" };
   }
 };
+
+// Increment item quantity
+export const incrementCartItemAPI = async (productId) => {
+  try {
+    const token = getAccessToken();
+    if (!token) return { success: false, message: "User not authenticated" };
+
+    const response = await fetch(`${API_URL}/api/cart/increment`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    const result = await response.json();
+    return response.ok ? result : { success: false, message: result.message || "Increment failed" };
+  } catch (error) {
+    console.error("Increment error:", error);
+    return { success: false, message: "An error occurred while incrementing item" };
+  }
+};
+
+// Decrement item quantity
+export const decrementCartItemAPI = async (productId) => {
+  try {
+    const token = getAccessToken();
+    if (!token) return { success: false, message: "User not authenticated" };
+
+    const response = await fetch(`${API_URL}/api/cart/decrement`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    const result = await response.json();
+    return response.ok ? result : { success: false, message: result.message || "Decrement failed" };
+  } catch (error) {
+    console.error("Decrement error:", error);
+    return { success: false, message: "An error occurred while decrementing item" };
+  }
+};
+
+// Remove item from cart
+export const removeItemFromCartAPI = async (productId) => {
+  try {
+    const token = getAccessToken();
+    if (!token) return { success: false, message: "User not authenticated" };
+
+    const response = await fetch(`${API_URL}/api/cart/remove`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    const result = await response.json();
+    return response.ok ? result : { success: false, message: result.message || "Remove failed" };
+  } catch (error) {
+    console.error("Remove error:", error);
+    return { success: false, message: "An error occurred while removing item" };
+  }
+};
