@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import imagekit from './imagekit';  // adjust path if needed
 import '../styles/upload-products.css';
+import { uploadImageToImageKit } from './apiComponents/api-image-upload';
 
 const UploadProducts = () => {
   const [productData, setProductData] = useState({
@@ -22,83 +23,35 @@ const UploadProducts = () => {
     }));
   };
 
-  const handleImageUpload = async () => {
-    if (!imageFile) {
-      throw new Error("No image selected");
-    }
-  
-    // Fetch the token, signature, and expire time from your backend
-    const authRes = await fetch("https://yummytummies-backend2.onrender.com/api/imagekit/auth"); // Change to your actual backend URL
-    const { token, signature, expire } = await authRes.json();
-  
-    const reader = new FileReader();
-  
-    return new Promise((resolve, reject) => {
-      reader.onloadend = () => {
-        const base64 = reader.result;
-  
-        // Upload the image to ImageKit with the auth details
-        imagekit.upload(
-          {
-            file: base64,
-            fileName: imageFile.name,
-            useUniqueFileName: true,
-            tags: ['product-image'],
-            isPrivateFile: false,
-            token,      // Pass the token from your backend
-            signature,  // Pass the signature from your backend
-            expire      // Pass the expire time from your backend
-          },
-          (err, result) => {
-            if (err) {
-              console.error('ImageKit Upload Error:', err);
-              alert(err.message || err);
-              reject(err);
-            } else {
-              resolve(result.url);  // Return the image URL after successful upload
-            }
-          }
-        );
-      };
-  
-      reader.onerror = (error) => {
-        reject("Failed to read image file: " + error);
-      };
-  
-      reader.readAsDataURL(imageFile);
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (parseFloat(productData.prodPrice) < 20) {
       alert('Product price must be at least R20.');
       return;
     }
-
+  
     if (!imageFile) {
       alert('Please select an image to upload.');
       return;
     }
-
+  
     try {
-      const imageUrl = await handleImageUpload();
-
+      const imageUrl = await uploadImageToImageKit(imageFile);
+  
       const fullProductData = {
         ...productData,
         prodImagePath: imageUrl
       };
-
-      //Send the full product data to the backend
+  
       const response = await fetch('https://yummytummies-backend2.onrender.com/api/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(fullProductData), // Send the product data as a JSON string
+        body: JSON.stringify(fullProductData),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
         console.log('Product successfully uploaded:', result);
@@ -106,8 +59,7 @@ const UploadProducts = () => {
       } else {
         throw new Error('Failed to upload product');
       }
-
-      // Reset form after successful upload
+  
       setProductData({
         prodName: '',
         prodPrice: '',
@@ -116,10 +68,10 @@ const UploadProducts = () => {
         prodOnMenu: false,
         prodImagePath: ''
       });
-
+  
       setImageFile(null);
       document.getElementById('prodImageInput').value = '';
-      
+  
     } catch (error) {
       console.error('Image upload failed:', error);
       alert('Failed to upload image.');
